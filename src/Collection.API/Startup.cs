@@ -1,37 +1,88 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Configuration;
+using AutoMapper;
+using Microsoft.Extensions.PlatformAbstractions;
+using Collection.API.Infrastructure;
 
 namespace Collection.API
 {
+    /// <summary>
+    /// Application entry point
+    /// </summary>
     public class Startup
     {
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
-        public void ConfigureServices(IServiceCollection services)
+        /// <summary>
+        /// Gets or sets the automatic mapper configuration.
+        /// </summary>
+        private MapperConfiguration AutoMapperConfig { get; set; }
+
+        /// <summary>
+        /// Gets the configuration.
+        /// </summary>
+        public IConfigurationRoot Configuration { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Startup"/> class.
+        /// </summary>
+        /// <param name="env">The environment</param>
+        public Startup(IHostingEnvironment env)
         {
+            var builder = new ConfigurationBuilder()
+                .SetBasePath(env.ContentRootPath)
+                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true);
+
+            this.AutoMapperConfig = new MapperConfiguration(config => config.AddProfile(new AutoMapperProfileConfiguration()));
+
+            builder.AddEnvironmentVariables();
+            this.Configuration = builder.Build();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        /// <summary>
+        /// Configures the services.
+        /// </summary>
+        /// <param name="services">The services.</param>
+        public void ConfigureServices(IServiceCollection services)
+        {
+            services.AddOptions();
+
+            services.AddMvc();
+            services.AddRouting(options => options.LowercaseUrls = true);
+            services.AddApiVersioning();
+            services.AddSwaggerGen(options =>
+            {
+                var basePath = PlatformServices.Default.Application.ApplicationBasePath;
+                options.SingleApiVersion(new Swashbuckle.Swagger.Model.Info
+                {
+                    Version = "v1",
+                    Title = this.Configuration["SwaggerInfo:Title"],
+                    Description = this.Configuration["SwaggerInfo:Description"]
+                });
+                options.IncludeXmlComments($"{basePath}\\Collection.API.xml");
+                options.DescribeAllEnumsAsStrings();
+            });
+        }
+
+        /// <summary>
+        /// Configures the application
+        /// </summary>
+        /// <param name="app">The application</param>
+        /// <param name="env">The environment</param>
+        /// <param name="loggerFactory">The logger factory</param>
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
         {
-            loggerFactory.AddConsole();
-
-            if (env.IsDevelopment())
+            if (!env.IsProduction())
             {
-                app.UseDeveloperExceptionPage();
+                loggerFactory.AddDebug();
             }
 
-            app.Run(async (context) =>
-            {
-                await context.Response.WriteAsync("Hello World!");
-            });
+            app.UseMvc();
+
+            app.UseSwagger();
+            app.UseSwaggerUi();
         }
     }
 }

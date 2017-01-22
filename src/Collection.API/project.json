@@ -1,18 +1,24 @@
-﻿{
+{
   "dependencies": {
-    "Microsoft.NETCore.App": {
-      "version": "1.0.1",
-      "type": "platform"
-    },
-    "Microsoft.AspNetCore.Diagnostics": "1.0.0",
-    
-    "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
-    "Microsoft.AspNetCore.Server.Kestrel": "1.0.1",
-    "Microsoft.Extensions.Logging.Console": "1.0.0"
+    "AutoMapper": "5.2.0",
+    "Microsoft.AspNetCore.Mvc.Versioning": "1.0.3",
+    "Microsoft.AspNetCore.Diagnostics": "1.1.0",
+    "Microsoft.AspNetCore.Server.IISIntegration": "1.1.0",
+    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.1.0-preview4-final",
+    "Microsoft.AspNetCore.Server.Kestrel": "1.1.0",
+    "Microsoft.Extensions.Logging.Console": "1.1.0",
+    "Microsoft.NETCore.App": "1.1.0",
+    "Microsoft.Extensions.Configuration.EnvironmentVariables": "1.1.0",
+    "Microsoft.Extensions.Configuration.FileExtensions": "1.1.0",
+    "Microsoft.Extensions.Configuration.Json": "1.1.0",
+    "Microsoft.Framework.Logging.Debug": "1.0.0-beta7",
+    "NLog.Extensions.Logging": "1.0.0-rtm-beta1",
+    "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
+    "Swashbuckle": "6.0.0-beta902",
+    "Microsoft.Extensions.Logging.Debug": "1.0.0"
   },
 
   "tools": {
-    "Microsoft.AspNetCore.Server.IISIntegration.Tools": "1.0.0-preview2-final"
   },
 
   "frameworks": {
@@ -26,7 +32,9 @@
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "xmlDoc": true,
+    "nowarn": [ "SA1633" ]
   },
 
   "runtimeOptions": {
@@ -38,11 +46,19 @@
   "publishOptions": {
     "include": [
       "wwwroot",
-      "web.config"
+      "**/*.cshtml",
+      "appsettings.json",
+      "appsettings.*.json",
+      "web.config",
+      "nlog.config"
     ]
   },
 
   "scripts": {
     "postpublish": [ "dotnet publish-iis --publish-folder %publish:OutputPath% --framework %publish:FullTargetFramework%" ]
+  },
+
+  "runtimes": {
+    "win8-x64": {}
   }
 }
