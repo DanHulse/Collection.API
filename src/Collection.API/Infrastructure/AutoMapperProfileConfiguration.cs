@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Collection.API.DtoModels;
+using Collection.API.ViewModels;
 
 namespace Collection.API.Infrastructure
 {
@@ -13,6 +15,8 @@ namespace Collection.API.Infrastructure
         /// </summary>
         public AutoMapperProfileConfiguration()
         {
+            this.CreateMap<MovieDto, MovieViewModel>();
+            this.CreateMap<MovieDto, MovieDetailViewModel>();
         }
     }
 }
