@@ -5,6 +5,7 @@ using Collection.API.Repositories.Interfaces;
 using Collection.API.Services.Interfaces;
 using Collection.API.ViewModels;
 using Collection.API.ViewModels.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -42,7 +43,7 @@ namespace Collection.API.Services
         /// <summary>
         /// Gets all movies asynchronously.
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="IEnumerable{IMovieViewModel}"/>of requested movies from collection</returns>
         public async Task<IEnumerable<IMovieViewModel>> GetMoviesAsync()
         {
             var movies = await this.moviesRepository.GetAsync();
@@ -55,7 +56,7 @@ namespace Collection.API.Services
         /// <summary>
         /// Gets the movie by identifier asynchronously.
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="IMovieDetailViewModel"/>requested movie from collection</returns>
         public async Task<IMovieDetailViewModel> GetMovieByIdAsync()
         {
             var movie = await this.moviesRepository.GetAsync();
@@ -69,10 +70,20 @@ namespace Collection.API.Services
         /// Posts the movie to the server asynchronously.
         /// </summary>
         /// <param name="movie">The movie.</param>
-        /// <returns></returns>
+        /// <returns><see cref="IActionResult"/>result of POST</returns>
         public async Task<bool> PostMovieAsync(MovieModel movie)
         {
             return await this.moviesRepository.PostAsync(movie);
+        }
+
+        /// <summary>
+        /// Patches the movie asynchronously.
+        /// </summary>
+        /// <param name="movie">The movie.</param>
+        /// <returns><see cref="IActionResult"/>result of PATCH</returns>
+        public async Task<bool> PatchMovieAsync(MovieModel movie)
+        {
+            return await this.moviesRepository.PatchAsync(movie);
         }
     }
 }

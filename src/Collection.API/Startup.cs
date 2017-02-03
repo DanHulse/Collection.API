@@ -43,6 +43,8 @@ namespace Collection.API
 
             this.AutoMapperConfig = new MapperConfiguration(config => config.AddProfile(new AutoMapperProfileConfiguration()));
 
+            builder.AddUserSecrets();
+
             builder.AddEnvironmentVariables();
             this.Configuration = builder.Build();
         }

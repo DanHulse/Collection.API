@@ -12,6 +12,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Collection.API", "src\Collection.API\Collection.API.xproj", "{91C33B66-B69C-427C-A35C-DAD258E9000B}"
 EndProject
+Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "COLLECTION", "Collection.API.Database\COLLECTION.sqlproj", "{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -22,11 +24,18 @@ Global
 		{91C33B66-B69C-427C-A35C-DAD258E9000B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91C33B66-B69C-427C-A35C-DAD258E9000B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{91C33B66-B69C-427C-A35C-DAD258E9000B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{91C33B66-B69C-427C-A35C-DAD258E9000B} = {5E075C09-245F-4683-929E-729080CB4D1B}
+		{6B6AF6D6-F7DF-4516-BD7D-7BFFC2EA98D5} = {5E075C09-245F-4683-929E-729080CB4D1B}
 	EndGlobalSection
 EndGlobal

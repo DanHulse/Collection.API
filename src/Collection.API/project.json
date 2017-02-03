@@ -16,10 +16,15 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.1.0",
     "Swashbuckle": "6.0.0-beta902",
     "Microsoft.Extensions.Logging.Debug": "1.0.0",
-    "System.Data.SqlClient": "4.1.0"
+    "System.Data.SqlClient": "4.1.0",
+    "Microsoft.Extensions.Configuration.UserSecrets": "1.0.0"
   },
 
   "tools": {
+    "Microsoft.Extensions.SecretManager.Tools": {
+      "version": "1.0.0-preview2-final",
+      "imports": "portable-net45+win8+dnxcore50"
+    }
   },
 
   "frameworks": {
@@ -35,7 +40,7 @@
     "emitEntryPoint": true,
     "preserveCompilationContext": true,
     "xmlDoc": true,
-    "nowarn": [ "SA1633" ]
+    "nowarn": [ "SA1633" ],
   },
 
   "runtimeOptions": {
@@ -60,6 +65,7 @@
   },
 
   "runtimes": {
-    "win8-x64": {}
-  }
+    "win8-x86": {}
+  },
+  "userSecretsId": "aspnet-Collection.API-20170203100509"
 }

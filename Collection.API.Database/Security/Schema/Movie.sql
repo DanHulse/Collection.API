@@ -1,0 +1,7 @@
+﻿CREATE SCHEMA [Movie]
+	AUTHORIZATION [dbo];
+
+GO
+GRANT SELECT
+	ON SCHEMA::[Movie] TO [Collection Data Fetch]
+	WITH GRANT OPTION;

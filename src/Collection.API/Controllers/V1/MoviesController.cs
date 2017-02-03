@@ -34,7 +34,7 @@ namespace Collection.API.Controllers.V1
         /// <summary>
         /// Get all movies asynchronously
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="IEnumerable{IMovieViewModel}"/>of requested movies from collection</returns>
         [HttpGet("")]
         [Produces(typeof(IEnumerable<IMovieViewModel>))]
         public async Task<IActionResult> GetAsync()
@@ -53,7 +53,7 @@ namespace Collection.API.Controllers.V1
         /// Gets the movie by identifier asynchronously.
         /// </summary>
         /// <param name="id">The identifier.</param>
-        /// <returns></returns>
+        /// <returns><see cref="IMovieDetailViewModel"/>requested movie from collection</returns>
         [HttpGet("{id}")]
         [Produces(typeof(IMovieDetailViewModel))]
         public async Task<IActionResult> GetByIdAsync([FromRoute]Guid id)
@@ -72,12 +72,31 @@ namespace Collection.API.Controllers.V1
         /// Posts movie model to the server asynchronously.
         /// </summary>
         /// <param name="model">The model.</param>
-        /// <returns></returns>
+        /// <returns><see cref="IActionResult"/>result of POST</returns>
         [HttpPost("")]
         [Produces(typeof(IActionResult))]
         public async Task<IActionResult> PostAsync([FromBody]MovieModel model)
         {
             var success = await this.moviesService.PostMovieAsync(model);
+
+            if (success)
+            {
+                return this.Ok();
+            }
+
+            return this.BadRequest();
+        }
+
+        /// <summary>
+        /// Patches the movie asynchronously.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        /// <returns><see cref="IActionResult"/>result of PATCH</returns>
+        [HttpPatch("")]
+        [Produces(typeof(IActionResult))]
+        public async Task<IActionResult> PatchAsync([FromBody]MovieModel model)
+        {
+            var success = await this.moviesService.PatchMovieAsync(model);
 
             if (success)
             {
