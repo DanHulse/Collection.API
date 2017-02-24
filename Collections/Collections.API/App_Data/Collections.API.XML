@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Collections.API</name>
+    </assembly>
+    <members>
+        <member name="T:Collections.API.App_Start.RouteConfig">
+            <summary>
+            The Route config.
+            </summary>
+        </member>
+        <member name="M:Collections.API.App_Start.RouteConfig.RegisterRoutes(System.Web.Routing.RouteCollection)">
+            <summary>
+            Registers the routes.
+            </summary>
+            <param name="routes">The routes.</param>
+        </member>
+        <member name="T:Collections.API.App_Start.WebApiConfig">
+            <summary>
+            Web API configuration
+            </summary>
+        </member>
+        <member name="M:Collections.API.App_Start.WebApiConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Registers the specified configuration.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="T:Collections.API.Controllers.BaseController">
+            <summary>
+            The Base controller
+            </summary>
+            <seealso cref="T:System.Web.Http.ApiController" />
+        </member>
+        <member name="P:Collections.API.Controllers.BaseController.Logger">
+            <summary>
+            Gets or sets the logger.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Enumerations.LogLevel">
+            <summary>
+            Log Level.
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.LogLevel.Debug">
+            <summary>
+            Is Debug.
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.LogLevel.Information">
+            <summary>
+            Is Information.
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.LogLevel.Warning">
+            <summary>
+            Is Warning.
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.LogLevel.Error">
+            <summary>
+            Is Error.
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.LogLevel.Fatal">
+            <summary>
+            Is Fatal.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Infrastructure.DependencyRegistrar">
+            <summary>
+            The Dependency registrar used for setting up DI container.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DependencyRegistrar.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Registers the specified configuration.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="T:Collections.API.Infrastructure.Interfaces.ILogger">
+            <summary>
+            Interface for the Logger
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.ILogger.IsEnabled(Collections.API.Enumerations.LogLevel)">
+            <summary>
+            Check if the level is enabled.
+            </summary>
+            <param name="level">The log level to check.</param>
+            <returns>true or false.</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.ILogger.Log(Collections.API.Enumerations.LogLevel,System.Exception,System.String)">
+            <summary>
+            Log message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="exception">The exception that was thrown to log.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.ILogger.Log(Collections.API.Enumerations.LogLevel,System.Exception,System.String,System.Object[])">
+            <summary>
+            Log formatted message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="exception">The exception that was thrown to log.</param>
+            <param name="format">The composite format message to log.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.ILogger.Log(Collections.API.Enumerations.LogLevel,System.String)">
+            <summary>
+            Log message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.ILogger.Log(Collections.API.Enumerations.LogLevel,System.String,System.Object[])">
+            <summary>
+            Log formatted message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="format">The composite format message to log.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="T:Collections.API.Infrastructure.Logger">
+            <summary>
+            Implementation of Log 4 Net
+            </summary>
+            <seealso cref="T:Collections.API.Infrastructure.Interfaces.ILogger" />
+        </member>
+        <member name="F:Collections.API.Infrastructure.Logger.log">
+            <summary>
+            Log 4 Net instance.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Infrastructure.Logger"/> class.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.#ctor(log4net.ILog)">
+            <summary>
+             Initializes a new instance of the <see cref="T:Collections.API.Infrastructure.Logger"/> class. Excepting a log 4 net instance.
+            </summary>
+            <param name="log">Log4Net Instance.</param>
+        </member>
+        <member name="P:Collections.API.Infrastructure.Logger.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Infrastructure.Logger.Repository">
+            <summary>
+            Gets the repository.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.IsEnabled(Collections.API.Enumerations.LogLevel)">
+            <summary>
+            Check if the level is enabled.
+            </summary>
+            <param name="level">The log level to check.</param>
+            <returns>True or false.</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.Log(Collections.API.Enumerations.LogLevel,System.Exception,System.String)">
+            <summary>
+            Log message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="exception">The exception that was thrown to log.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.Log(Collections.API.Enumerations.LogLevel,System.Exception)">
+            <summary>
+            Log message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="exception">The exception that was thrown to log.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.Log(Collections.API.Enumerations.LogLevel,System.Exception,System.String,System.Object[])">
+            <summary>
+            Log formatted message at specified log level .
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="exception">The exception that was thrown to log.</param>
+            <param name="format">The composite format message to log.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.Log(Collections.API.Enumerations.LogLevel,System.String)">
+            <summary>
+            Log message at specified log level.
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="message">The message to log.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Logger.Log(Collections.API.Enumerations.LogLevel,System.String,System.Object[])">
+            <summary>
+            Log formatted message at specified log level. 
+            </summary>
+            <param name="level">The log level.</param>
+            <param name="format">The composite format message to log.</param>
+            <param name="args">An object array that contains zero or more objects to format.</param>
+        </member>
+        <member name="T:Collections.API.Infrastructure.MappingConfig">
+            <summary>
+            The Auto mapper profile config
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.MappingConfig.Configure">
+            <summary>
+            Configures this instance.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Mapper.Interfaces.IMapper">
+            <summary>
+            Interface for mapper.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Mapper.Interfaces.IMapper.Map``1(System.Object)">
+            <summary>
+            Maps object to that of type T.
+            </summary>
+            <typeparam name="T"> Type that is being mapped to.</typeparam>
+            <param name="mapFrom">The map from.</param>
+            <returns>Instance of T.</returns>
+        </member>
+        <member name="T:Collections.API.Mapper.Mapper">
+            <summary>
+            Maps object using AutoMapper.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Mapper.Mapper.Map``1(System.Object)">
+            <summary>
+            Maps object to that of type T.
+            </summary>
+            <typeparam name="T">Type that is being mapped to.</typeparam>
+            <param name="mapFrom">The map from.</param>
+            <returns>
+            Instance of T.
+            </returns>
+        </member>
+        <member name="M:Collections.API.Startup.Configuration(Owin.IAppBuilder)">
+            <summary>
+            Configurations the specified application.
+            </summary>
+            <param name = "app">The application.</param>
+        </member>
+        <member name="T:Collection.SwaggerConfig">
+            <summary>
+            The swagger configuration
+            </summary>
+        </member>
+        <member name="M:Collection.SwaggerConfig.Register(System.Web.Http.HttpConfiguration)">
+            <summary>
+            Registers the specified configuration.
+            </summary>
+            <param name="config">The configuration.</param>
+        </member>
+        <member name="M:Collection.SwaggerConfig.GetXmlCommentsPath">
+            <summary>
+            Gets the XML comments path.
+            </summary>
+            <returns>Path to Xml document</returns>
+        </member>
+    </members>
+</doc>
