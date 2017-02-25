@@ -1,13 +1,12 @@
 ﻿using Collections.API.Enumerations;
 using Collections.API.Infrastructure.Interfaces;
-using Collections.API.Models.Movies;
+using Collections.API.Models;
 using Collections.API.Services.Interfaces;
-using Collections.API.ViewModels.Movies;
+using Collections.API.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Http;
 using System.Web.Http.Description;
 
@@ -37,11 +36,11 @@ namespace Collections.API.Controllers.V1
         }
 
         /// <summary>
-        /// Gets all movies
+        /// Retrieve all movies
         /// </summary>
         /// <returns><see cref="IHttpActionResult"/>of all movies</returns>
         [HttpGet]
-        [Route("", Name = "Get")]
+        [Route("", Name = "GetMovies")]
         [ResponseType(typeof(IEnumerable<MovieViewModel>))]
         public async Task<IHttpActionResult> GetAsync()
         {
@@ -65,12 +64,40 @@ namespace Collections.API.Controllers.V1
         }
 
         /// <summary>
-        /// Post the movie model
+        /// Retrieve requested movie
+        /// </summary>
+        /// <returns><see cref="IHttpActionResult"/>of requested movie</returns>
+        [HttpGet]
+        [Route("{id}", Name = "GetMovieById")]
+        [ResponseType(typeof(MovieDetailViewModel))]
+        public async Task<IHttpActionResult> GetByIdAsync([FromUri]string id)
+        {
+            try
+            {
+                var result = await this.moviesService.GetByIdAsync(id);
+
+                if (result != null)
+                {
+                    return this.Ok(result);
+                }
+
+                return this.NotFound();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to retrive movie with Id: {id}");
+
+                return this.InternalServerError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Insert new movie to DB
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
         [HttpPost]
-        [Route("", Name = "Post")]
+        [Route("", Name = "PostMovie")]
         [ResponseType(typeof(IHttpActionResult))]
         public async Task<IHttpActionResult> PostAsync([FromBody]MovieModel model)
         {
@@ -88,6 +115,65 @@ namespace Collections.API.Controllers.V1
             catch (Exception ex)
             {
                 this.Logger.Log(LogLevel.Error, ex, "Failed to post the movie");
+
+                return this.InternalServerError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Updates specified movie
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="model">The model.</param>
+        /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
+        [HttpPatch]
+        [Route("{id}", Name = "PatchMovie")]
+        [ResponseType(typeof(IHttpActionResult))]
+        public async Task<IHttpActionResult> PatchAsync([FromUri]string id, [FromBody]MovieModel model)
+        {
+            try
+            {
+                var result = await this.moviesService.PatchAsync(id, model);
+
+                if (result)
+                {
+                    return this.Ok();
+                }
+
+                return this.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to patch movie with Id: {id}");
+
+                return this.InternalServerError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Deletes the movie asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
+        [HttpDelete]
+        [Route("{id}", Name = "DeleteMovie")]
+        [ResponseType(typeof(IHttpActionResult))]
+        public async Task<IHttpActionResult> DeleteAsync([FromUri]string id)
+        {
+            try
+            {
+                var result = await this.moviesService.DeleteAsync(id);
+
+                if (result)
+                {
+                    return this.Ok();
+                }
+
+                return this.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to delete movie with Id: {id}");
 
                 return this.InternalServerError(ex);
             }

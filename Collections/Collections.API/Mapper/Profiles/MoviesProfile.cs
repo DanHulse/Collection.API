@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Collections.API.Models.Interfaces.Movies;
-using Collections.API.ViewModels.Movies;
+using Collections.API.Models.Interfaces;
+using Collections.API.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +20,7 @@ namespace Collections.API.Mapper.Profiles
         public MoviesProfile()
         {
             this.CreateMap<IMovieModel, MovieViewModel>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
+            this.CreateMap<IMovieModel, MovieDetailViewModel>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
         }
     }
 }

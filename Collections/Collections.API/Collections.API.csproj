@@ -273,17 +273,20 @@
     <Compile Include="Mapper\Interfaces\IMapper.cs" />
     <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Mapper\Profiles\MoviesProfile.cs" />
-    <Compile Include="Models\Interfaces\Movies\IMovieModel.cs" />
-    <Compile Include="Models\Movies\MovieModel.cs" />
+    <Compile Include="Models\Interfaces\IMovieModel.cs" />
+    <Compile Include="Models\MovieModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\Interfaces\IMoviesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepository.cs" />
     <Compile Include="Repositories\MoviesRepository.cs" />
+    <Compile Include="Services\ConfigurationService.cs" />
+    <Compile Include="Services\Interfaces\IConfigurationService.cs" />
     <Compile Include="Services\Interfaces\IMoviesService.cs" />
     <Compile Include="Services\Interfaces\IService.cs" />
     <Compile Include="Services\MoviesService.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="ViewModels\Movies\MovieViewModel.cs" />
+    <Compile Include="ViewModels\MovieDetailViewModel.cs" />
+    <Compile Include="ViewModels\MovieViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Collections.API.XML" />

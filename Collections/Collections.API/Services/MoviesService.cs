@@ -1,10 +1,10 @@
 ﻿using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
-using Collections.API.ViewModels.Movies;
+using Collections.API.ViewModels;
 using System.Collections.Generic;
 using Collections.API.Mapper.Interfaces;
 using System.Threading.Tasks;
-using Collections.API.Models.Movies;
+using Collections.API.Models;
 
 namespace Collections.API.Services
 {
@@ -28,6 +28,7 @@ namespace Collections.API.Services
         /// Initializes a new instance of the <see cref="MoviesService"/> class.
         /// </summary>
         /// <param name="moviesRepository">The movies repository.</param>
+        /// <param name="mapper">The mapper</param>
         public MoviesService(IMoviesRepository moviesRepository, IMapper mapper)
         {
             this.moviesRepository = moviesRepository;
@@ -48,6 +49,19 @@ namespace Collections.API.Services
         }
 
         /// <summary>
+        /// Gets the requested movie asynchronously.
+        /// </summary>
+        /// <returns><see cref="MovieDetailViewModel"/>requested movie</returns>
+        public async Task<MovieDetailViewModel> GetByIdAsync(string id)
+        {
+            var movie = await this.moviesRepository.GetByIdAsync(id);
+
+            var mappedMovie = mapper.Map<MovieDetailViewModel>(movie);
+
+            return mappedMovie;
+        }
+
+        /// <summary>
         /// Posts the movie model asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
@@ -55,6 +69,31 @@ namespace Collections.API.Services
         public async Task<bool> PostAsync(MovieModel model)
         {
             var result = await this.moviesRepository.PostAsync(model);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Patches specified the movie asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="model">The model.</param>
+        /// <returns>True if successful</returns>
+        public async Task<bool> PatchAsync(string id, MovieModel model)
+        {
+            var result = await this.moviesRepository.PatchAsync(id, model);
+
+            return result;
+        }
+
+        /// <summary>
+        /// Deletes specified the movie asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <returns>True if successful</returns>
+        public async Task<bool> DeleteAsync(string id)
+        {
+            var result = await this.moviesRepository.DeleteAsync(id);
 
             return result;
         }

@@ -1,4 +1,4 @@
-﻿using Collections.API.Models.Movies;
+﻿using Collections.API.Models;
 using MongoDB.Bson.Serialization;
 using System;
 using System.Collections.Generic;
@@ -18,7 +18,6 @@ namespace Collections.API.Infrastructure
         public static void Configure()
         {
             BsonClassMap.RegisterClassMap<MovieModel>(cm => { cm.AutoMap(); cm.SetIgnoreExtraElements(true); });
-            //BsonClassMap.RegisterClassMap<IMovieModel>(cm => { cm.AutoMap(); cm.SetIgnoreExtraElements(true); });
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Collections.API.Factories.Interfaces;
+using Collections.API.Services.Interfaces;
 using MongoDB.Driver;
 using System.Security.Authentication;
 
@@ -12,10 +13,28 @@ namespace Collections.API.Factories
     public class MongoFactory<T> : IMongoFactory<T> where T : class
     {
         /// <summary>
+        /// The configuration service
+        /// </summary>
+        private readonly IConfigurationService configurationService;
+
+        /// <summary>
+        /// The MongoDB connection string
+        /// </summary>
+        private readonly string connectionString;
+
+        /// <summary>
+        /// The MongoDB collection
+        /// </summary>
+        private readonly string collection;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="MongoFactory{T}"/> class.
         /// </summary>
-        public MongoFactory()
+        public MongoFactory(IConfigurationService configurationService)
         {
+            this.configurationService = configurationService;
+            this.connectionString = this.configurationService.GetConnectionString("MongoDbConnection");
+            this.collection = this.configurationService.GetAppSetting("MongoDbCollection");
         }
 
         /// <summary>
@@ -24,15 +43,13 @@ namespace Collections.API.Factories
         /// <returns><see cref="IMongoCollection{TDocument}"/> of collection from DB</returns>
         public IMongoCollection<T> ConnectToCollection()
         {
-            string connectionString = @"mongodb://collections:H1dB0O8JlKK096sbxMWkuBE3dzOomHwzyQHtmHduz1I85MIhMmYFFd7kxICEXqQIdj7PvMRlZiEJAWwmcauJLQ==@collections.documents.azure.com:10250/?ssl=true&sslverifycertificate=false";
-
-            MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(connectionString));
+            MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(this.connectionString));
 
             settings.SslSettings = new SslSettings() { EnabledSslProtocols = SslProtocols.Tls12 };
 
             var mongoClient = new MongoClient(settings);
 
-            var db = mongoClient.GetDatabase("Collections");
+            var db = mongoClient.GetDatabase(this.collection);
 
             return db.GetCollection<T>(typeof(T).Name.ToLower());
         }
