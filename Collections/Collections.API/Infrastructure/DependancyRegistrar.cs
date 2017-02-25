@@ -4,6 +4,10 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Collections.API.Infrastructure.Interfaces;
+using Collections.API.Services.Interfaces;
+using Collections.API.Repositories.Interfaces;
+using Collections.API.Mapper.Interfaces;
+using Collections.API.Factories.Interfaces;
 
 namespace Collections.API.Infrastructure
 {
@@ -26,6 +30,27 @@ namespace Collections.API.Infrastructure
 
             builder.RegisterApiControllers(assembly).PropertiesAutowired();
             builder.RegisterWebApiFilterProvider(config);
+
+            builder.RegisterAssemblyTypes(assembly)
+                .Where(t => typeof(IService).IsAssignableFrom(t))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                .Where(t => typeof(IRepository).IsAssignableFrom(t))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                .Where(t => typeof(IMapper).IsAssignableFrom(t))
+                .AsImplementedInterfaces()
+                .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                .Where(t => typeof(IMongoFactory<>).IsAssignableFrom(t))
+                .AsImplementedInterfaces();
+
+            //builder.Register(c => c.Resolve<IAuthenticationFactory>().Connect()).As<IOrganizationService>().SingleInstance();
 
             var container = builder.Build();
 

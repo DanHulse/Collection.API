@@ -11,6 +11,9 @@ using Microsoft.Owin.Cors;
 
 namespace Collections.API
 {
+    /// <summary>
+    /// Startup class
+    /// </summary>
     public partial class Startup
     {
         /// <summary>
@@ -26,7 +29,8 @@ namespace Collections.API
             app.UseCors(CorsOptions.AllowAll);
             app.UseWebApi(config);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
-            MappingConfig.Configure();
+            AutoMapConfig.Configure();
+            BsonMapConfig.Configure();
         }
     }
 }

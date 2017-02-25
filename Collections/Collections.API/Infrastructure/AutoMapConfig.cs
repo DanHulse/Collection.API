@@ -1,9 +1,11 @@
-﻿namespace Collections.API.Infrastructure
+﻿using Collections.API.Mapper.Profiles;
+
+namespace Collections.API.Infrastructure
 {
     /// <summary>
     /// The Auto mapper profile config
     /// </summary>
-    public class MappingConfig
+    public class AutoMapConfig
     {
         /// <summary>
         /// Configures this instance.
@@ -13,6 +15,7 @@
             AutoMapper.Mapper.Initialize(
                 x =>
                 {
+                    x.AddProfile<MoviesProfile>();
                 });
         }
     }

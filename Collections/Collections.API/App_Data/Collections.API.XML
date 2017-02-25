@@ -37,6 +37,29 @@
             Gets or sets the logger.
             </summary>
         </member>
+        <member name="T:Collections.API.Controllers.V1.MoviesController">
+            <summary>
+            Movies collection controller
+            </summary>
+            <seealso cref="T:Collections.API.Controllers.BaseController" />
+        </member>
+        <member name="F:Collections.API.Controllers.V1.MoviesController.moviesService">
+            <summary>
+            The movies service
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IMoviesService)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.MoviesController"/> class.
+            </summary>
+            <param name="moviesService">The movies service</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.Get">
+            <summary>
+            Gets all movies
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all movies</returns>
+        </member>
         <member name="T:Collections.API.Enumerations.LogLevel">
             <summary>
             Log Level.
@@ -65,6 +88,16 @@
         <member name="F:Collections.API.Enumerations.LogLevel.Fatal">
             <summary>
             Is Fatal.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Infrastructure.BsonMapConfig">
+            <summary>
+            The mapping config for Mongo DB BSON documents
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.BsonMapConfig.Configure">
+            <summary>
+            Configures this instance.
             </summary>
         </member>
         <member name="T:Collections.API.Infrastructure.DependencyRegistrar">
@@ -200,15 +233,32 @@
             <param name="format">The composite format message to log.</param>
             <param name="args">An object array that contains zero or more objects to format.</param>
         </member>
-        <member name="T:Collections.API.Infrastructure.MappingConfig">
+        <member name="T:Collections.API.Infrastructure.AutoMapConfig">
             <summary>
             The Auto mapper profile config
             </summary>
         </member>
-        <member name="M:Collections.API.Infrastructure.MappingConfig.Configure">
+        <member name="M:Collections.API.Infrastructure.AutoMapConfig.Configure">
             <summary>
             Configures this instance.
             </summary>
+        </member>
+        <member name="T:Collections.API.Factories.MongoFactory`1">
+            <summary>
+            Factory for connecting to the Document DB
+            </summary>
+            <typeparam name="T">Type of BSON Document</typeparam>
+        </member>
+        <member name="M:Collections.API.Factories.MongoFactory`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoFactory`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Factories.MongoFactory`1.ConnectToCollection">
+            <summary>
+            Connects to Document DB collection.
+            </summary>
+            <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
         </member>
         <member name="T:Collections.API.Mapper.Interfaces.IMapper">
             <summary>
@@ -237,6 +287,121 @@
             <returns>
             Instance of T.
             </returns>
+        </member>
+        <member name="T:Collections.API.Models.Interfaces.Movies.IMovieModel">
+            <summary>
+            Interface for the Movie Model
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.Movies.IMovieModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.Movies.IMovieModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.Movies.IMovieModel.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.Movies.MovieModel">
+            <summary>
+            Model for Movie data
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Movies.MovieModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Movies.MovieModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Movies.MovieModel.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Repositories.Interfaces.IMoviesRepository">
+            <summary>
+            Interface for the movies repository
+            </summary>
+            <seealso cref="T:Collections.API.Repositories.Interfaces.IRepository" />
+        </member>
+        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.GetAsync">
+            <summary>
+            Gets the movies asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Repositories.Interfaces.IRepository">
+            <summary>
+            Base repository
+            </summary>
+        </member>
+        <member name="T:Collections.API.Repositories.MoviesRepository">
+            <summary>
+            Repository for movie data
+            </summary>
+            <seealso cref="T:Collections.API.Repositories.Interfaces.IMoviesRepository" />
+        </member>
+        <member name="M:Collections.API.Repositories.MoviesRepository.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Repositories.MoviesRepository"/> class.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Repositories.MoviesRepository.GetAsync">
+            <summary>
+            Gets the movies asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.IMoviesService">
+            <summary>
+            Interface for the movies service
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IService" />
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IMoviesService.GetAsync">
+            <summary>
+            Gets the movies asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.IService">
+            <summary>
+            Base service class
+            </summary>
+        </member>
+        <member name="T:Collections.API.Services.MoviesService">
+            <summary>
+            The movies service
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IMoviesService" />
+        </member>
+        <member name="F:Collections.API.Services.MoviesService.moviesRepository">
+            <summary>
+            The movies repository
+            </summary>
+        </member>
+        <member name="M:Collections.API.Services.MoviesService.#ctor(Collections.API.Repositories.Interfaces.IMoviesRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Services.MoviesService"/> class.
+            </summary>
+            <param name="moviesRepository">The movies repository.</param>
+        </member>
+        <member name="M:Collections.API.Services.MoviesService.GetAsync">
+            <summary>
+            Gets the movies asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Startup">
+            <summary>
+            Startup class
+            </summary>
         </member>
         <member name="M:Collections.API.Startup.Configuration(Owin.IAppBuilder)">
             <summary>
