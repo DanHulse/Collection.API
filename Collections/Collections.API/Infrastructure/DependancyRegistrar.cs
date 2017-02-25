@@ -8,6 +8,7 @@ using Collections.API.Services.Interfaces;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Mapper.Interfaces;
 using Collections.API.Factories.Interfaces;
+using Collections.API.Models.Interfaces.Movies;
 
 namespace Collections.API.Infrastructure
 {
@@ -46,9 +47,9 @@ namespace Collections.API.Infrastructure
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
 
-            builder.RegisterAssemblyTypes(assembly)
-                .Where(t => typeof(IMongoFactory<>).IsAssignableFrom(t))
-                .AsImplementedInterfaces();
+            //builder.RegisterAssemblyTypes(assembly)
+            //    .Where(t => typeof(IMongoFactory<IMovieModel>).IsAssignableFrom(t))
+            //    .AsImplementedInterfaces();
 
             //builder.Register(c => c.Resolve<IAuthenticationFactory>().Connect()).As<IOrganizationService>().SingleInstance();
 

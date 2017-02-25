@@ -13,7 +13,7 @@ namespace Collections.API.ViewModels.Movies
         /// <summary>
         /// Gets or sets the identifier.
         /// </summary>
-        public Guid Id { get; set; }
+        public string Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name.

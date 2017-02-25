@@ -1,4 +1,5 @@
-﻿using MongoDB.Bson.Serialization.Attributes;
+﻿using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,7 @@ namespace Collections.API.Models.Interfaces.Movies
         /// Gets or sets the identifier.
         /// </summary>
         [BsonId]
-        Guid Id { get; set; }
+        ObjectId Id { get; set; }
 
         /// <summary>
         /// Gets or sets the name.

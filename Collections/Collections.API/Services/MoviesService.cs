@@ -4,6 +4,7 @@ using Collections.API.ViewModels.Movies;
 using System.Collections.Generic;
 using Collections.API.Mapper.Interfaces;
 using System.Threading.Tasks;
+using Collections.API.Models.Movies;
 
 namespace Collections.API.Services
 {
@@ -44,6 +45,18 @@ namespace Collections.API.Services
             var mappedMovies = mapper.Map<IEnumerable<MovieViewModel>>(movies);
 
             return mappedMovies;
+        }
+
+        /// <summary>
+        /// Posts the movie model asynchronously
+        /// </summary>
+        /// <param name="model">The model to be posted</param>
+        /// <returns>True if successful</returns>
+        public async Task<bool> PostAsync(MovieModel model)
+        {
+            var result = await this.moviesRepository.PostAsync(model);
+
+            return result;
         }
     }
 }

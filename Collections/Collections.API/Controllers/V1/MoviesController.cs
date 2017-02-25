@@ -1,5 +1,6 @@
 ﻿using Collections.API.Enumerations;
 using Collections.API.Infrastructure.Interfaces;
+using Collections.API.Models.Movies;
 using Collections.API.Services.Interfaces;
 using Collections.API.ViewModels.Movies;
 using System;
@@ -58,6 +59,35 @@ namespace Collections.API.Controllers.V1
             catch (Exception ex)
             {
                 this.Logger.Log(LogLevel.Error, ex, "Failed to retrive movies");
+
+                return this.InternalServerError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Post the movie model
+        /// </summary>
+        /// <param name="model">The model to be posted</param>
+        /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
+        [HttpPost]
+        [Route("", Name = "Post")]
+        [ResponseType(typeof(IHttpActionResult))]
+        public async Task<IHttpActionResult> PostAsync([FromBody]MovieModel model)
+        {
+            try
+            {
+                var result = await this.moviesService.PostAsync(model);
+
+                if (result)
+                {
+                    return this.Ok();
+                }
+
+                return this.BadRequest();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Log(LogLevel.Error, ex, "Failed to post the movie");
 
                 return this.InternalServerError(ex);
             }

@@ -262,6 +262,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\V1\MoviesController.cs" />
     <Compile Include="Enumerations\LogLevel.cs" />
+    <Compile Include="Factories\Interfaces\IFactory.cs" />
     <Compile Include="Factories\Interfaces\IMongoFactory.cs" />
     <Compile Include="Infrastructure\BsonMapConfig.cs" />
     <Compile Include="Infrastructure\DependancyRegistrar.cs" />

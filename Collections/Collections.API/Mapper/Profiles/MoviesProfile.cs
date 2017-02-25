@@ -19,7 +19,7 @@ namespace Collections.API.Mapper.Profiles
         /// </summary>
         public MoviesProfile()
         {
-            this.CreateMap<IMovieModel, MovieViewModel>();
+            this.CreateMap<IMovieModel, MovieViewModel>().ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id.ToString()));
         }
     }
 }

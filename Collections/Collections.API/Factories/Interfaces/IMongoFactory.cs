@@ -10,7 +10,7 @@ namespace Collections.API.Factories.Interfaces
     /// <summary>
     /// Interface for the Mongo DB Factory
     /// </summary>
-    public interface IMongoFactory<T> where T : class
+    public interface IMongoFactory<T> : IFactory where T : class
     {
         /// <summary>
         /// Connects to Document DB collection.

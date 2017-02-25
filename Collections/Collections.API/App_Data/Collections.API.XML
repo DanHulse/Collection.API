@@ -48,17 +48,25 @@
             The movies service
             </summary>
         </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IMoviesService)">
+        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IMoviesService,Collections.API.Infrastructure.Interfaces.ILogger)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.MoviesController"/> class.
             </summary>
             <param name="moviesService">The movies service</param>
+            <param name="logger">The logger.</param>
         </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.Get">
+        <member name="M:Collections.API.Controllers.V1.MoviesController.GetAsync">
             <summary>
             Gets all movies
             </summary>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all movies</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.PostAsync(Collections.API.Models.Movies.MovieModel)">
+            <summary>
+            Post the movie model
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
         <member name="T:Collections.API.Enumerations.LogLevel">
             <summary>
@@ -89,6 +97,40 @@
             <summary>
             Is Fatal.
             </summary>
+        </member>
+        <member name="T:Collections.API.Factories.Interfaces.IFactory">
+            <summary>
+            Base interface for Factories
+            </summary>
+        </member>
+        <member name="T:Collections.API.Factories.Interfaces.IMongoFactory`1">
+            <summary>
+            Interface for the Mongo DB Factory
+            </summary>
+        </member>
+        <member name="M:Collections.API.Factories.Interfaces.IMongoFactory`1.ConnectToCollection">
+            <summary>
+            Connects to Document DB collection.
+            </summary>
+            <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
+        </member>
+        <member name="T:Collections.API.Factories.MongoFactory`1">
+            <summary>
+            Factory for connecting to the Document DB
+            </summary>
+            <typeparam name="T">Type of BSON Document</typeparam>
+            <seealso cref="T:Collections.API.Factories.Interfaces.IMongoFactory`1"/>
+        </member>
+        <member name="M:Collections.API.Factories.MongoFactory`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoFactory`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Collections.API.Factories.MongoFactory`1.ConnectToCollection">
+            <summary>
+            Connects to Document DB collection.
+            </summary>
+            <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
         </member>
         <member name="T:Collections.API.Infrastructure.BsonMapConfig">
             <summary>
@@ -243,23 +285,6 @@
             Configures this instance.
             </summary>
         </member>
-        <member name="T:Collections.API.Factories.MongoFactory`1">
-            <summary>
-            Factory for connecting to the Document DB
-            </summary>
-            <typeparam name="T">Type of BSON Document</typeparam>
-        </member>
-        <member name="M:Collections.API.Factories.MongoFactory`1.#ctor">
-            <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoFactory`1"/> class.
-            </summary>
-        </member>
-        <member name="M:Collections.API.Factories.MongoFactory`1.ConnectToCollection">
-            <summary>
-            Connects to Document DB collection.
-            </summary>
-            <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
-        </member>
         <member name="T:Collections.API.Mapper.Interfaces.IMapper">
             <summary>
             Interface for mapper.
@@ -287,6 +312,17 @@
             <returns>
             Instance of T.
             </returns>
+        </member>
+        <member name="T:Collections.API.Mapper.Profiles.MoviesProfile">
+            <summary>
+            Class for movies AutoMapper config profiles
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:Collections.API.Mapper.Profiles.MoviesProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.MoviesProfile"/> class.
+            </summary>
         </member>
         <member name="T:Collections.API.Models.Interfaces.Movies.IMovieModel">
             <summary>
@@ -338,6 +374,14 @@
             <summary>
             Gets the movies asynchronously.
             </summary>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+        </member>
+        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.PostAsync(Collections.API.Models.Movies.MovieModel)">
+            <summary>
+            Posts the movie asynchronously
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Repositories.Interfaces.IRepository">
             <summary>
@@ -350,6 +394,16 @@
             </summary>
             <seealso cref="T:Collections.API.Repositories.Interfaces.IMoviesRepository" />
         </member>
+        <member name="F:Collections.API.Repositories.MoviesRepository.movieFactory">
+            <summary>
+            The movie factory
+            </summary>
+        </member>
+        <member name="F:Collections.API.Repositories.MoviesRepository.movieCollection">
+            <summary>
+            The movie collection
+            </summary>
+        </member>
         <member name="M:Collections.API.Repositories.MoviesRepository.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Repositories.MoviesRepository"/> class.
@@ -359,6 +413,14 @@
             <summary>
             Gets the movies asynchronously.
             </summary>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+        </member>
+        <member name="M:Collections.API.Repositories.MoviesRepository.PostAsync(Collections.API.Models.Movies.MovieModel)">
+            <summary>
+            Posts the movie asynchronously
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.IMoviesService">
             <summary>
@@ -366,10 +428,13 @@
             </summary>
             <seealso cref="T:Collections.API.Services.Interfaces.IService" />
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.GetAsync">
+        <!-- Badly formed XML comment ignored for member "M:Collections.API.Services.Interfaces.IMoviesService.GetAsync" -->
+        <member name="M:Collections.API.Services.Interfaces.IMoviesService.PostAsync(Collections.API.Models.Movies.MovieModel)">
             <summary>
-            Gets the movies asynchronously.
+            Posts the movie model asynchronously
             </summary>
+            <param name="model">The model to be posted</param>
+            <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.IService">
             <summary>
@@ -387,7 +452,12 @@
             The movies repository
             </summary>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.#ctor(Collections.API.Repositories.Interfaces.IMoviesRepository)">
+        <member name="F:Collections.API.Services.MoviesService.mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:Collections.API.Services.MoviesService.#ctor(Collections.API.Repositories.Interfaces.IMoviesRepository,Collections.API.Mapper.Interfaces.IMapper)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Services.MoviesService"/> class.
             </summary>
@@ -397,6 +467,14 @@
             <summary>
             Gets the movies asynchronously.
             </summary>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+        </member>
+        <member name="M:Collections.API.Services.MoviesService.PostAsync(Collections.API.Models.Movies.MovieModel)">
+            <summary>
+            Posts the movie model asynchronously
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Startup">
             <summary>
@@ -408,6 +486,26 @@
             Configurations the specified application.
             </summary>
             <param name = "app">The application.</param>
+        </member>
+        <member name="T:Collections.API.ViewModels.Movies.MovieViewModel">
+            <summary>
+            View model for the movie data
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.Movies.MovieViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.Movies.MovieViewModel.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.Movies.MovieViewModel.LastModified">
+            <summary>
+            Gets or sets the last modified.
+            </summary>
         </member>
         <member name="T:Collection.SwaggerConfig">
             <summary>
