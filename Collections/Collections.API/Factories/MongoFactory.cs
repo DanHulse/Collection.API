@@ -33,7 +33,7 @@ namespace Collections.API.Factories
         public MongoFactory(IConfigurationService configurationService)
         {
             this.configurationService = configurationService;
-            this.connectionString = this.configurationService.GetConnectionString("MongoDbConnection");
+            this.connectionString = this.configurationService.GetAppSetting("MongoDbConnection");
             this.collection = this.configurationService.GetAppSetting("MongoDbCollection");
         }
 

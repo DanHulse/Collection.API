@@ -582,10 +582,16 @@
             The movie collection
             </summary>
         </member>
+        <member name="F:Collections.API.Repositories.MoviesRepository.configurationService">
+            <summary>
+            The configuration service
+            </summary>
+        </member>
         <member name="M:Collections.API.Repositories.MoviesRepository.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Repositories.MoviesRepository"/> class.
             </summary>
+            <param name="configurationService">The configuration service</param>
         </member>
         <member name="M:Collections.API.Repositories.MoviesRepository.GetAsync">
             <summary>

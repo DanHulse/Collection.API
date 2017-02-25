@@ -244,3 +244,5 @@ ModelManifest.xml
 # Custom
 *.publish.xml
 *.jfm
+/Collections/Collections.API/AppSettingsSecrets.config
+/AppSettingsSecrets.config
