@@ -19,6 +19,11 @@ This will ensure that the API will connect to your Azure DB without storing the 
 
 When publishing this API to Azure, you can then add these AppSettings into the live app by following this: [AppSettings and Connection Strings in Azure] (https://azure.microsoft.com/en-gb/blog/windows-azure-web-sites-how-application-strings-and-connection-strings-work/)
 
+## Current Status
+The API currently supports Movie, Book, Album, and Video Game collections that run through generic DataService and DataRepository classes, this allows the API to be easily expanded to support more data models if needs be. There is currently one major limitation: the PATCH route through the API only supports flat data models.
+
+The API also doesn't support any sort of advanced search
+
 ### Routing
 | HTTPCommand | Route | Description | Returns |
 | --- | --- | --- | --- |
@@ -29,8 +34,6 @@ When publishing this API to Azure, you can then add these AppSettings into the l
 | **DELETE** | /api/v1/[*controller*]/ | Deletes specified item(s) from collection, accepts array of Ids to delete | HttpActionResult |
 
 ### To-Do
-- [x] Movies route
-- [ ] Video Games route
-- [ ] Books route
-- [ ] Music route
-- [x] README.md
+- [ ] Unit tests
+- [ ] Advanced Search capabilities
+- [ ] Support for more complex models
