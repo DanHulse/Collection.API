@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Collections.API.Mapper.Interfaces
+﻿namespace Collections.API.Mapper.Interfaces
 {
     /// <summary>
     /// Interface for mapper.

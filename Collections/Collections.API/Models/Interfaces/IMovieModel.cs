@@ -1,10 +1,7 @@
-﻿using MongoDB.Bson;
-using MongoDB.Bson.Serialization.Attributes;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using MongoDB.Bson;
+using MongoDB.Bson.Serialization.Attributes;
 
 namespace Collections.API.Models.Interfaces
 {
@@ -51,19 +48,24 @@ namespace Collections.API.Models.Interfaces
         List<string> Writers { get; set; }
 
         /// <summary>
-        /// Gets or sets the music.
+        /// Gets or sets the genres.
         /// </summary>
-        List<string> Music { get; set; }
+        List<string> Genres { get; set; }
+
+        /// <summary>
+        /// Gets or sets the formats.
+        /// </summary>
+        List<string> Formats { get; set; }
 
         /// <summary>
         /// Gets or sets the release date.
         /// </summary>
-        DateTime ReleaseDate { get; set; }
+        DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the running time.
         /// </summary>
-        int RunningTime { get; set; }
+        int? RunningTime { get; set; }
 
         /// <summary>
         /// Gets or sets the language.
@@ -71,9 +73,9 @@ namespace Collections.API.Models.Interfaces
         string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the rating.
+        /// Gets or sets the certification.
         /// </summary>
-        string Rating { get; set; }
+        string Certification { get; set; }
 
         /// <summary>
         /// Gets or sets the poster URL.
@@ -88,6 +90,16 @@ namespace Collections.API.Models.Interfaces
         /// <summary>
         /// Gets or sets the series number.
         /// </summary>
-        int SeriesNumber { get; set; }
+        int? SeriesNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="MovieModel"/> is watched.
+        /// </summary>
+        bool? Watched { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        int? Rating { get; set; }
     }
 }

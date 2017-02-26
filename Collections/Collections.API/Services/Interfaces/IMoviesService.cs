@@ -1,7 +1,7 @@
-﻿using Collections.API.Models;
-using Collections.API.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Collections.API.Models;
+using Collections.API.ViewModels;
 
 namespace Collections.API.Services.Interfaces
 {
@@ -29,7 +29,7 @@ namespace Collections.API.Services.Interfaces
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns>True if successful</returns>
-        Task<bool> PostAsync(MovieModel model);
+        Task<bool> PostAsync(IEnumerable<MovieModel> model);
 
         /// <summary>
         /// Patches specified the movie asynchronously.
@@ -40,10 +40,10 @@ namespace Collections.API.Services.Interfaces
         Task<bool> PatchAsync(string id, MovieModel model);
 
         /// <summary>
-        /// Deletes specified the movie asynchronously.
+        /// Deletes specified the movies asynchronously.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="ids">The identifiers.</param>
         /// <returns>True if successful</returns>
-        Task<bool> DeleteAsync(string id);
+        Task<bool> DeleteAsync(IEnumerable<string> ids);
     }
 }

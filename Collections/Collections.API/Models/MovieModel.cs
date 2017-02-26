@@ -1,10 +1,8 @@
-﻿using Collections.API.Models.Interfaces;
+﻿using System;
+using System.Collections.Generic;
+using Collections.API.Models.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Collections.API.Models
 {
@@ -52,19 +50,24 @@ namespace Collections.API.Models
         public List<string> Writers { get; set; }
 
         /// <summary>
-        /// Gets or sets the music.
+        /// Gets or sets the genres.
         /// </summary>
-        public List<string> Music { get; set; }
+        public List<string> Genres { get; set; }
+
+        /// <summary>
+        /// Gets or sets the formats.
+        /// </summary>
+        public List<string> Formats { get; set; }
 
         /// <summary>
         /// Gets or sets the release date.
         /// </summary>
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the running time.
         /// </summary>
-        public int RunningTime { get; set; }
+        public int? RunningTime { get; set; }
 
         /// <summary>
         /// Gets or sets the language.
@@ -72,9 +75,9 @@ namespace Collections.API.Models
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the rating.
+        /// Gets or sets the certification.
         /// </summary>
-        public string Rating { get; set; }
+        public string Certification { get; set; }
 
         /// <summary>
         /// Gets or sets the poster URL.
@@ -89,6 +92,16 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the series number.
         /// </summary>
-        public int SeriesNumber { get; set; }
+        public int? SeriesNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="MovieModel"/> is watched.
+        /// </summary>
+        public bool? Watched { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        public int? Rating { get; set; }
     }
 }

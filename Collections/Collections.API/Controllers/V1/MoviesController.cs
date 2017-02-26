@@ -1,14 +1,14 @@
-﻿using Collections.API.Enumerations;
-using Collections.API.Infrastructure.Interfaces;
-using Collections.API.Models;
-using Collections.API.Services.Interfaces;
-using Collections.API.ViewModels;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web.Http;
 using System.Web.Http.Description;
+using Collections.API.Enumerations;
+using Collections.API.Infrastructure.Interfaces;
+using Collections.API.Models;
+using Collections.API.Services.Interfaces;
+using Collections.API.ViewModels;
 
 namespace Collections.API.Controllers.V1
 {
@@ -92,14 +92,14 @@ namespace Collections.API.Controllers.V1
         }
 
         /// <summary>
-        /// Insert new movie to DB
+        /// Insert new movies to DB
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
         [HttpPost]
-        [Route("", Name = "PostMovie")]
+        [Route("", Name = "PostMovies")]
         [ResponseType(typeof(IHttpActionResult))]
-        public async Task<IHttpActionResult> PostAsync([FromBody]MovieModel model)
+        public async Task<IHttpActionResult> PostAsync([FromBody]IEnumerable<MovieModel> model)
         {
             try
             {
@@ -114,7 +114,7 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, "Failed to post the movie");
+                this.Logger.Log(LogLevel.Error, ex, "Failed to post the movies");
 
                 return this.InternalServerError(ex);
             }
@@ -151,18 +151,18 @@ namespace Collections.API.Controllers.V1
         }
 
         /// <summary>
-        /// Deletes the movie asynchronously.
+        /// Deletes the movies asynchronously.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="ids">The identifiers of the movies to delete.</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
         [HttpDelete]
-        [Route("{id}", Name = "DeleteMovie")]
+        [Route("", Name = "DeleteMovies")]
         [ResponseType(typeof(IHttpActionResult))]
-        public async Task<IHttpActionResult> DeleteAsync([FromUri]string id)
+        public async Task<IHttpActionResult> DeleteAsync([FromBody]IEnumerable<string> ids)
         {
             try
             {
-                var result = await this.moviesService.DeleteAsync(id);
+                var result = await this.moviesService.DeleteAsync(ids);
 
                 if (result)
                 {
@@ -173,7 +173,7 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, $"Failed to delete movie with Id: {id}");
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to delete movies");
 
                 return this.InternalServerError(ex);
             }

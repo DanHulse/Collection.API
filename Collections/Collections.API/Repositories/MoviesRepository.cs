@@ -1,14 +1,16 @@
-﻿using Collections.API.Factories;
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using System.Linq;
+using Collections.API.Factories;
 using Collections.API.Factories.Interfaces;
-using Collections.API.Models.Interfaces;
+using Collections.API.Helpers;
 using Collections.API.Models;
+using Collections.API.Models.Interfaces;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Collections.API.Repositories
 {
@@ -69,17 +71,20 @@ namespace Collections.API.Repositories
         }
 
         /// <summary>
-        /// Posts the movie asynchronously
+        /// Posts multiple movies asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns>True if successful</returns>
-        public async Task<bool> PostAsync(MovieModel model)
+        public async Task<bool> PostMultipleAsync(IEnumerable<MovieModel> model)
         {
             try
             {
-                model.Id = ObjectId.GenerateNewId().ToString();
+                foreach (var m in model)
+                {
+                    m.Id = ObjectId.GenerateNewId().ToString();
+                }
 
-                await movieCollection.InsertOneAsync(model);
+                await movieCollection.InsertManyAsync(model);
 
                 return true;
             }
@@ -97,9 +102,9 @@ namespace Collections.API.Repositories
         /// <returns>True if successful</returns>
         public async Task<bool> PatchAsync(string id, MovieModel model)
         {
-            var filter = Builders<IMovieModel>.Filter.Eq("_id", ObjectId.Parse(model.Id));
-
-            var result = await movieCollection.ReplaceOneAsync(filter, model);
+            var dictionary = model.ToDictionary();
+        
+            var result = await movieCollection.UpdateOneAsync(new BsonDocument("_id", ObjectId.Parse(id)), new BsonDocument("$set", new BsonDocument(dictionary)));
 
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {
@@ -114,17 +119,19 @@ namespace Collections.API.Repositories
         }
 
         /// <summary>
-        /// Deletes specified movie asynchronously.
+        /// Deletes specified movies asynchronously.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="ids">The identifiers.</param>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteMultipleAsync(IEnumerable<string> ids)
         {
-            var filter = Builders<IMovieModel>.Filter.Eq("_id", ObjectId.Parse(id));
+            var parsedIds = ids.Select(s => ObjectId.Parse(s));
 
-            var result = await movieCollection.DeleteOneAsync(filter);
+            var filter = Builders<IMovieModel>.Filter.In("_id", parsedIds);
 
-            if (result.IsAcknowledged && result.DeletedCount == 1)
+            var result = await movieCollection.DeleteManyAsync(filter);
+
+            if (result.IsAcknowledged && result.DeletedCount >= 1)
             {
                 return true;
             }

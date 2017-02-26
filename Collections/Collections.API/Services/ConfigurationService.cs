@@ -1,9 +1,6 @@
-﻿using Collections.API.Services.Interfaces;
-using System;
-using System.Collections.Generic;
+﻿using System;
 using System.Configuration;
-using System.Linq;
-using System.Web;
+using Collections.API.Services.Interfaces;
 
 namespace Collections.API.Services
 {

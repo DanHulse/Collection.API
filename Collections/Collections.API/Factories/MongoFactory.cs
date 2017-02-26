@@ -1,7 +1,7 @@
-﻿using Collections.API.Factories.Interfaces;
+﻿using System.Security.Authentication;
+using Collections.API.Factories.Interfaces;
 using Collections.API.Services.Interfaces;
 using MongoDB.Driver;
-using System.Security.Authentication;
 
 namespace Collections.API.Factories
 {

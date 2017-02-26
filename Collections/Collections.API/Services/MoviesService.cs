@@ -1,10 +1,10 @@
-﻿using Collections.API.Repositories.Interfaces;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Collections.API.Mapper.Interfaces;
+using Collections.API.Models;
+using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
 using Collections.API.ViewModels;
-using System.Collections.Generic;
-using Collections.API.Mapper.Interfaces;
-using System.Threading.Tasks;
-using Collections.API.Models;
 
 namespace Collections.API.Services
 {
@@ -66,9 +66,9 @@ namespace Collections.API.Services
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns>True if successful</returns>
-        public async Task<bool> PostAsync(MovieModel model)
+        public async Task<bool> PostAsync(IEnumerable<MovieModel> model)
         {
-            var result = await this.moviesRepository.PostAsync(model);
+            var result = await this.moviesRepository.PostMultipleAsync(model);
 
             return result;
         }
@@ -87,13 +87,13 @@ namespace Collections.API.Services
         }
 
         /// <summary>
-        /// Deletes specified the movie asynchronously.
+        /// Deletes specified the movies asynchronously.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="ids">The identifiers.</param>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteAsync(string id)
+        public async Task<bool> DeleteAsync(IEnumerable<string> ids)
         {
-            var result = await this.moviesRepository.DeleteAsync(id);
+            var result = await this.moviesRepository.DeleteMultipleAsync(ids);
 
             return result;
         }

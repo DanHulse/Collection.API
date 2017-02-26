@@ -4,9 +4,9 @@ using System.Web.Http;
 using Autofac;
 using Autofac.Integration.WebApi;
 using Collections.API.Infrastructure.Interfaces;
-using Collections.API.Services.Interfaces;
-using Collections.API.Repositories.Interfaces;
 using Collections.API.Mapper.Interfaces;
+using Collections.API.Repositories.Interfaces;
+using Collections.API.Services.Interfaces;
 
 namespace Collections.API.Infrastructure
 {

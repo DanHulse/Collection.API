@@ -1,7 +1,7 @@
-﻿using Collections.API.Models.Interfaces;
-using Collections.API.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Collections.API.Models;
+using Collections.API.Models.Interfaces;
 
 namespace Collections.API.Repositories.Interfaces
 {
@@ -24,11 +24,11 @@ namespace Collections.API.Repositories.Interfaces
         Task<IMovieModel> GetByIdAsync(string id);
 
         /// <summary>
-        /// Posts the movie asynchronously
+        /// Posts multiple movies asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns>True if successful</returns>
-        Task<bool> PostAsync(MovieModel model);
+        Task<bool> PostMultipleAsync(IEnumerable<MovieModel> model);
 
         /// <summary>
         /// Patches specified movie asynchronously.
@@ -39,10 +39,10 @@ namespace Collections.API.Repositories.Interfaces
         Task<bool> PatchAsync(string id, MovieModel model);
 
         /// <summary>
-        /// Deletes specified movie asynchronously.
+        /// Deletes specified movies asynchronously.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <param name="ids">The identifiers.</param>
         /// <returns>True if successful</returns>
-        Task<bool> DeleteAsync(string id);
+        Task<bool> DeleteMultipleAsync(IEnumerable<string> ids);
     }
 }

@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Collections.API.ViewModels
 {
@@ -46,9 +44,14 @@ namespace Collections.API.ViewModels
         public List<string> Writers { get; set; }
 
         /// <summary>
-        /// Gets or sets the music.
+        /// Gets or sets the genres.
         /// </summary>
-        public List<string> Music { get; set; }
+        public List<string> Genres { get; set; }
+
+        /// <summary>
+        /// Gets or sets the formats.
+        /// </summary>
+        public List<string> Formats { get; set; }
 
         /// <summary>
         /// Gets or sets the release date.
@@ -66,9 +69,9 @@ namespace Collections.API.ViewModels
         public string Language { get; set; }
 
         /// <summary>
-        /// Gets or sets the rating.
+        /// Gets or sets the certification.
         /// </summary>
-        public string Rating { get; set; }
+        public string Certification { get; set; }
 
         /// <summary>
         /// Gets or sets the poster URL.
@@ -84,5 +87,15 @@ namespace Collections.API.ViewModels
         /// Gets or sets the series number.
         /// </summary>
         public int SeriesNumber { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether this <see cref="MovieViewModel"/> is watched.
+        /// </summary>
+        public bool Watched { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rating.
+        /// </summary>
+        public int Rating { get; set; }
     }
 }

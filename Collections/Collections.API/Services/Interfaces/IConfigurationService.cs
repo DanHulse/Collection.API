@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace Collections.API.Services.Interfaces
+﻿namespace Collections.API.Services.Interfaces
 {
     /// <summary>
     /// Interface for the configuration service

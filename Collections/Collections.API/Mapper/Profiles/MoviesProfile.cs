@@ -1,10 +1,6 @@
 ﻿using AutoMapper;
 using Collections.API.Models.Interfaces;
 using Collections.API.ViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 
 namespace Collections.API.Mapper.Profiles
 {

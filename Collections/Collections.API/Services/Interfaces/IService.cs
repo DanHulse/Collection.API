@@ -1,7 +1,7 @@
 ﻿namespace Collections.API.Services.Interfaces
 {
     /// <summary>
-    /// Base service class
+    /// Base service interface
     /// </summary>
     public interface IService
     {

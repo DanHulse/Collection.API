@@ -67,9 +67,9 @@
             </summary>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested movie</returns>
         </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.PostAsync(Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Controllers.V1.MoviesController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
             <summary>
-            Insert new movie to DB
+            Insert new movies to DB
             </summary>
             <param name="model">The model to be posted</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
@@ -82,11 +82,11 @@
             <param name="model">The model.</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.DeleteAsync(System.String)">
+        <member name="M:Collections.API.Controllers.V1.MoviesController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes the movie asynchronously.
+            Deletes the movies asynchronously.
             </summary>
-            <param name="id">The identifier.</param>
+            <param name="ids">The identifiers of the movies to delete.</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
         <member name="T:Collections.API.Enumerations.LogLevel">
@@ -167,6 +167,50 @@
             Connects to Document DB collection.
             </summary>
             <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
+        </member>
+        <member name="T:Collections.API.Helpers.ObjectToDictionaryHelper">
+            <summary>
+            Helper method to convert an object into a dictionary of it's properties
+            Found on GiyHub: https://gist.github.com/jarrettmeyer/798667
+            </summary>
+        </member>
+        <member name="M:Collections.API.Helpers.ObjectToDictionaryHelper.ToDictionary(System.Object)">
+            <summary>
+            Translates object to the dictionary.
+            </summary>
+            <param name="source">The source.</param>
+            <returns><see cref="T:System.Collections.Generic.IDictionary`2"/>from object</returns>
+        </member>
+        <member name="M:Collections.API.Helpers.ObjectToDictionaryHelper.ToDictionary``1(System.Object)">
+            <summary>
+            Translates object to the dictionary.
+            </summary>
+            <typeparam name="T">The provided object type</typeparam>
+            <param name="source">The source.</param>
+            <returns><see cref="T:System.Collections.Generic.IDictionary`2"/>from object</returns>
+        </member>
+        <member name="M:Collections.API.Helpers.ObjectToDictionaryHelper.AddPropertyToDictionary``1(System.ComponentModel.PropertyDescriptor,System.Object,System.Collections.Generic.Dictionary{System.String,``0})">
+            <summary>
+            Adds the property to dictionary.
+            </summary>
+            <typeparam name="T"></typeparam>
+            <param name="property">The property.</param>
+            <param name="source">The source.</param>
+            <param name="dictionary">The dictionary.</param>
+        </member>
+        <member name="M:Collections.API.Helpers.ObjectToDictionaryHelper.IsOfType``1(System.Object)">
+            <summary>
+            Determines whether property is of the specified type.
+            </summary>
+            <typeparam name="T">The type of the property</typeparam>
+            <param name="value">The value.</param>
+            <returns>True if the property is of the specified type.</returns>
+        </member>
+        <member name="M:Collections.API.Helpers.ObjectToDictionaryHelper.ThrowExceptionWhenSourceArgumentIsNull">
+            <summary>
+            Throws the exception when source argument is null.
+            </summary>
+            <exception cref="T:System.ArgumentNullException">source - Unable to convert object to a dictionary. The source object is null.</exception>
         </member>
         <member name="T:Collections.API.Infrastructure.BsonMapConfig">
             <summary>
@@ -400,9 +444,14 @@
             Gets or sets the writers.
             </summary>
         </member>
-        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Music">
+        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Genres">
             <summary>
-            Gets or sets the music.
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Formats">
+            <summary>
+            Gets or sets the formats.
             </summary>
         </member>
         <member name="P:Collections.API.Models.Interfaces.IMovieModel.ReleaseDate">
@@ -420,9 +469,9 @@
             Gets or sets the language.
             </summary>
         </member>
-        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Rating">
+        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Certification">
             <summary>
-            Gets or sets the rating.
+            Gets or sets the certification.
             </summary>
         </member>
         <member name="P:Collections.API.Models.Interfaces.IMovieModel.PosterUrl">
@@ -438,6 +487,16 @@
         <member name="P:Collections.API.Models.Interfaces.IMovieModel.SeriesNumber">
             <summary>
             Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Watched">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.Models.MovieModel"/> is watched.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IMovieModel.Rating">
+            <summary>
+            Gets or sets the rating.
             </summary>
         </member>
         <member name="T:Collections.API.Models.MovieModel">
@@ -481,9 +540,14 @@
             Gets or sets the writers.
             </summary>
         </member>
-        <member name="P:Collections.API.Models.MovieModel.Music">
+        <member name="P:Collections.API.Models.MovieModel.Genres">
             <summary>
-            Gets or sets the music.
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.MovieModel.Formats">
+            <summary>
+            Gets or sets the formats.
             </summary>
         </member>
         <member name="P:Collections.API.Models.MovieModel.ReleaseDate">
@@ -501,9 +565,9 @@
             Gets or sets the language.
             </summary>
         </member>
-        <member name="P:Collections.API.Models.MovieModel.Rating">
+        <member name="P:Collections.API.Models.MovieModel.Certification">
             <summary>
-            Gets or sets the rating.
+            Gets or sets the certification.
             </summary>
         </member>
         <member name="P:Collections.API.Models.MovieModel.PosterUrl">
@@ -519,6 +583,16 @@
         <member name="P:Collections.API.Models.MovieModel.SeriesNumber">
             <summary>
             Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.MovieModel.Watched">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.Models.MovieModel"/> is watched.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.MovieModel.Rating">
+            <summary>
+            Gets or sets the rating.
             </summary>
         </member>
         <member name="T:Collections.API.Repositories.Interfaces.IMoviesRepository">
@@ -539,9 +613,9 @@
             </summary>
             <returns><see cref="T:Collections.API.Models.Interfaces.IMovieModel"/>requeted movie</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.PostAsync(Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.PostMultipleAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
             <summary>
-            Posts the movie asynchronously
+            Posts multiple movies asynchronously
             </summary>
             <param name="model">The model to be posted</param>
             <returns>True if successful</returns>
@@ -554,11 +628,11 @@
             <param name="model">The model.</param>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.DeleteAsync(System.String)">
+        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.DeleteMultipleAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified movie asynchronously.
+            Deletes specified movies asynchronously.
             </summary>
-            <param name="id">The identifier.</param>
+            <param name="ids">The identifiers.</param>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Repositories.Interfaces.IRepository">
@@ -605,9 +679,9 @@
             </summary>
             <returns><see cref="T:Collections.API.Models.Interfaces.IMovieModel"/>requeted movie</returns>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.PostAsync(Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Repositories.MoviesRepository.PostMultipleAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
             <summary>
-            Posts the movie asynchronously
+            Posts multiple movies asynchronously
             </summary>
             <param name="model">The model to be posted</param>
             <returns>True if successful</returns>
@@ -620,11 +694,11 @@
             <param name="model">The model.</param>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.DeleteAsync(System.String)">
+        <member name="M:Collections.API.Repositories.MoviesRepository.DeleteMultipleAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified movie asynchronously.
+            Deletes specified movies asynchronously.
             </summary>
-            <param name="id">The identifier.</param>
+            <param name="ids">The identifiers.</param>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.ConfigurationService">
@@ -686,7 +760,7 @@
             <param name="id">the identifier</param>
             <returns><see cref="T:Collections.API.ViewModels.MovieDetailViewModel"/>requested movie</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.PostAsync(Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Services.Interfaces.IMoviesService.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
             <summary>
             Posts the movie model asynchronously
             </summary>
@@ -701,11 +775,11 @@
             <param name="model">The model.</param>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.DeleteAsync(System.String)">
+        <member name="M:Collections.API.Services.Interfaces.IMoviesService.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified the movie asynchronously.
+            Deletes specified the movies asynchronously.
             </summary>
-            <param name="id">The identifier.</param>
+            <param name="ids">The identifiers.</param>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.IService">
@@ -748,7 +822,7 @@
             </summary>
             <returns><see cref="T:Collections.API.ViewModels.MovieDetailViewModel"/>requested movie</returns>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.PostAsync(Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Services.MoviesService.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
             <summary>
             Posts the movie model asynchronously
             </summary>
@@ -763,11 +837,11 @@
             <param name="model">The model.</param>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.DeleteAsync(System.String)">
+        <member name="M:Collections.API.Services.MoviesService.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified the movie asynchronously.
+            Deletes specified the movies asynchronously.
             </summary>
-            <param name="id">The identifier.</param>
+            <param name="ids">The identifiers.</param>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Startup">
@@ -821,9 +895,14 @@
             Gets or sets the writers.
             </summary>
         </member>
-        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Music">
+        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Genres">
             <summary>
-            Gets or sets the music.
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Formats">
+            <summary>
+            Gets or sets the formats.
             </summary>
         </member>
         <member name="P:Collections.API.ViewModels.MovieDetailViewModel.ReleaseDate">
@@ -841,9 +920,9 @@
             Gets or sets the language.
             </summary>
         </member>
-        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Rating">
+        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Certification">
             <summary>
-            Gets or sets the rating.
+            Gets or sets the certification.
             </summary>
         </member>
         <member name="P:Collections.API.ViewModels.MovieDetailViewModel.PosterUrl">
@@ -859,6 +938,16 @@
         <member name="P:Collections.API.ViewModels.MovieDetailViewModel.SeriesNumber">
             <summary>
             Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Watched">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.ViewModels.MovieViewModel"/> is watched.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.MovieDetailViewModel.Rating">
+            <summary>
+            Gets or sets the rating.
             </summary>
         </member>
         <member name="T:Collections.API.ViewModels.MovieViewModel">
@@ -879,21 +968,6 @@
         <member name="P:Collections.API.ViewModels.MovieViewModel.TranslatedTitle">
             <summary>
             Gets or sets the translated title.
-            </summary>
-        </member>
-        <member name="P:Collections.API.ViewModels.MovieViewModel.Directors">
-            <summary>
-            Gets or sets the directors.
-            </summary>
-        </member>
-        <member name="P:Collections.API.ViewModels.MovieViewModel.Cast">
-            <summary>
-            Gets or sets the cast.
-            </summary>
-        </member>
-        <member name="P:Collections.API.ViewModels.MovieViewModel.RunningTime">
-            <summary>
-            Gets or sets the running time.
             </summary>
         </member>
         <member name="P:Collections.API.ViewModels.MovieViewModel.PosterUrl">

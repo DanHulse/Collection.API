@@ -1,5 +1,5 @@
-﻿using Collections.API.Infrastructure.Interfaces;
-using System.Web.Http;
+﻿using System.Web.Http;
+using Collections.API.Infrastructure.Interfaces;
 
 namespace Collections.API.Controllers
 {

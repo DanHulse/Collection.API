@@ -1,11 +1,11 @@
-﻿using Microsoft.Owin;
-using Owin;
-using System.Web.Http;
+﻿using System.Web.Http;
+using System.Web.Routing;
 using Collection;
 using Collections.API.App_Start;
 using Collections.API.Infrastructure;
-using System.Web.Routing;
+using Microsoft.Owin;
 using Microsoft.Owin.Cors;
+using Owin;
 
 [assembly: OwinStartup(typeof(Collections.API.Startup))]
 

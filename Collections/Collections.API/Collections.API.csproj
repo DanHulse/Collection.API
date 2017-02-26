@@ -264,6 +264,7 @@
     <Compile Include="Enumerations\LogLevel.cs" />
     <Compile Include="Factories\Interfaces\IFactory.cs" />
     <Compile Include="Factories\Interfaces\IMongoFactory.cs" />
+    <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
     <Compile Include="Infrastructure\BsonMapConfig.cs" />
     <Compile Include="Infrastructure\DependancyRegistrar.cs" />
     <Compile Include="Infrastructure\Interfaces\ILogger.cs" />
