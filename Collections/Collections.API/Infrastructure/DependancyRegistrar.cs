@@ -7,6 +7,8 @@ using Collections.API.Infrastructure.Interfaces;
 using Collections.API.Mapper.Interfaces;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
+using Collections.API.Factories.Interfaces;
+using MongoDB.Driver;
 
 namespace Collections.API.Infrastructure
 {
@@ -44,6 +46,16 @@ namespace Collections.API.Infrastructure
                 .Where(t => typeof(IMapper).IsAssignableFrom(t))
                 .AsImplementedInterfaces()
                 .InstancePerLifetimeScope();
+
+            builder.RegisterAssemblyTypes(assembly)
+                .Where(t => typeof(IFactory).IsAssignableFrom(t))
+                .AsImplementedInterfaces()
+                .SingleInstance();
+
+            builder.RegisterAssemblyTypes(assembly)
+                .Where(t => typeof(IDataCollection).IsAssignableFrom(t))
+                .AsImplementedInterfaces()
+                .SingleInstance();
 
             var container = builder.Build();
 

@@ -43,16 +43,22 @@
             </summary>
             <seealso cref="T:Collections.API.Controllers.BaseController" />
         </member>
-        <member name="F:Collections.API.Controllers.V1.MoviesController.moviesService">
+        <member name="F:Collections.API.Controllers.V1.MoviesController.dataService">
             <summary>
-            The movies service
+            The data service
             </summary>
         </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IMoviesService,Collections.API.Infrastructure.Interfaces.ILogger)">
+        <member name="F:Collections.API.Controllers.V1.MoviesController.mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.MoviesController"/> class.
             </summary>
-            <param name="moviesService">The movies service</param>
+            <param name="dataService">The data service</param>
+            <param name="mapper">The mapper</param>
             <param name="logger">The logger.</param>
         </member>
         <member name="M:Collections.API.Controllers.V1.MoviesController.GetAsync">
@@ -87,6 +93,64 @@
             Deletes the movies asynchronously.
             </summary>
             <param name="ids">The identifiers of the movies to delete.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="T:Collections.API.Controllers.V1.VideoGamesController">
+            <summary>
+            Video games collection controller
+            </summary>
+            <seealso cref="T:Collections.API.Controllers.BaseController" />
+        </member>
+        <member name="F:Collections.API.Controllers.V1.VideoGamesController.dataService">
+            <summary>
+            The data service
+            </summary>
+        </member>
+        <member name="F:Collections.API.Controllers.V1.VideoGamesController.mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.VideoGamesController"/> class.
+            </summary>
+            <param name="dataService">The data service</param>
+            <param name="mapper">The mapper.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.GetAsync">
+            <summary>
+            Retrieve all video games
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all video games</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.GetByIdAsync(System.String)">
+            <summary>
+            Retrieve requested video game
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested video game</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.VideoGameModel})">
+            <summary>
+            Insert new video games to DB
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.PatchAsync(System.String,Collections.API.Models.VideoGameModel)">
+            <summary>
+            Updates specified video game
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the video games asynchronously.
+            </summary>
+            <param name="ids">The identifiers of the video games to delete.</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
         <member name="T:Collections.API.Enumerations.LogLevel">
@@ -124,45 +188,45 @@
             Base interface for Factories
             </summary>
         </member>
-        <member name="T:Collections.API.Factories.Interfaces.IMongoFactory`1">
+        <member name="T:Collections.API.Factories.Interfaces.IMongoFactory">
             <summary>
             Interface for the Mongo DB Factory
             </summary>
         </member>
-        <member name="M:Collections.API.Factories.Interfaces.IMongoFactory`1.ConnectToCollection">
+        <member name="M:Collections.API.Factories.Interfaces.IMongoFactory.ConnectToCollection``1">
             <summary>
             Connects to Document DB collection.
             </summary>
             <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
         </member>
-        <member name="T:Collections.API.Factories.MongoFactory`1">
+        <member name="T:Collections.API.Factories.MongoFactory">
             <summary>
             Factory for connecting to the Document DB
             </summary>
             <typeparam name="T">Type of BSON Document</typeparam>
-            <seealso cref="T:Collections.API.Factories.Interfaces.IMongoFactory`1"/>
+            <seealso cref="!:Collections.API.Factories.Interfaces.IMongoFactory&lt;T&gt;"/>
         </member>
-        <member name="F:Collections.API.Factories.MongoFactory`1.configurationService">
+        <member name="F:Collections.API.Factories.MongoFactory.configurationService">
             <summary>
             The configuration service
             </summary>
         </member>
-        <member name="F:Collections.API.Factories.MongoFactory`1.connectionString">
+        <member name="F:Collections.API.Factories.MongoFactory.connectionString">
             <summary>
             The MongoDB connection string
             </summary>
         </member>
-        <member name="F:Collections.API.Factories.MongoFactory`1.collection">
+        <member name="F:Collections.API.Factories.MongoFactory.collection">
             <summary>
             The MongoDB collection
             </summary>
         </member>
-        <member name="M:Collections.API.Factories.MongoFactory`1.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
+        <member name="M:Collections.API.Factories.MongoFactory.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
             <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoFactory`1"/> class.
+            Initializes a new instance of the <see cref="!:MongoFactory&lt;T&gt;"/> class.
             </summary>
         </member>
-        <member name="M:Collections.API.Factories.MongoFactory`1.ConnectToCollection">
+        <member name="M:Collections.API.Factories.MongoFactory.ConnectToCollection``1">
             <summary>
             Connects to Document DB collection.
             </summary>
@@ -222,6 +286,79 @@
             Configures this instance.
             </summary>
         </member>
+        <member name="T:Collections.API.Infrastructure.DataCollection">
+            <summary>
+            Wrapper class for the Mongo DB Collection
+            </summary>
+            <seealso cref="T:Collections.API.Infrastructure.Interfaces.IDataCollection" />
+        </member>
+        <member name="F:Collections.API.Infrastructure.DataCollection.mongoFactory">
+            <summary>
+            The mongo DB factory
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.#ctor(Collections.API.Factories.Interfaces.IMongoFactory)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Infrastructure.DataCollection"/> class.
+            </summary>
+            <param name="mongoFactory">The mongo DB factory.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Finds one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns>Retrieved record</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Finds many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns>Retrived records</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.InsertOneAsync``2(``1)">
+            <summary>
+            Inserts one record asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The model.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Inserts many records asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="models">The models.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.UpdateOneAsync``1(MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.UpdateDefinition{``0})">
+            <summary>
+            Updates one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <param name="update">The update.</param>
+            <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Deletes many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.RetrieveCollection``1">
+            <summary>
+            Retrieves the collection.
+            </summary>
+            <typeparam name="T">Model of collection</typeparam>
+            <returns>Mongo DB collection</returns>
+        </member>
         <member name="T:Collections.API.Infrastructure.DependencyRegistrar">
             <summary>
             The Dependency registrar used for setting up DI container.
@@ -232,6 +369,60 @@
             Registers the specified configuration.
             </summary>
             <param name="config">The configuration.</param>
+        </member>
+        <member name="T:Collections.API.Infrastructure.Interfaces.IDataCollection">
+            <summary>
+            Interface for the Data Collection wrapper class
+            </summary>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Finds one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns>Retrieved record</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Finds many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns>Retrived records</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertOneAsync``2(``1)">
+            <summary>
+            Inserts one record asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The model.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Inserts many records asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="models">The models.</param>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.UpdateOneAsync``1(MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.UpdateDefinition{``0})">
+            <summary>
+            Updates one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <param name="update">The update.</param>
+            <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Deletes many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
         </member>
         <member name="T:Collections.API.Infrastructure.Interfaces.ILogger">
             <summary>
@@ -499,6 +690,81 @@
             Gets or sets the rating.
             </summary>
         </member>
+        <member name="T:Collections.API.Models.Interfaces.IVideoGameModel">
+            <summary>
+            Interface for the video game model
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Developers">
+            <summary>
+            Gets or sets the developers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.DevelopmentStudios">
+            <summary>
+            Gets or sets the development studios.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Publishers">
+            <summary>
+            Gets or sets the publishers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Platforms">
+            <summary>
+            Gets or sets the platforms.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.ReleaseDate">
+            <summary>
+            Gets or sets the release date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.BoxArtUrl">
+            <summary>
+            Gets or sets the box art URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Series">
+            <summary>
+            Gets or sets the series.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.SeriesNumber">
+            <summary>
+            Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Finished">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.Models.VideoGameModel"/> is finished.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IVideoGameModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
         <member name="T:Collections.API.Models.MovieModel">
             <summary>
             Model for movie data
@@ -595,44 +861,128 @@
             Gets or sets the rating.
             </summary>
         </member>
-        <member name="T:Collections.API.Repositories.Interfaces.IMoviesRepository">
+        <member name="T:Collections.API.Models.VideoGameModel">
+            <summary>
+            Model for video game data from the collection
+            </summary>
+            <seealso cref="T:Collections.API.Models.Interfaces.IVideoGameModel" />
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Developers">
+            <summary>
+            Gets or sets the developers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.DevelopmentStudios">
+            <summary>
+            Gets or sets the development studios.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Publishers">
+            <summary>
+            Gets or sets the publishers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Platforms">
+            <summary>
+            Gets or sets the platforms.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.ReleaseDate">
+            <summary>
+            Gets or sets the release date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.BoxArtUrl">
+            <summary>
+            Gets or sets the box art URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Series">
+            <summary>
+            Gets or sets the series.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.SeriesNumber">
+            <summary>
+            Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Finished">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.Models.VideoGameModel"/> is finished.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.VideoGameModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Repositories.Interfaces.IDataRepository">
             <summary>
             Interface for the movies repository
             </summary>
             <seealso cref="T:Collections.API.Repositories.Interfaces.IRepository" />
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.GetAsync">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.GetAsync``1">
             <summary>
-            Gets the movies asynchronously.
+            Gets the records asynchronously.
             </summary>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>All records of requested type</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.GetByIdAsync(System.String)">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.GetByIdAsync``1(System.String)">
             <summary>
-            Gets the requested movie asynchronously.
+            Gets the requested record asynchronously.
             </summary>
-            <returns><see cref="T:Collections.API.Models.Interfaces.IMovieModel"/>requeted movie</returns>
+            <param name="id">The Id of the record to be retrieved</param>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>Retrieved record by it's Id</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.PostMultipleAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostMultipleAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
-            Posts multiple movies asynchronously
+            Posts multiple records asynchronously
             </summary>
             <param name="model">The model to be posted</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.PatchAsync(System.String,Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PatchAsync``2(System.String,``1)">
             <summary>
-            Patches specified movie asynchronously.
+            Patches specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IMoviesRepository.DeleteMultipleAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.DeleteMultipleAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified movies asynchronously.
+            Deletes specified records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Repositories.Interfaces.IRepository">
@@ -640,65 +990,69 @@
             Base repository
             </summary>
         </member>
-        <member name="T:Collections.API.Repositories.MoviesRepository">
+        <member name="T:Collections.API.Repositories.DataRepository">
             <summary>
-            Repository for movie data
+            Repository for data from Mongp DB
             </summary>
-            <seealso cref="T:Collections.API.Repositories.Interfaces.IMoviesRepository" />
+            <seealso cref="T:Collections.API.Repositories.Interfaces.IDataRepository" />
         </member>
-        <member name="F:Collections.API.Repositories.MoviesRepository.movieFactory">
+        <member name="F:Collections.API.Repositories.DataRepository.dataCollection">
             <summary>
-            The movie factory
-            </summary>
-        </member>
-        <member name="F:Collections.API.Repositories.MoviesRepository.movieCollection">
-            <summary>
-            The movie collection
+            The data collection
             </summary>
         </member>
-        <member name="F:Collections.API.Repositories.MoviesRepository.configurationService">
+        <member name="F:Collections.API.Repositories.DataRepository.configurationService">
             <summary>
             The configuration service
             </summary>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
+        <member name="M:Collections.API.Repositories.DataRepository.#ctor(Collections.API.Services.Interfaces.IConfigurationService,Collections.API.Infrastructure.Interfaces.IDataCollection)">
             <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Repositories.MoviesRepository"/> class.
+            Initializes a new instance of the <see cref="T:Collections.API.Repositories.DataRepository"/> class.
             </summary>
             <param name="configurationService">The configuration service</param>
+            <param name="dataCollection">The data collection</param>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.GetAsync">
+        <member name="M:Collections.API.Repositories.DataRepository.GetAsync``1">
             <summary>
-            Gets the movies asynchronously.
+            Gets the records asynchronously.
             </summary>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>All records of requested type</returns>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.GetByIdAsync(System.String)">
+        <member name="M:Collections.API.Repositories.DataRepository.GetByIdAsync``1(System.String)">
             <summary>
-            Gets the requested movie asynchronously.
+            Gets the requested record asynchronously.
             </summary>
-            <returns><see cref="T:Collections.API.Models.Interfaces.IMovieModel"/>requeted movie</returns>
+            <param name="id">The Id of the record to be retrieved</param>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>Retrieved record by it's Id</returns>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.PostMultipleAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
+        <member name="M:Collections.API.Repositories.DataRepository.PostMultipleAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
-            Posts multiple movies asynchronously
+            Posts multiple records asynchronously
             </summary>
             <param name="model">The model to be posted</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.PatchAsync(System.String,Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Repositories.DataRepository.PatchAsync``2(System.String,``1)">
             <summary>
-            Patches specified movie asynchronously.
+            Patches specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.MoviesRepository.DeleteMultipleAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Collections.API.Repositories.DataRepository.DeleteMultipleAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified movies asynchronously.
+            Deletes specified records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.ConfigurationService">
@@ -741,107 +1095,114 @@
             <param name="key">The key.</param>
             <returns>A connection string</returns>
         </member>
-        <member name="T:Collections.API.Services.Interfaces.IMoviesService">
+        <member name="T:Collections.API.Services.Interfaces.IDataService">
             <summary>
-            Interface for the movies service
+            Interface for the data service
             </summary>
             <seealso cref="T:Collections.API.Services.Interfaces.IService" />
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.GetAsync">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.GetAsync``1">
             <summary>
-            Gets the movies asynchronously.
+            Gets the records asynchronously.
             </summary>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+            <typeparam name="T">The collection type</typeparam>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.GetByIdAsync(System.String)">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.GetByIdAsync``1(System.String)">
             <summary>
-            Gets the requested movie asynchronously.
+            Gets the requested record asynchronously.
             </summary>
-            <param name="id">the identifier</param>
-            <returns><see cref="T:Collections.API.ViewModels.MovieDetailViewModel"/>requested movie</returns>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>The requested record</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
-            Posts the movie model asynchronously
+            Posts the record asynchronously
             </summary>
             <param name="model">The model to be posted</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.PatchAsync(System.String,Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PatchAsync``2(System.String,``1)">
             <summary>
-            Patches specified the movie asynchronously.
+            Patches specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IMoviesService.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified the movies asynchronously.
+            Deletes specified the records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.IService">
             <summary>
-            Base service class
+            Base service interface
             </summary>
         </member>
-        <member name="T:Collections.API.Services.MoviesService">
+        <member name="T:Collections.API.Services.DataService">
             <summary>
-            The movies service
+            The data service
             </summary>
-            <seealso cref="T:Collections.API.Services.Interfaces.IMoviesService" />
+            <seealso cref="T:Collections.API.Services.Interfaces.IDataService" />
         </member>
-        <member name="F:Collections.API.Services.MoviesService.moviesRepository">
+        <member name="F:Collections.API.Services.DataService.dataRepository">
             <summary>
-            The movies repository
-            </summary>
-        </member>
-        <member name="F:Collections.API.Services.MoviesService.mapper">
-            <summary>
-            The mapper
+            The data repository
             </summary>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.#ctor(Collections.API.Repositories.Interfaces.IMoviesRepository,Collections.API.Mapper.Interfaces.IMapper)">
+        <member name="M:Collections.API.Services.DataService.#ctor(Collections.API.Repositories.Interfaces.IDataRepository)">
             <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Services.MoviesService"/> class.
+            Initializes a new instance of the <see cref="T:Collections.API.Services.DataService"/> class.
             </summary>
-            <param name="moviesRepository">The movies repository.</param>
-            <param name="mapper">The mapper</param>
+            <param name="dataRepository">The data repository.</param>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.GetAsync">
+        <member name="M:Collections.API.Services.DataService.GetAsync``1">
             <summary>
-            Gets the movies asynchronously.
+            Gets the records asynchronously.
             </summary>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of movies</returns>
+            <typeparam name="T">The collection type</typeparam>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.GetByIdAsync(System.String)">
+        <member name="M:Collections.API.Services.DataService.GetByIdAsync``1(System.String)">
             <summary>
-            Gets the requested movie asynchronously.
+            Gets the requested record asynchronously.
             </summary>
-            <returns><see cref="T:Collections.API.ViewModels.MovieDetailViewModel"/>requested movie</returns>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>The requested record</returns>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
+        <member name="M:Collections.API.Services.DataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
-            Posts the movie model asynchronously
+            Posts the record asynchronously
             </summary>
             <param name="model">The model to be posted</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.PatchAsync(System.String,Collections.API.Models.MovieModel)">
+        <member name="M:Collections.API.Services.DataService.PatchAsync``2(System.String,``1)">
             <summary>
-            Patches specified the movie asynchronously.
+            Patches specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.MoviesService.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Collections.API.Services.DataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes specified the movies asynchronously.
+            Deletes specified the records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Startup">
@@ -973,6 +1334,106 @@
         <member name="P:Collections.API.ViewModels.MovieViewModel.PosterUrl">
             <summary>
             Gets or sets the poster URL.
+            </summary>
+        </member>
+        <member name="T:Collections.API.ViewModels.VideoGameDetailViewModel">
+            <summary>
+            Detailed view model for data from the Video Games collection
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Developers">
+            <summary>
+            Gets or sets the developers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.DevelopmentStudios">
+            <summary>
+            Gets or sets the development studios.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Publishers">
+            <summary>
+            Gets or sets the publishers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Platforms">
+            <summary>
+            Gets or sets the platforms.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.ReleaseDate">
+            <summary>
+            Gets or sets the release date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.BoxArtUrl">
+            <summary>
+            Gets or sets the box art URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Series">
+            <summary>
+            Gets or sets the series.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.SeriesNumber">
+            <summary>
+            Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Finished">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.ViewModels.VideoGameDetailViewModel"/> is finished.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameDetailViewModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.ViewModels.VideoGameViewModel">
+            <summary>
+            View model for data from the Video Games collection
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameViewModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameViewModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.VideoGameViewModel.BoxArtUrl">
+            <summary>
+            Gets or sets the box art URL.
             </summary>
         </member>
         <member name="T:Collection.SwaggerConfig">

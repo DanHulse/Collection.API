@@ -261,12 +261,15 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\V1\MoviesController.cs" />
+    <Compile Include="Controllers\V1\VideoGamesController.cs" />
     <Compile Include="Enumerations\LogLevel.cs" />
     <Compile Include="Factories\Interfaces\IFactory.cs" />
     <Compile Include="Factories\Interfaces\IMongoFactory.cs" />
     <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
     <Compile Include="Infrastructure\BsonMapConfig.cs" />
+    <Compile Include="Infrastructure\DataCollection.cs" />
     <Compile Include="Infrastructure\DependancyRegistrar.cs" />
+    <Compile Include="Infrastructure\Interfaces\IDataCollection.cs" />
     <Compile Include="Infrastructure\Interfaces\ILogger.cs" />
     <Compile Include="Infrastructure\Logger.cs" />
     <Compile Include="Infrastructure\AutoMapConfig.cs" />
@@ -275,19 +278,23 @@
     <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Mapper\Profiles\MoviesProfile.cs" />
     <Compile Include="Models\Interfaces\IMovieModel.cs" />
+    <Compile Include="Models\Interfaces\IVideoGameModel.cs" />
     <Compile Include="Models\MovieModel.cs" />
+    <Compile Include="Models\VideoGameModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Repositories\Interfaces\IMoviesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDataRepository.cs" />
     <Compile Include="Repositories\Interfaces\IRepository.cs" />
-    <Compile Include="Repositories\MoviesRepository.cs" />
+    <Compile Include="Repositories\DataRepository.cs" />
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\Interfaces\IConfigurationService.cs" />
-    <Compile Include="Services\Interfaces\IMoviesService.cs" />
+    <Compile Include="Services\Interfaces\IDataService.cs" />
     <Compile Include="Services\Interfaces\IService.cs" />
-    <Compile Include="Services\MoviesService.cs" />
+    <Compile Include="Services\DataService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\MovieDetailViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
+    <Compile Include="ViewModels\VideoGameDetailViewModel.cs" />
+    <Compile Include="ViewModels\VideoGameViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="App_Data\Collections.API.XML" />
