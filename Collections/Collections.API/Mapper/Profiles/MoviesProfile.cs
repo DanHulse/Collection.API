@@ -5,7 +5,7 @@ using Collections.API.ViewModels;
 namespace Collections.API.Mapper.Profiles
 {
     /// <summary>
-    /// Class for movies AutoMapper config profiles
+    /// Class for movie AutoMapper config profiles
     /// </summary>
     /// <seealso cref="AutoMapper.Profile" />
     public class MoviesProfile : Profile

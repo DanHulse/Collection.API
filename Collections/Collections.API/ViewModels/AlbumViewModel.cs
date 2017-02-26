@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Web;
 
 namespace Collections.API.ViewModels
 {
     /// <summary>
-    /// View model for the movie data
+    /// View model for Album data
     /// </summary>
-    public class MovieViewModel
+    public class AlbumViewModel
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -24,13 +26,13 @@ namespace Collections.API.ViewModels
         public string TranslatedTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the directors.
+        /// Gets or sets the album artist.
         /// </summary>
-        public List<string> Directors { get; set; }
+        public string AlbumArtist { get; set; }
 
         /// <summary>
-        /// Gets or sets the poster URL.
+        /// Gets or sets the album cover URL.
         /// </summary>
-        public Uri PosterUrl { get; set; }
+        public Uri AlbumCoverUrl { get; set; }
     }
 }

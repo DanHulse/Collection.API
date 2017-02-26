@@ -16,6 +16,9 @@ namespace Collections.API.Infrastructure
                 x =>
                 {
                     x.AddProfile<MoviesProfile>();
+                    x.AddProfile<BooksProfile>();
+                    x.AddProfile<AlbumsProfile>();
+                    x.AddProfile<VideoGamesProfile>();
                 });
         }
     }

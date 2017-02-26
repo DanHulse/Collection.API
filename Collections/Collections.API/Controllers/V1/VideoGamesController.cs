@@ -11,6 +11,7 @@ using Collections.API.Services.Interfaces;
 using Collections.API.ViewModels;
 using Collections.API.Models.Interfaces;
 using Collections.API.Mapper.Interfaces;
+using MongoDB.Bson;
 
 namespace Collections.API.Controllers.V1
 {
@@ -61,7 +62,7 @@ namespace Collections.API.Controllers.V1
                 {
                     var mappedResult = this.mapper.Map<IEnumerable<VideoGameViewModel>>(result);
 
-                    return this.Ok(result);
+                    return this.Ok(mappedResult);
                 }
 
                 return this.NotFound();
@@ -116,6 +117,11 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
+                foreach (var m in model)
+                {
+                    m.Id = ObjectId.GenerateNewId().ToString();
+                }
+
                 var result = await this.dataService.PostAsync<IVideoGameModel, VideoGameModel>(model);
 
                 if (result)

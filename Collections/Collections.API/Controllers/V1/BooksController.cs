@@ -16,11 +16,11 @@ using MongoDB.Bson;
 namespace Collections.API.Controllers.V1
 {
     /// <summary>
-    /// Movies collection controller
+    /// Books collection controller
     /// </summary>
     /// <seealso cref="Collections.API.Controllers.BaseController" />
-    [RoutePrefix("api/v1/Movies")]
-    public class MoviesController : BaseController
+    [RoutePrefix("api/v1/Books")]
+    public class BooksController : BaseController
     {
         /// <summary>
         /// The data service
@@ -33,12 +33,12 @@ namespace Collections.API.Controllers.V1
         private readonly IMapper mapper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="MoviesController"/> class.
+        /// Initializes a new instance of the <see cref="BooksController"/> class.
         /// </summary>
         /// <param name="dataService">The data service</param>
         /// <param name="mapper">The mapper</param>
         /// <param name="logger">The logger.</param>
-        public MoviesController(IDataService dataService, IMapper mapper, ILogger logger)
+        public BooksController(IDataService dataService, IMapper mapper, ILogger logger)
         {
             this.dataService = dataService;
             this.mapper = mapper;
@@ -46,21 +46,21 @@ namespace Collections.API.Controllers.V1
         }
 
         /// <summary>
-        /// Retrieve all movies
+        /// Retrieve all books
         /// </summary>
-        /// <returns><see cref="IHttpActionResult"/>of all movies</returns>
+        /// <returns><see cref="IHttpActionResult"/>of all books</returns>
         [HttpGet]
-        [Route("", Name = "GetMovies")]
-        [ResponseType(typeof(IEnumerable<MovieViewModel>))]
+        [Route("", Name = "GetBooks")]
+        [ResponseType(typeof(IEnumerable<BookViewModel>))]
         public async Task<IHttpActionResult> GetAsync()
         {
             try
             {
-                var result = await this.dataService.GetAsync<IMovieModel>();
+                var result = await this.dataService.GetAsync<IBookModel>();
 
                 if (result.Any())
                 {
-                    var mappedResults = this.mapper.Map<IEnumerable<MovieViewModel>>(result);
+                    var mappedResults = this.mapper.Map<IEnumerable<BookViewModel>>(result);
 
                     return this.Ok(mappedResults);
                 }
@@ -69,28 +69,28 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, "Failed to retrive movies");
+                this.Logger.Log(LogLevel.Error, ex, "Failed to retrive books");
 
                 return this.InternalServerError(ex);
             }
         }
 
         /// <summary>
-        /// Retrieve requested movie
+        /// Retrieve requested book
         /// </summary>
-        /// <returns><see cref="IHttpActionResult"/>of requested movie</returns>
+        /// <returns><see cref="IHttpActionResult"/>of requested book</returns>
         [HttpGet]
-        [Route("{id}", Name = "GetMovieById")]
-        [ResponseType(typeof(MovieDetailViewModel))]
+        [Route("{id}", Name = "GetBooksById")]
+        [ResponseType(typeof(BookDetailViewModel))]
         public async Task<IHttpActionResult> GetByIdAsync([FromUri]string id)
         {
             try
             {
-                var result = await this.dataService.GetByIdAsync<IMovieModel>(id);
+                var result = await this.dataService.GetByIdAsync<IBookModel>(id);
 
                 if (result != null)
                 {
-                    var mappedResult = this.mapper.Map<MovieDetailViewModel>(result);
+                    var mappedResult = this.mapper.Map<BookDetailViewModel>(result);
 
                     return this.Ok(mappedResult);
                 }
@@ -99,21 +99,21 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, $"Failed to retrive movie with Id: {id}");
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to retrive book with Id: {id}");
 
                 return this.InternalServerError(ex);
             }
         }
 
         /// <summary>
-        /// Insert new movies to DB
+        /// Insert new books to DB
         /// </summary>
         /// <param name="model">The model to be posted</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
         [HttpPost]
-        [Route("", Name = "PostMovies")]
+        [Route("", Name = "PostBooks")]
         [ResponseType(typeof(IHttpActionResult))]
-        public async Task<IHttpActionResult> PostAsync([FromBody]IEnumerable<MovieModel> model)
+        public async Task<IHttpActionResult> PostAsync([FromBody]IEnumerable<BookModel> model)
         {
             try
             {
@@ -122,7 +122,7 @@ namespace Collections.API.Controllers.V1
                     m.Id = ObjectId.GenerateNewId().ToString();
                 }
 
-                var result = await this.dataService.PostAsync<IMovieModel, MovieModel>(model);
+                var result = await this.dataService.PostAsync<IBookModel, BookModel>(model);
 
                 if (result)
                 {
@@ -133,26 +133,26 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, "Failed to post the movies");
+                this.Logger.Log(LogLevel.Error, ex, "Failed to post the books");
 
                 return this.InternalServerError(ex);
             }
         }
 
         /// <summary>
-        /// Updates specified movie
+        /// Updates specified book
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
         [HttpPatch]
-        [Route("{id}", Name = "PatchMovie")]
+        [Route("{id}", Name = "PatchBook")]
         [ResponseType(typeof(IHttpActionResult))]
-        public async Task<IHttpActionResult> PatchAsync([FromUri]string id, [FromBody]MovieModel model)
+        public async Task<IHttpActionResult> PatchAsync([FromUri]string id, [FromBody]BookModel model)
         {
             try
             {
-                var result = await this.dataService.PatchAsync<IMovieModel, MovieModel>(id, model);
+                var result = await this.dataService.PatchAsync<IBookModel, BookModel>(id, model);
 
                 if (result)
                 {
@@ -163,25 +163,25 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, $"Failed to patch movie with Id: {id}");
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to patch book with Id: {id}");
 
                 return this.InternalServerError(ex);
             }
         }
 
         /// <summary>
-        /// Deletes the movies asynchronously.
+        /// Deletes the books asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers of the movies to delete.</param>
+        /// <param name="ids">The identifiers of the books to delete.</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
         [HttpDelete]
-        [Route("", Name = "DeleteMovies")]
+        [Route("", Name = "DeleteBooks")]
         [ResponseType(typeof(IHttpActionResult))]
         public async Task<IHttpActionResult> DeleteAsync([FromBody]IEnumerable<string> ids)
         {
             try
             {
-                var result = await this.dataService.DeleteAsync<IMovieModel>(ids);
+                var result = await this.dataService.DeleteAsync<IBookModel>(ids);
 
                 if (result)
                 {
@@ -192,7 +192,7 @@ namespace Collections.API.Controllers.V1
             }
             catch (Exception ex)
             {
-                this.Logger.Log(LogLevel.Error, ex, $"Failed to delete movies");
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to delete books");
 
                 return this.InternalServerError(ex);
             }

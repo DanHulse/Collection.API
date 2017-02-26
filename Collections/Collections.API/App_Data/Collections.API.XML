@@ -37,6 +37,64 @@
             Gets or sets the logger.
             </summary>
         </member>
+        <member name="T:Collections.API.Controllers.V1.AlbumsController">
+            <summary>
+            Albums collection controller
+            </summary>
+            <seealso cref="T:Collections.API.Controllers.BaseController" />
+        </member>
+        <member name="F:Collections.API.Controllers.V1.AlbumsController.dataService">
+            <summary>
+            The data service
+            </summary>
+        </member>
+        <member name="F:Collections.API.Controllers.V1.AlbumsController.mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.AlbumsController"/> class.
+            </summary>
+            <param name="dataService">The data service</param>
+            <param name="mapper">The mapper</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.GetAsync">
+            <summary>
+            Retrieve all albums
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all albums</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.GetByIdAsync(System.String)">
+            <summary>
+            Retrieve requested album
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested album</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.AlbumModel})">
+            <summary>
+            Insert new albums to DB
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.PatchAsync(System.String,Collections.API.Models.AlbumModel)">
+            <summary>
+            Updates specified album
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the albums asynchronously.
+            </summary>
+            <param name="ids">The identifiers of the albums to delete.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
         <member name="T:Collections.API.Controllers.V1.MoviesController">
             <summary>
             Movies collection controller
@@ -93,6 +151,64 @@
             Deletes the movies asynchronously.
             </summary>
             <param name="ids">The identifiers of the movies to delete.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="T:Collections.API.Controllers.V1.BooksController">
+            <summary>
+            Books collection controller
+            </summary>
+            <seealso cref="T:Collections.API.Controllers.BaseController" />
+        </member>
+        <member name="F:Collections.API.Controllers.V1.BooksController.dataService">
+            <summary>
+            The data service
+            </summary>
+        </member>
+        <member name="F:Collections.API.Controllers.V1.BooksController.mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.BooksController"/> class.
+            </summary>
+            <param name="dataService">The data service</param>
+            <param name="mapper">The mapper</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.GetAsync">
+            <summary>
+            Retrieve all books
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all books</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.GetByIdAsync(System.String)">
+            <summary>
+            Retrieve requested book
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested book</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.BookModel})">
+            <summary>
+            Insert new books to DB
+            </summary>
+            <param name="model">The model to be posted</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.PatchAsync(System.String,Collections.API.Models.BookModel)">
+            <summary>
+            Updates specified book
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the books asynchronously.
+            </summary>
+            <param name="ids">The identifiers of the books to delete.</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
         <member name="T:Collections.API.Controllers.V1.VideoGamesController">
@@ -203,8 +319,7 @@
             <summary>
             Factory for connecting to the Document DB
             </summary>
-            <typeparam name="T">Type of BSON Document</typeparam>
-            <seealso cref="!:Collections.API.Factories.Interfaces.IMongoFactory&lt;T&gt;"/>
+            <seealso cref="T:Collections.API.Factories.Interfaces.IMongoFactory"/>
         </member>
         <member name="F:Collections.API.Factories.MongoFactory.configurationService">
             <summary>
@@ -223,8 +338,9 @@
         </member>
         <member name="M:Collections.API.Factories.MongoFactory.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
             <summary>
-            Initializes a new instance of the <see cref="!:MongoFactory&lt;T&gt;"/> class.
+            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoFactory"/> class.
             </summary>
+            <param name="configurationService">The configuration service.</param>
         </member>
         <member name="M:Collections.API.Factories.MongoFactory.ConnectToCollection``1">
             <summary>
@@ -584,15 +700,340 @@
             Instance of T.
             </returns>
         </member>
+        <member name="T:Collections.API.Mapper.Profiles.AlbumsProfile">
+            <summary>
+            Class for album AutoMapper config profiles
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:Collections.API.Mapper.Profiles.AlbumsProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.AlbumsProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Mapper.Profiles.BooksProfile">
+            <summary>
+            Class for book AutoMapper config profiles
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:Collections.API.Mapper.Profiles.BooksProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.BooksProfile"/> class.
+            </summary>
+        </member>
         <member name="T:Collections.API.Mapper.Profiles.MoviesProfile">
             <summary>
-            Class for movies AutoMapper config profiles
+            Class for movie AutoMapper config profiles
             </summary>
             <seealso cref="T:AutoMapper.Profile" />
         </member>
         <member name="M:Collections.API.Mapper.Profiles.MoviesProfile.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.MoviesProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Mapper.Profiles.VideoGamesProfile">
+            <summary>
+            Class for video game AutoMapper config profiles
+            </summary>
+            <seealso cref="T:AutoMapper.Profile" />
+        </member>
+        <member name="M:Collections.API.Mapper.Profiles.VideoGamesProfile.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.VideoGamesProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.AlbumModel">
+            <summary>
+            Model for Album data
+            </summary>
+            <seealso cref="T:Collections.API.Models.Interfaces.IAlbumModel" />
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.AlbumArtist">
+            <summary>
+            Gets or sets the album artist.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Producers">
+            <summary>
+            Gets or sets the producers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.FeaturedArtists">
+            <summary>
+            Gets or sets the featured artists.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Tracks">
+            <summary>
+            Gets or sets the tracks.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Discs">
+            <summary>
+            Gets or sets the discs.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Formats">
+            <summary>
+            Gets or sets the formats.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.ReleasedDate">
+            <summary>
+            Gets or sets the released date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.AlbumCoverUrl">
+            <summary>
+            Gets or sets the album cover URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AlbumModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.BookModel">
+            <summary>
+            Model for book data
+            </summary>
+            <seealso cref="T:Collections.API.Models.Interfaces.IBookModel" />
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Authors">
+            <summary>
+            Gets or sets the authors.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.ISBN13">
+            <summary>
+            Gets or sets the ISBN13.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Formats">
+            <summary>
+            Gets or sets the formats.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.PublishedDate">
+            <summary>
+            Gets or sets the published date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.CoverUrl">
+            <summary>
+            Gets or sets the cover URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Series">
+            <summary>
+            Gets or sets the series.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.SeriesNumber">
+            <summary>
+            Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Read">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.Models.BookModel"/> is read.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.BookModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.Interfaces.IAlbumModel">
+            <summary>
+            Interface for the Album model
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.AlbumArtist">
+            <summary>
+            Gets or sets the album artist.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Producers">
+            <summary>
+            Gets or sets the producers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.FeaturedArtists">
+            <summary>
+            Gets or sets the featured artists.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Tracks">
+            <summary>
+            Gets or sets the tracks.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Discs">
+            <summary>
+            Gets or sets the discs.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Formats">
+            <summary>
+            Gets or sets the formats.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.ReleasedDate">
+            <summary>
+            Gets or sets the released date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.AlbumCoverUrl">
+            <summary>
+            Gets or sets the album cover URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAlbumModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.Interfaces.IBookModel">
+            <summary>
+            Interface for the book model
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Authors">
+            <summary>
+            Gets or sets the authors.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.ISBN13">
+            <summary>
+            Gets or sets the ISBN13.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Formats">
+            <summary>
+            Gets or sets the formats.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.PublishedDate">
+            <summary>
+            Gets or sets the published date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.CoverUrl">
+            <summary>
+            Gets or sets the cover URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Series">
+            <summary>
+            Gets or sets the series.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.SeriesNumber">
+            <summary>
+            Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Read">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.Models.BookModel"/> is read.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IBookModel.Rating">
+            <summary>
+            Gets or sets the rating.
             </summary>
         </member>
         <member name="T:Collections.API.Models.Interfaces.IMovieModel">
@@ -1216,6 +1657,211 @@
             </summary>
             <param name = "app">The application.</param>
         </member>
+        <member name="T:Collections.API.ViewModels.AlbumDetailViewModel">
+            <summary>
+            Detailed view model for Album data
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.AlbumArtist">
+            <summary>
+            Gets or sets the album artist.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Producers">
+            <summary>
+            Gets or sets the producers.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.FeaturedArtists">
+            <summary>
+            Gets or sets the featured artists.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Tracks">
+            <summary>
+            Gets or sets the tracks.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Discs">
+            <summary>
+            Gets or sets the discs.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Formats">
+            <summary>
+            Gets or sets the formats.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.ReleasedDate">
+            <summary>
+            Gets or sets the released date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.AlbumCoverUrl">
+            <summary>
+            Gets or sets the album cover URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumDetailViewModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.ViewModels.AlbumViewModel">
+            <summary>
+            View model for Album data
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumViewModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumViewModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumViewModel.AlbumArtist">
+            <summary>
+            Gets or sets the album artist.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.AlbumViewModel.AlbumCoverUrl">
+            <summary>
+            Gets or sets the album cover URL.
+            </summary>
+        </member>
+        <member name="T:Collections.API.ViewModels.BookDetailViewModel">
+            <summary>
+            View model for detailed book data
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Authors">
+            <summary>
+            Gets or sets the authors.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.ISBN13">
+            <summary>
+            Gets or sets the ISBN13.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Genres">
+            <summary>
+            Gets or sets the genres.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Formats">
+            <summary>
+            Gets or sets the formats.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.PublishedDate">
+            <summary>
+            Gets or sets the published date.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.CoverUrl">
+            <summary>
+            Gets or sets the cover URL.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Series">
+            <summary>
+            Gets or sets the series.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.SeriesNumber">
+            <summary>
+            Gets or sets the series number.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Read">
+            <summary>
+            Gets or sets a value indicating whether this <see cref="T:Collections.API.ViewModels.BookDetailViewModel"/> is read.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookDetailViewModel.Rating">
+            <summary>
+            Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.ViewModels.BookViewModel">
+            <summary>
+            View model for books data
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookViewModel.Id">
+            <summary>
+            Gets or sets the identifier.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookViewModel.Title">
+            <summary>
+            Gets or sets the title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookViewModel.TranslatedTitle">
+            <summary>
+            Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookViewModel.Authors">
+            <summary>
+            Gets or sets the authors.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.BookViewModel.CoverUrl">
+            <summary>
+            Gets or sets the cover URL.
+            </summary>
+        </member>
         <member name="T:Collections.API.ViewModels.MovieDetailViewModel">
             <summary>
             View model for the movie data
@@ -1329,6 +1975,11 @@
         <member name="P:Collections.API.ViewModels.MovieViewModel.TranslatedTitle">
             <summary>
             Gets or sets the translated title.
+            </summary>
+        </member>
+        <member name="P:Collections.API.ViewModels.MovieViewModel.Directors">
+            <summary>
+            Gets or sets the directors.
             </summary>
         </member>
         <member name="P:Collections.API.ViewModels.MovieViewModel.PosterUrl">

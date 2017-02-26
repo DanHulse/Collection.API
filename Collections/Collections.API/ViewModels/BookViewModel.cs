@@ -4,9 +4,9 @@ using System.Collections.Generic;
 namespace Collections.API.ViewModels
 {
     /// <summary>
-    /// View model for the movie data
+    /// View model for books data
     /// </summary>
-    public class MovieViewModel
+    public class BookViewModel
     {
         /// <summary>
         /// Gets or sets the identifier.
@@ -24,13 +24,13 @@ namespace Collections.API.ViewModels
         public string TranslatedTitle { get; set; }
 
         /// <summary>
-        /// Gets or sets the directors.
+        /// Gets or sets the authors.
         /// </summary>
-        public List<string> Directors { get; set; }
+        public List<string> Authors { get; set; }
 
         /// <summary>
-        /// Gets or sets the poster URL.
+        /// Gets or sets the cover URL.
         /// </summary>
-        public Uri PosterUrl { get; set; }
+        public Uri CoverUrl { get; set; }
     }
 }

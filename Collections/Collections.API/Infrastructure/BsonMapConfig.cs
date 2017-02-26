@@ -14,6 +14,9 @@ namespace Collections.API.Infrastructure
         public static void Configure()
         {
             BsonClassMap.RegisterClassMap<MovieModel>(cm => { cm.AutoMap(); cm.SetIgnoreExtraElements(true); });
+            BsonClassMap.RegisterClassMap<VideoGameModel>(cm => { cm.AutoMap(); cm.SetIgnoreExtraElements(true); });
+            BsonClassMap.RegisterClassMap<BookModel>(cm => { cm.AutoMap(); cm.SetIgnoreExtraElements(true); });
+            BsonClassMap.RegisterClassMap<AlbumModel>(cm => { cm.AutoMap(); cm.SetIgnoreExtraElements(true); });
         }
     }
 }
