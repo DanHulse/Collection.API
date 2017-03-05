@@ -79,6 +79,21 @@ namespace Collections.API.Services
         }
 
         /// <summary>
+        /// Puts specified the record asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="model">The model.</param>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <returns>True if successful</returns>
+        public async Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new()
+        {
+            var result = await this.dataRepository.PutAsync<T, O>(id, model);
+
+            return result;
+        }
+
+        /// <summary>
         /// Deletes specified the records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>

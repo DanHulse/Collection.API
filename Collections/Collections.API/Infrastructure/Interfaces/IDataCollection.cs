@@ -51,6 +51,16 @@ namespace Collections.API.Infrastructure.Interfaces
         Task<UpdateResult> UpdateOneAsync<T>(FilterDefinition<T> filter, UpdateDefinition<T> update);
 
         /// <summary>
+        /// Replaces one document asynchronously.
+        /// </summary>
+        /// <typeparam name="T">The filter type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <param name="filter">The filter.</param>
+        /// <param name="model">The model.</param>
+        /// <returns><see cref="ReplaceOneResult"/>result of replace operation</returns>
+        Task<ReplaceOneResult> ReplaceOneAsync<T, O>(FilterDefinition<T> filter, O model) where O : class, T, new();
+
+        /// <summary>
         /// Deletes many records asynchronously.
         /// </summary>
         /// <typeparam name="T">The filter type</typeparam>

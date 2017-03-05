@@ -44,6 +44,16 @@ namespace Collections.API.Repositories.Interfaces
         Task<bool> PatchAsync<T, O>(string id, O model) where O : class, T, new();
 
         /// <summary>
+        /// Puts specified record asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="model">The model.</param>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <returns>True if successful</returns>
+        Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new();
+
+        /// <summary>
         /// Deletes specified records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>

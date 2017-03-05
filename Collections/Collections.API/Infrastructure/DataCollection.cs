@@ -83,6 +83,19 @@ namespace Collections.API.Infrastructure
         }
 
         /// <summary>
+        /// Replaces one document asynchronously.
+        /// </summary>
+        /// <typeparam name="T">The filter type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <param name="filter">The filter.</param>
+        /// <param name="model">The model.</param>
+        /// <returns><see cref="ReplaceOneResult"/>result of replace operation</returns>
+        public async Task<ReplaceOneResult> ReplaceOneAsync<T, O>(FilterDefinition<T> filter, O model) where O : class, T, new()
+        {
+            return await this.RetrieveCollection<T>().ReplaceOneAsync(filter, model);
+        }
+
+        /// <summary>
         /// Deletes many records asynchronously.
         /// </summary>
         /// <typeparam name="T">The filter type</typeparam>

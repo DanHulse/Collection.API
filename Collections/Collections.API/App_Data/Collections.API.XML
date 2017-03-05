@@ -39,235 +39,253 @@
         </member>
         <member name="T:Collections.API.Controllers.V1.AlbumsController">
             <summary>
-            Albums collection controller
+            Albums Controller
             </summary>
-            <seealso cref="T:Collections.API.Controllers.BaseController" />
-        </member>
-        <member name="F:Collections.API.Controllers.V1.AlbumsController.dataService">
-            <summary>
-            The data service
-            </summary>
-        </member>
-        <member name="F:Collections.API.Controllers.V1.AlbumsController.mapper">
-            <summary>
-            The mapper
-            </summary>
+            <seealso cref="T:Collections.API.Controllers.V1.DataController`3" />
         </member>
         <member name="M:Collections.API.Controllers.V1.AlbumsController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.AlbumsController"/> class.
             </summary>
-            <param name="dataService">The data service</param>
-            <param name="mapper">The mapper</param>
+            <param name="dataService">The data service.</param>
+            <param name="mapper">The mapper.</param>
             <param name="logger">The logger.</param>
         </member>
         <member name="M:Collections.API.Controllers.V1.AlbumsController.GetAsync">
             <summary>
-            Retrieve all albums
+            Retrieve all data records of the data type specified
             </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all albums</returns>
         </member>
         <member name="M:Collections.API.Controllers.V1.AlbumsController.GetByIdAsync(System.String)">
             <summary>
-            Retrieve requested album
+            Retrieve requested record
             </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested album</returns>
         </member>
         <member name="M:Collections.API.Controllers.V1.AlbumsController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.AlbumModel})">
             <summary>
-            Insert new albums to DB
+            Insert new records to DB of specified type
             </summary>
-            <param name="model">The model to be posted</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
-        <member name="M:Collections.API.Controllers.V1.AlbumsController.PatchAsync(System.String,Collections.API.Models.AlbumModel)">
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.PutAsync(System.String,Collections.API.Models.AlbumModel)">
             <summary>
-            Updates specified album
+            Replaces the specified record with the new model
             </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
         <member name="M:Collections.API.Controllers.V1.AlbumsController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
-            Deletes the albums asynchronously.
+            Deletes the records of the specified type asynchronously.
             </summary>
-            <param name="ids">The identifiers of the albums to delete.</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
-        </member>
-        <member name="T:Collections.API.Controllers.V1.MoviesController">
-            <summary>
-            Movies collection controller
-            </summary>
-            <seealso cref="T:Collections.API.Controllers.BaseController" />
-        </member>
-        <member name="F:Collections.API.Controllers.V1.MoviesController.dataService">
-            <summary>
-            The data service
-            </summary>
-        </member>
-        <member name="F:Collections.API.Controllers.V1.MoviesController.mapper">
-            <summary>
-            The mapper
-            </summary>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.MoviesController"/> class.
-            </summary>
-            <param name="dataService">The data service</param>
-            <param name="mapper">The mapper</param>
-            <param name="logger">The logger.</param>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.GetAsync">
-            <summary>
-            Retrieve all movies
-            </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all movies</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.GetByIdAsync(System.String)">
-            <summary>
-            Retrieve requested movie
-            </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested movie</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
-            <summary>
-            Insert new movies to DB
-            </summary>
-            <param name="model">The model to be posted</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.PatchAsync(System.String,Collections.API.Models.MovieModel)">
-            <summary>
-            Updates specified movie
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Deletes the movies asynchronously.
-            </summary>
-            <param name="ids">The identifiers of the movies to delete.</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
-        </member>
-        <member name="T:Collections.API.Controllers.V1.BooksController">
-            <summary>
-            Books collection controller
-            </summary>
-            <seealso cref="T:Collections.API.Controllers.BaseController" />
-        </member>
-        <member name="F:Collections.API.Controllers.V1.BooksController.dataService">
-            <summary>
-            The data service
-            </summary>
-        </member>
-        <member name="F:Collections.API.Controllers.V1.BooksController.mapper">
-            <summary>
-            The mapper
-            </summary>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.BooksController"/> class.
-            </summary>
-            <param name="dataService">The data service</param>
-            <param name="mapper">The mapper</param>
-            <param name="logger">The logger.</param>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.GetAsync">
-            <summary>
-            Retrieve all books
-            </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all books</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.GetByIdAsync(System.String)">
-            <summary>
-            Retrieve requested book
-            </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested book</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.BookModel})">
-            <summary>
-            Insert new books to DB
-            </summary>
-            <param name="model">The model to be posted</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.PatchAsync(System.String,Collections.API.Models.BookModel)">
-            <summary>
-            Updates specified book
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
-        </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Deletes the books asynchronously.
-            </summary>
-            <param name="ids">The identifiers of the books to delete.</param>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
         <member name="T:Collections.API.Controllers.V1.VideoGamesController">
             <summary>
-            Video games collection controller
+            Video Games Controller
             </summary>
-            <seealso cref="T:Collections.API.Controllers.BaseController" />
-        </member>
-        <member name="F:Collections.API.Controllers.V1.VideoGamesController.dataService">
-            <summary>
-            The data service
-            </summary>
-        </member>
-        <member name="F:Collections.API.Controllers.V1.VideoGamesController.mapper">
-            <summary>
-            The mapper
-            </summary>
+            <seealso cref="T:Collections.API.Controllers.V1.DataController`3" />
         </member>
         <member name="M:Collections.API.Controllers.V1.VideoGamesController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.VideoGamesController"/> class.
             </summary>
-            <param name="dataService">The data service</param>
+            <param name="dataService">The data service.</param>
             <param name="mapper">The mapper.</param>
             <param name="logger">The logger.</param>
         </member>
         <member name="M:Collections.API.Controllers.V1.VideoGamesController.GetAsync">
             <summary>
-            Retrieve all video games
+            Retrieve all data records of the data type specified
             </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all video games</returns>
         </member>
         <member name="M:Collections.API.Controllers.V1.VideoGamesController.GetByIdAsync(System.String)">
             <summary>
-            Retrieve requested video game
+            Retrieve requested record
             </summary>
-            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested video game</returns>
         </member>
         <member name="M:Collections.API.Controllers.V1.VideoGamesController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.VideoGameModel})">
             <summary>
-            Insert new video games to DB
+            Insert new records to DB of specified type
             </summary>
-            <param name="model">The model to be posted</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.PutAsync(System.String,Collections.API.Models.VideoGameModel)">
+            <summary>
+            Replaces the specified record with the new model
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the records of the specified type asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Controllers.V1.DataController`3">
+            <summary>
+            Data collections controller
+            </summary>
+            <typeparam name="T">The inteface type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <typeparam name="S">The view model type</typeparam>
+            <seealso cref="T:Collections.API.Controllers.BaseController" />
+        </member>
+        <member name="F:Collections.API.Controllers.V1.DataController`3.dataService">
+            <summary>
+            The data service
+            </summary>
+        </member>
+        <member name="F:Collections.API.Controllers.V1.DataController`3.mapper">
+            <summary>
+            The mapper
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.DataController`3.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.DataController`3"/> class.
+            </summary>
+            <param name="dataService">The data service.</param>
+            <param name="mapper">The mapper.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.DataController`3.GetAsync">
+            <summary>
+            Retrieve all data records of the data type specified
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of all records</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.DataController`3.GetByIdAsync(System.String)">
+            <summary>
+            Retrieve requested record
+            </summary>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested record</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.DataController`3.PostAsync(System.Collections.Generic.IEnumerable{`1})">
+            <summary>
+            Insert new records to DB of specified type
+            </summary>
+            <param name="model">The record to be posted</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
-        <member name="M:Collections.API.Controllers.V1.VideoGamesController.PatchAsync(System.String,Collections.API.Models.VideoGameModel)">
+        <member name="M:Collections.API.Controllers.V1.DataController`3.PatchAsync(System.String,`1)">
             <summary>
-            Updates specified video game
+            Updates specified record
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
         </member>
-        <member name="M:Collections.API.Controllers.V1.VideoGamesController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+        <member name="M:Collections.API.Controllers.V1.DataController`3.PutAsync(System.String,`1)">
             <summary>
-            Deletes the video games asynchronously.
+            Replaces the specified record with the new model
             </summary>
-            <param name="ids">The identifiers of the video games to delete.</param>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.DataController`3.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the records of the specified type asynchronously.
+            </summary>
+            <param name="ids">The identifiers of the records to delete.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>OK if successful</returns>
+        </member>
+        <member name="T:Collections.API.Controllers.V1.BooksController">
+            <summary>
+            Books Controller
+            </summary>
+            <seealso cref="T:Collections.API.Controllers.V1.DataController`3" />
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.BooksController"/> class.
+            </summary>
+            <param name="dataService">The data service.</param>
+            <param name="mapper">The mapper.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.GetAsync">
+            <summary>
+            Retrieve all data records of the data type specified
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.GetByIdAsync(System.String)">
+            <summary>
+            Retrieve requested record
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.BookModel})">
+            <summary>
+            Insert new records to DB of specified type
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.PutAsync(System.String,Collections.API.Models.BookModel)">
+            <summary>
+            Replaces the specified record with the new model
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.BooksController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the records of the specified type asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Controllers.V1.MoviesController">
+            <summary>
+            Movies Controller
+            </summary>
+            <seealso cref="T:Collections.API.Controllers.V1.DataController`3" />
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.#ctor(Collections.API.Services.Interfaces.IDataService,Collections.API.Mapper.Interfaces.IMapper,Collections.API.Infrastructure.Interfaces.ILogger)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Controllers.V1.MoviesController"/> class.
+            </summary>
+            <param name="dataService">The data service.</param>
+            <param name="mapper">The mapper.</param>
+            <param name="logger">The logger.</param>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.GetAsync">
+            <summary>
+            Retrieve all data records of the data type specified
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.GetByIdAsync(System.String)">
+            <summary>
+            Retrieve requested record
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.PostAsync(System.Collections.Generic.IEnumerable{Collections.API.Models.MovieModel})">
+            <summary>
+            Insert new records to DB of specified type
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.PutAsync(System.String,Collections.API.Models.MovieModel)">
+            <summary>
+            Replaces the specified record with the new model
+            </summary>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.MoviesController.DeleteAsync(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes the records of the specified type asynchronously.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Enumerations.DataType">
+            <summary>
+            Enumeration for the different data types
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.DataType.Movies">
+            <summary>
+            The movies type
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.DataType.Books">
+            <summary>
+            The books type
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.DataType.Albums">
+            <summary>
+            The albums type
+            </summary>
+        </member>
+        <member name="F:Collections.API.Enumerations.DataType.VideoGames">
+            <summary>
+            The video games type
+            </summary>
         </member>
         <member name="T:Collections.API.Enumerations.LogLevel">
             <summary>
@@ -460,6 +478,16 @@
             <param name="update">The update.</param>
             <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
         </member>
+        <member name="M:Collections.API.Infrastructure.DataCollection.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
+            <summary>
+            Replaces one document asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="filter">The filter.</param>
+            <param name="model">The model.</param>
+            <returns><see cref="T:MongoDB.Driver.ReplaceOneResult"/>result of replace operation</returns>
+        </member>
         <member name="M:Collections.API.Infrastructure.DataCollection.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Deletes many records asynchronously.
@@ -531,6 +559,16 @@
             <param name="filter">The filter.</param>
             <param name="update">The update.</param>
             <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
+        </member>
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
+            <summary>
+            Replaces one document asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="filter">The filter.</param>
+            <param name="model">The model.</param>
+            <returns><see cref="T:MongoDB.Driver.ReplaceOneResult"/>result of replace operation</returns>
         </member>
         <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
@@ -1418,6 +1456,16 @@
             <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PutAsync``2(System.String,``1)">
+            <summary>
+            Puts specified record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
         <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.DeleteMultipleAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Deletes specified records asynchronously.
@@ -1481,6 +1529,16 @@
         <member name="M:Collections.API.Repositories.DataRepository.PatchAsync``2(System.String,``1)">
             <summary>
             Patches specified record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Repositories.DataRepository.PutAsync``2(System.String,``1)">
+            <summary>
+            Puts specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
@@ -1575,6 +1633,16 @@
             <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PutAsync``2(System.String,``1)">
+            <summary>
+            Puts specified the record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
         <member name="M:Collections.API.Services.Interfaces.IDataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Deletes specified the records asynchronously.
@@ -1631,6 +1699,16 @@
         <member name="M:Collections.API.Services.DataService.PatchAsync``2(System.String,``1)">
             <summary>
             Patches specified the record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.PutAsync``2(System.String,``1)">
+            <summary>
+            Puts specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>

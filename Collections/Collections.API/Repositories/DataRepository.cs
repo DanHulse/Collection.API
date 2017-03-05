@@ -76,11 +76,6 @@ namespace Collections.API.Repositories
         {
             try
             {
-                foreach (var m in model)
-                {
-                    //m.Id = ObjectId.GenerateNewId().ToString();
-                }
-
                 await this.dataCollection.InsertManyAsync<T, O>(model);
 
                 return true;
@@ -104,6 +99,32 @@ namespace Collections.API.Repositories
             var dictionary = model.ToDictionary();
         
             var result = await this.dataCollection.UpdateOneAsync<T>(new BsonDocument("_id", ObjectId.Parse(id)), new BsonDocument("$set", new BsonDocument(dictionary)));
+
+            if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
+            {
+                return true;
+            }
+            else if (result.IsAcknowledged && result.MatchedCount == 1)
+            {
+                throw new Exception("Document found but failed to be replaced");
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Puts specified record asynchronously.
+        /// </summary>
+        /// <param name="id">The identifier.</param>
+        /// <param name="model">The model.</param>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <returns>True if successful</returns>
+        public async Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new()
+        {
+            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(id));
+
+            var result = await this.dataCollection.ReplaceOneAsync<T, O>(filter, model);
 
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {

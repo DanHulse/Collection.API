@@ -17,7 +17,7 @@ namespace Collections.API.Models
         /// </summary>
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; }
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString();
 
         /// <summary>
         /// Gets or sets the title.

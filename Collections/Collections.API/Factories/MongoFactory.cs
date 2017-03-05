@@ -51,7 +51,7 @@ namespace Collections.API.Factories
 
             var db = mongoClient.GetDatabase(this.collection);
 
-            return db.GetCollection<T>(typeof(T).Name.ToLower());
+            return db.GetCollection<T>(this.collection);
         }
     }
 }
