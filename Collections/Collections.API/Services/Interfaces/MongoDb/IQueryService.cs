@@ -17,18 +17,18 @@ namespace Collections.API.Services.Interfaces.MongoDb
         /// <summary>
         /// Builds the query.
         /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The interface type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns></returns>
-        FilterDefinition<T> BuildQuery<T, O>() where O : class, T, new();
+        FilterDefinition<TInterface> BuildQuery<TInterface, TModel>() where TModel : class, TInterface, new();
 
         /// <summary>
         /// Builds the query.
         /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The interface type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="advancedSearchModel">The advanced search model</param>
         /// <returns></returns>
-        FilterDefinition<T> BuildQuery<T, O>(AdvancedSearchModel<O> advancedSearchModel) where O : class, T, new();
+        FilterDefinition<TInterface> BuildQuery<TInterface, TModel>(AdvancedSearchModel<TModel> advancedSearchModel) where TModel : class, TInterface, new();
     }
 }

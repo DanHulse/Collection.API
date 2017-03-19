@@ -3,12 +3,11 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
 using Collections.API.Services.Interfaces.MongoDb;
-using Collections.API.Helpers;
 using Collections.API.Repositories.Interfaces;
-using Collections.API.Services.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using Collections.API.Models;
+using Collections.API.Helpers;
 
 namespace Collections.API.Repositories
 {
@@ -21,7 +20,7 @@ namespace Collections.API.Repositories
         /// <summary>
         /// The data collection
         /// </summary>
-        private readonly IMongoService dataCollection;
+        private readonly IDataCollection dataCollection;
 
         /// <summary>
         /// The query service
@@ -29,19 +28,12 @@ namespace Collections.API.Repositories
         private readonly IQueryService queryService;
 
         /// <summary>
-        /// The configuration service
-        /// </summary>
-        private readonly IConfigurationService configurationService;
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="DataRepository"/> class.
         /// </summary>
-        /// <param name="configurationService">The configuration service</param>
         /// <param name="queryService">The query service</param>
         /// <param name="dataCollection">The data collection</param>
-        public DataRepository(IConfigurationService configurationService, IQueryService queryService, IMongoService dataCollection)
+        public DataRepository(IQueryService queryService, IDataCollection dataCollection)
         {
-            this.configurationService = configurationService;
             this.queryService = queryService;
             this.dataCollection = dataCollection;
         }
@@ -49,14 +41,14 @@ namespace Collections.API.Repositories
         /// <summary>
         /// Gets the records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>All records of requested type</returns>
-        public async Task<IEnumerable<T>> GetAsync<T, O>() where O : class, T, new()
+        public async Task<IEnumerable<TInterface>> GetAsync<TInterface, TModel>() where TModel : class, TInterface, new()
         {
-            var filter = Builders<T>.Filter.Eq("_t", (typeof(O).Name));
+            var filter = Builders<TInterface>.Filter.Eq("_t", (typeof(TModel).Name));
 
-            var result = await this.dataCollection.FindManyAsync<T>(filter);
+            var result = await this.dataCollection.FindManyAsync<TInterface>(filter);
 
             return result;
         }
@@ -65,13 +57,13 @@ namespace Collections.API.Repositories
         /// Gets the requested record asynchronously.
         /// </summary>
         /// <param name="id">The Id of the record to be retrieved</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>Retrieved record by it's Id</returns>
-        public async Task<T> GetByIdAsync<T>(string id)
+        public async Task<TInterface> GetByIdAsync<TInterface>(string id)
         {
-            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(id));
+            var filter = Builders<TInterface>.Filter.Eq("_id", ObjectId.Parse(id));
 
-            var result = await this.dataCollection.FindOneAsync<T>(filter);
+            var result = await this.dataCollection.FindOneAsync<TInterface>(filter);
 
             return result;
         }
@@ -79,29 +71,31 @@ namespace Collections.API.Repositories
         /// <summary>
         /// Searches for the model provided.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The advanced search model.</param>
         /// <returns>Results from the search</returns>
-        public Task<IEnumerable<T>> PostSearchAsync<T, O>(AdvancedSearchModel<O> model) where O : class, T, new()
+        public async Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(AdvancedSearchModel<TModel> model) where TModel : class, TInterface, new()
         {
-            var filter = this.queryService.BuildQuery<T, O>(model);
+            var filter = this.queryService.BuildQuery<TInterface, TModel>(model);
 
-            return null;
+            var result = await this.dataCollection.FindManyAsync<TInterface>(filter);
+
+            return result;
         }
 
         /// <summary>
         /// Posts multiple records asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PostMultipleAsync<T, O>(IEnumerable<O> model) where O : class, T, new()
+        public async Task<bool> PostMultipleAsync<TInterface, TModel>(IEnumerable<TModel> model) where TModel : class, TInterface, new()
         {
             try
             {
-                await this.dataCollection.InsertManyAsync<T, O>(model);
+                await this.dataCollection.InsertManyAsync<TInterface, TModel>(model);
 
                 return true;
             }
@@ -116,14 +110,14 @@ namespace Collections.API.Repositories
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model tyoe</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model tyoe</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PatchAsync<T, O>(string id, O model) where O : class, T, new()
+        public async Task<bool> PatchAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new()
         {
-            var dictionary = model.ToDictionary();
+            var dictionary = model.ToValueDictionary();
 
-            var result = await this.dataCollection.UpdateOneAsync<T>(new BsonDocument("_id", ObjectId.Parse(id)), new BsonDocument("$set", new BsonDocument(dictionary)));
+            var result = await this.dataCollection.UpdateOneAsync<TInterface>(new BsonDocument("_id", ObjectId.Parse(id)), new BsonDocument("$set", new BsonDocument(dictionary)));
 
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {
@@ -142,14 +136,14 @@ namespace Collections.API.Repositories
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model tyoe</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model tyoe</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new()
+        public async Task<bool> PutAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new()
         {
-            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(id));
+            var filter = Builders<TInterface>.Filter.Eq("_id", ObjectId.Parse(id));
 
-            var result = await this.dataCollection.ReplaceOneAsync<T, O>(filter, model);
+            var result = await this.dataCollection.ReplaceOneAsync<TInterface, TModel>(filter, model);
 
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {
@@ -167,15 +161,15 @@ namespace Collections.API.Repositories
         /// Deletes specified records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteMultipleAsync<T>(IEnumerable<string> ids)
+        public async Task<bool> DeleteMultipleAsync<TInterface>(IEnumerable<string> ids)
         {
             var parsedIds = ids.Select(s => ObjectId.Parse(s));
 
-            var filter = Builders<T>.Filter.In("_id", parsedIds);
+            var filter = Builders<TInterface>.Filter.In("_id", parsedIds);
 
-            var result = await this.dataCollection.DeleteManyAsync<T>(filter);
+            var result = await this.dataCollection.DeleteManyAsync<TInterface>(filter);
 
             if (result.IsAcknowledged && result.DeletedCount >= 1)
             {

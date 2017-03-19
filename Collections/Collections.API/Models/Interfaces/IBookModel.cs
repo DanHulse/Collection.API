@@ -51,7 +51,7 @@ namespace Collections.API.Models.Interfaces
         /// <summary>
         /// Gets or sets the published date.
         /// </summary>
-        DateTime PublishedDate { get; set; }
+        DateTime? PublishedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the cover URL.
@@ -66,16 +66,16 @@ namespace Collections.API.Models.Interfaces
         /// <summary>
         /// Gets or sets the series number.
         /// </summary>
-        int SeriesNumber { get; set; }
+        int? SeriesNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="BookModel"/> is read.
         /// </summary>
-        bool Read { get; set; }
+        bool? Read { get; set; }
 
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
-        int Rating { get; set; }
+        int? Rating { get; set; }
     }
 }

@@ -19,7 +19,7 @@ namespace Collections.API.Services
         private readonly IDataRepository dataRepository;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataService"/> class.
+        /// Initializes a new instance TModelf the <see cref="DataService"/> class.
         /// </summary>
         /// <param name="dataRepository">The data repository.</param>
         public DataService(IDataRepository dataRepository)
@@ -30,12 +30,12 @@ namespace Collections.API.Services
         /// <summary>
         /// Gets the records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
-        /// <returns><see cref="IEnumerable{T}"/>collection of records</returns>
-        public async Task<IEnumerable<T>> GetAsync<T, O>() where O : class, T, new()
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
+        /// <returns><see cref="IEnumerable{T}"/>collection TModelf records</returns>
+        public async Task<IEnumerable<TInterface>> GetAsync<TInterface, TModel>() where TModel : class, TInterface, new()
         {
-            var results = await this.dataRepository.GetAsync<T, O>();
+            var results = await this.dataRepository.GetAsync<TInterface, TModel>();
 
             return results;
         }
@@ -43,11 +43,11 @@ namespace Collections.API.Services
         /// <summary>
         /// Gets the requested record asynchronously.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>The requested record</returns>
-        public async Task<T> GetByIdAsync<T>(string id)
+        public async Task<TInterface> GetByIdAsync<TInterface>(string id)
         {
-            var result = await this.dataRepository.GetByIdAsync<T>(id);
+            var result = await this.dataRepository.GetByIdAsync<TInterface>(id);
 
             return result;
         }
@@ -55,13 +55,13 @@ namespace Collections.API.Services
         /// <summary>
         /// Searches for the specified model with the advanced search model.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The advanced search model.</param>
-        /// <returns>The results of the search</returns>
-        public async Task<IEnumerable<T>> PostSearchAsync<T, O>(AdvancedSearchModel<O> model) where O : class, T, new()
+        /// <returns>The results TModelf the search</returns>
+        public async Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(AdvancedSearchModel<TModel> model) where TModel : class, TInterface, new()
         {
-            var results = await this.dataRepository.PostSearchAsync<T, O>(model);
+            var results = await this.dataRepository.PostSearchAsync<TInterface, TModel>(model);
 
             return results;
         }
@@ -70,12 +70,12 @@ namespace Collections.API.Services
         /// Posts the record asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PostAsync<T, O>(IEnumerable<O> model) where O : class, T, new()
+        public async Task<bool> PostAsync<TInterface, TModel>(IEnumerable<TModel> model) where TModel : class, TInterface, new()
         {
-            var result = await this.dataRepository.PostMultipleAsync<T, O>(model);
+            var result = await this.dataRepository.PostMultipleAsync<TInterface, TModel>(model);
 
             return result;
         }
@@ -85,12 +85,12 @@ namespace Collections.API.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PatchAsync<T, O>(string id, O model) where O : class, T, new()
+        public async Task<bool> PatchAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new()
         {
-            var result = await this.dataRepository.PatchAsync<T, O>(id, model);
+            var result = await this.dataRepository.PatchAsync<TInterface, TModel>(id, model);
 
             return result;
         }
@@ -100,12 +100,12 @@ namespace Collections.API.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new()
+        public async Task<bool> PutAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new()
         {
-            var result = await this.dataRepository.PutAsync<T, O>(id, model);
+            var result = await this.dataRepository.PutAsync<TInterface, TModel>(id, model);
 
             return result;
         }
@@ -114,11 +114,11 @@ namespace Collections.API.Services
         /// Deletes specified the records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteAsync<T>(IEnumerable<string> ids)
+        public async Task<bool> DeleteAsync<TInterface>(IEnumerable<string> ids)
         {
-            var result = await this.dataRepository.DeleteMultipleAsync<T>(ids);
+            var result = await this.dataRepository.DeleteMultipleAsync<TInterface>(ids);
 
             return result;
         }

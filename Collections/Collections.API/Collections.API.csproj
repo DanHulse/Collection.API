@@ -274,11 +274,11 @@
     <Compile Include="Enumerations\LogLevel.cs" />
     <Compile Include="Factories\Interfaces\IFactory.cs" />
     <Compile Include="Factories\Interfaces\MongoDb\IMongoFactory.cs" />
-    <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
+    <Compile Include="Helpers\ObjectToDictionary.cs" />
     <Compile Include="App_Start\MongoDb\BsonMapConfig.cs" />
-    <Compile Include="Services\MongoDb\MongoService.cs" />
+    <Compile Include="Services\MongoDb\DataCollection.cs" />
     <Compile Include="Infrastructure\DependancyRegistrar.cs" />
-    <Compile Include="Services\Interfaces\MongoDb\IMongoService.cs" />
+    <Compile Include="Services\Interfaces\MongoDb\IDataCollection.cs" />
     <Compile Include="Infrastructure\Interfaces\ILogger.cs" />
     <Compile Include="Infrastructure\Logger.cs" />
     <Compile Include="App_Start\AutoMapConfig.cs" />

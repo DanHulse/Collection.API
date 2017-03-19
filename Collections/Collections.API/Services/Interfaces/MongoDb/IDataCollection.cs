@@ -7,65 +7,65 @@ namespace Collections.API.Services.Interfaces.MongoDb
     /// <summary>
     /// Interface for the Data Collection wrapper class
     /// </summary>
-    public interface IMongoService : IService
+    public interface IDataCollection : IService
     {
         /// <summary>
         /// Finds one record asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <returns>Retrieved record</returns>
-        Task<T> FindOneAsync<T>(FilterDefinition<T> filter);
+        Task<TInterface> FindOneAsync<TInterface>(FilterDefinition<TInterface> filter);
 
         /// <summary>
         /// Finds many records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <returns>Retrived records</returns>
-        Task<IEnumerable<T>> FindManyAsync<T>(FilterDefinition<T> filter);
+        Task<IEnumerable<TInterface>> FindManyAsync<TInterface>(FilterDefinition<TInterface> filter);
 
         /// <summary>
         /// Inserts one record asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The model.</param>
-        Task InsertOneAsync<T, O>(O model) where O : class, T, new();
+        Task InsertOneAsync<TInterface, TModel>(TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Inserts many records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="models">The models.</param>
-        Task InsertManyAsync<T, O>(IEnumerable<O> models) where O : class, T, new();
+        Task InsertManyAsync<TInterface, TModel>(IEnumerable<TModel> models) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Updates one record asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <param name="update">The update.</param>
         /// <returns><see cref="UpdateResult"/>result of update operation</returns>
-        Task<UpdateResult> UpdateOneAsync<T>(FilterDefinition<T> filter, UpdateDefinition<T> update);
+        Task<UpdateResult> UpdateOneAsync<TInterface>(FilterDefinition<TInterface> filter, UpdateDefinition<TInterface> update);
 
         /// <summary>
         /// Replaces one document asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="ReplaceOneResult"/>result of replace operation</returns>
-        Task<ReplaceOneResult> ReplaceOneAsync<T, O>(FilterDefinition<T> filter, O model) where O : class, T, new();
+        Task<ReplaceOneResult> ReplaceOneAsync<TInterface, TModel>(FilterDefinition<TInterface> filter, TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Deletes many records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The filter type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <returns><see cref="DeleteResult"/>result of delete operation</returns>
-        Task<DeleteResult> DeleteManyAsync<T>(FilterDefinition<T> filter);
+        Task<DeleteResult> DeleteManyAsync<TInterface>(FilterDefinition<TInterface> filter);
     }
 }

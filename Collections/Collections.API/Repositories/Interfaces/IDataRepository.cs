@@ -13,63 +13,63 @@ namespace Collections.API.Repositories.Interfaces
         /// <summary>
         /// Gets the records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>All records of requested type</returns>
-        Task<IEnumerable<T>> GetAsync<T, O>() where O : class, T, new();
+        Task<IEnumerable<TInterface>> GetAsync<TInterface, TModel>() where TModel : class, TInterface, new();
 
         /// <summary>
         /// Gets the requested record asynchronously.
         /// </summary>
         /// <param name="id">The Id of the record to be retrieved</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>Retrieved record by it's Id</returns>
-        Task<T> GetByIdAsync<T>(string id);
+        Task<TInterface> GetByIdAsync<TInterface>(string id);
 
         /// <summary>
         /// Searches for the model provided.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The advanced search model.</param>
         /// <returns>Results from the search</returns>
-        Task<IEnumerable<T>> PostSearchAsync<T, O>(AdvancedSearchModel<O> model) where O : class, T, new();
+        Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(AdvancedSearchModel<TModel> model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Posts multiple records asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
         /// <returns>True if successful</returns>
-        Task<bool> PostMultipleAsync<T, O>(IEnumerable<O> model) where O : class, T, new();
+        Task<bool> PostMultipleAsync<TInterface, TModel>(IEnumerable<TModel> model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Patches specified record asynchronously.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model tyoe</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model tyoe</typeparam>
         /// <returns>True if successful</returns>
-        Task<bool> PatchAsync<T, O>(string id, O model) where O : class, T, new();
+        Task<bool> PatchAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Puts specified record asynchronously.
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model tyoe</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TModel">The model tyoe</typeparam>
         /// <returns>True if successful</returns>
-        Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new();
+        Task<bool> PutAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Deletes specified records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        Task<bool> DeleteMultipleAsync<T>(IEnumerable<string> ids);
+        Task<bool> DeleteMultipleAsync<TInterface>(IEnumerable<string> ids);
     }
 }

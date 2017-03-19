@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Collections.API.Models.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using Newtonsoft.Json;
 
 namespace Collections.API.Models
 {
@@ -52,12 +53,12 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the tracks.
         /// </summary>
-        public int Tracks { get; set; }
+        public int? Tracks { get; set; }
 
         /// <summary>
         /// Gets or sets the discs.
         /// </summary>
-        public int Discs { get; set; }
+        public int? Discs { get; set; }
 
         /// <summary>
         /// Gets or sets the formats.
@@ -67,7 +68,7 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the released date.
         /// </summary>
-        public DateTime ReleasedDate { get; set; }
+        public DateTime? ReleasedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the album cover URL.
@@ -77,6 +78,6 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
     }
 }

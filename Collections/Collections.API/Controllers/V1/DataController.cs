@@ -14,11 +14,12 @@ namespace Collections.API.Controllers.V1
     /// <summary>
     /// Data collections controller
     /// </summary>
-    /// <typeparam name="T">The inteface type</typeparam>
-    /// <typeparam name="O">The model type</typeparam>
-    /// <typeparam name="S">The view model type</typeparam>
+    /// <typeparam name="TInterface">The interface type</typeparam>
+    /// <typeparam name="TModel">The model type</typeparam>
+    /// <typeparam name="TView">The view model type</typeparam>
+    /// <typeparam name="TDetail">The detail view model type</typeparam>
     /// <seealso cref="Collections.API.Controllers.BaseController" />
-    public class DataController<T, O, S> : BaseController where O : class, T, new()
+    public class DataController<TInterface, TModel, TView, TDetail> : BaseController where TModel : class, TInterface, new()
     {
         /// <summary>
         /// The data service
@@ -31,7 +32,7 @@ namespace Collections.API.Controllers.V1
         private readonly IMapper mapper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataController{T, O, S}"/> class.
+        /// Initializes a new instance of the <see cref="DataController{TInterface, TModel, TView, TDetail}"/> class.
         /// </summary>
         /// <param name="dataService">The data service.</param>
         /// <param name="mapper">The mapper.</param>
@@ -51,11 +52,11 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.GetAsync<T, O>();
+                var result = await this.dataService.GetAsync<TInterface, TModel>();
 
                 if (result.Any())
                 {
-                    var mappedResults = this.mapper.Map<IEnumerable<S>>(result);
+                    var mappedResults = this.mapper.Map<IEnumerable<TView>>(result);
 
                     return this.Ok(mappedResults);
                 }
@@ -78,11 +79,11 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.GetByIdAsync<T>(id);
+                var result = await this.dataService.GetByIdAsync<TInterface>(id);
 
                 if (result != null)
                 {
-                    var mappedResult = this.mapper.Map<S>(result);
+                    var mappedResult = this.mapper.Map<TDetail>(result);
 
                     return this.Ok(mappedResult);
                 }
@@ -102,15 +103,15 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         /// <param name="model">The model type to be searched.</param>
         /// <returns><see cref="IHttpActionResult"/>of search results</returns>
-        public virtual async Task<IHttpActionResult> PostSearchAsync([FromBody]AdvancedSearchModel<O> model)
+        public virtual async Task<IHttpActionResult> PostSearchAsync([FromBody]AdvancedSearchModel<TModel> model)
         {
             try
             {
-                var result = await this.dataService.PostSearchAsync<T, O>(model);
+                var result = await this.dataService.PostSearchAsync<TInterface, TModel>(model);
 
                 if (result.Any())
                 {
-                    var mappedResult = this.mapper.Map<S>(result);
+                    var mappedResult = this.mapper.Map<IEnumerable<TView>>(result);
 
                     return this.Ok(mappedResult);
                 }
@@ -130,11 +131,11 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         /// <param name="model">The record to be posted</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
-        public virtual async Task<IHttpActionResult> PostAsync([FromBody]IEnumerable<O> model)
+        public virtual async Task<IHttpActionResult> PostAsync([FromBody]IEnumerable<TModel> model)
         {
             try
             {
-                var result = await this.dataService.PostAsync<T, O>(model);
+                var result = await this.dataService.PostAsync<TInterface, TModel>(model);
 
                 if (result)
                 {
@@ -157,11 +158,11 @@ namespace Collections.API.Controllers.V1
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
-        public virtual async Task<IHttpActionResult> PatchAsync([FromUri]string id, [FromBody]O model)
+        public virtual async Task<IHttpActionResult> PatchAsync([FromUri]string id, [FromBody]TModel model)
         {
             try
             {
-                var result = await this.dataService.PatchAsync<T, O>(id, model);
+                var result = await this.dataService.PatchAsync<TInterface, TModel>(id, model);
 
                 if (result)
                 {
@@ -184,11 +185,11 @@ namespace Collections.API.Controllers.V1
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="IHttpActionResult"/>OK if successful</returns>
-        public virtual async Task<IHttpActionResult> PutAsync([FromUri]string id, [FromBody]O model)
+        public virtual async Task<IHttpActionResult> PutAsync([FromUri]string id, [FromBody]TModel model)
         {
             try
             {
-                var result = await this.dataService.PutAsync<T, O>(id, model);
+                var result = await this.dataService.PutAsync<TInterface, TModel>(id, model);
 
                 if (result)
                 {
@@ -214,7 +215,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.DeleteAsync<T>(ids);
+                var result = await this.dataService.DeleteAsync<TInterface>(ids);
 
                 if (result)
                 {

@@ -11,6 +11,6 @@ namespace Collections.API.Factories.Interfaces.MongoDb
         /// Connects to Document DB collection.
         /// </summary>
         /// <returns><see cref="IMongoCollection{TDocument}"/> of collection from DB</returns>
-        IMongoCollection<T> ConnectToCollection<T>();
+        IMongoCollection<TInterface> ConnectToCollection<TInterface>();
     }
 }

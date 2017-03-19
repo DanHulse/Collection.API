@@ -50,12 +50,12 @@ namespace Collections.API.Models.Interfaces
         /// <summary>
         /// Gets or sets the tracks.
         /// </summary>
-        int Tracks { get; set; }
+        int? Tracks { get; set; }
 
         /// <summary>
         /// Gets or sets the discs.
         /// </summary>
-        int Discs { get; set; }
+        int? Discs { get; set; }
 
         /// <summary>
         /// Gets or sets the formats.
@@ -65,7 +65,7 @@ namespace Collections.API.Models.Interfaces
         /// <summary>
         /// Gets or sets the released date.
         /// </summary>
-        DateTime ReleasedDate { get; set; }
+        DateTime? ReleasedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the album cover URL.
@@ -75,6 +75,6 @@ namespace Collections.API.Models.Interfaces
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
-        int Rating { get; set; }
+        int? Rating { get; set; }
     }
 }

@@ -57,7 +57,7 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the published date.
         /// </summary>
-        public DateTime PublishedDate { get; set; }
+        public DateTime? PublishedDate { get; set; }
 
         /// <summary>
         /// Gets or sets the cover URL.
@@ -72,16 +72,16 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the series number.
         /// </summary>
-        public int SeriesNumber { get; set; }
+        public int? SeriesNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="BookModel"/> is read.
         /// </summary>
-        public bool Read { get; set; }
+        public bool? Read { get; set; }
 
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
     }
 }

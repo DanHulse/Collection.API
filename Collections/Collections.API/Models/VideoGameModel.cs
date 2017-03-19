@@ -59,7 +59,7 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the release date.
         /// </summary>
-        public DateTime ReleaseDate { get; set; }
+        public DateTime? ReleaseDate { get; set; }
 
         /// <summary>
         /// Gets or sets the box art URL.
@@ -74,16 +74,16 @@ namespace Collections.API.Models
         /// <summary>
         /// Gets or sets the series number.
         /// </summary>
-        public int SeriesNumber { get; set; }
+        public int? SeriesNumber { get; set; }
 
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="VideoGameModel"/> is finished.
         /// </summary>
-        public bool Finished { get; set; }
+        public bool? Finished { get; set; }
 
         /// <summary>
         /// Gets or sets the rating.
         /// </summary>
-        public int Rating { get; set; }
+        public int? Rating { get; set; }
     }
 }

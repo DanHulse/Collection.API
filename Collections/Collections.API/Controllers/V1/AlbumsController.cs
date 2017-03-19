@@ -14,9 +14,9 @@ namespace Collections.API.Controllers.V1
     /// <summary>
     /// Albums Controller
     /// </summary>
-    /// <seealso cref="Collections.API.Controllers.V1.DataController{T, O, S}" />
+    /// <seealso cref="Collections.API.Controllers.V1.DataController{TInterface, TModel, TView, TDetail}" />
     [RoutePrefix("api/v1/Albums")]
-    public class AlbumsController : DataController<IAlbumModel, AlbumModel, AlbumDetailViewModel>
+    public class AlbumsController : DataController<IAlbumModel, AlbumModel, AlbumViewModel, AlbumDetailViewModel>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="AlbumsController"/> class.
@@ -34,8 +34,9 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         [HttpGet]
         [Route("")]
-        [ResponseType(typeof(IHttpActionResult))]
-        public override Task<IHttpActionResult> GetAsync() { return base.GetAsync(); }
+        [ResponseType(typeof(IEnumerable<AlbumViewModel>))]
+        public override Task<IHttpActionResult> GetAsync()
+        { return base.GetAsync(); }
 
         /// <summary>
         /// Retrieve requested record
@@ -43,7 +44,17 @@ namespace Collections.API.Controllers.V1
         [HttpGet]
         [Route("{id}")]
         [ResponseType(typeof(IHttpActionResult))]
-        public override Task<IHttpActionResult> GetByIdAsync([FromUri] string id) { return base.GetByIdAsync(id); }
+        public override Task<IHttpActionResult> GetByIdAsync([FromUri] string id)
+        { return base.GetByIdAsync(id); }
+
+        /// <summary>
+        /// Performs an advanced search function on the provided model
+        /// </summary>
+        [HttpPost]
+        [Route("search")]
+        [ResponseType(typeof(IEnumerable<AlbumViewModel>))]
+        public override Task<IHttpActionResult> PostSearchAsync([FromBody] AdvancedSearchModel<AlbumModel> model)
+        { return base.PostSearchAsync(model); }
 
         /// <summary>
         /// Insert new records to DB of specified type
@@ -51,7 +62,8 @@ namespace Collections.API.Controllers.V1
         [HttpPost]
         [Route("")]
         [ResponseType(typeof(IHttpActionResult))]
-        public override Task<IHttpActionResult> PostAsync([FromBody] IEnumerable<AlbumModel> model) { return base.PostAsync(model); }
+        public override Task<IHttpActionResult> PostAsync([FromBody] IEnumerable<AlbumModel> model)
+        { return base.PostAsync(model); }
 
         /// <summary>
         /// Replaces the specified record with the new model
@@ -59,7 +71,8 @@ namespace Collections.API.Controllers.V1
         [HttpPut]
         [Route("{id}")]
         [ResponseType(typeof(IHttpActionResult))]
-        public override Task<IHttpActionResult> PutAsync([FromUri] string id, [FromBody] AlbumModel model) { return base.PutAsync(id, model); }
+        public override Task<IHttpActionResult> PutAsync([FromUri] string id, [FromBody] AlbumModel model)
+        { return base.PutAsync(id, model); }
 
         /// <summary>
         /// Deletes the records of the specified type asynchronously.
@@ -67,6 +80,7 @@ namespace Collections.API.Controllers.V1
         [HttpDelete]
         [Route("")]
         [ResponseType(typeof(IHttpActionResult))]
-        public override Task<IHttpActionResult> DeleteAsync([FromBody] IEnumerable<string> ids) { return base.DeleteAsync(ids); }
+        public override Task<IHttpActionResult> DeleteAsync([FromBody] IEnumerable<string> ids)
+        { return base.DeleteAsync(ids); }
     }
 }
