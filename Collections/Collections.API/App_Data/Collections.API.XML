@@ -437,35 +437,35 @@
             </summary>
             <param name="mongoFactory">The mongo DB factory.</param>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.FindOneAsync``2(MongoDB.Driver.FilterDefinition{``1})">
+        <member name="M:Collections.API.Infrastructure.DataCollection.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Finds one record asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <returns>Retrieved record</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.FindManyAsync``2(MongoDB.Driver.FilterDefinition{``1})">
+        <member name="M:Collections.API.Infrastructure.DataCollection.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Finds many records asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <returns>Retrived records</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.InsertOneAsync``1(``0)">
+        <member name="M:Collections.API.Infrastructure.DataCollection.InsertOneAsync``2(``1)">
             <summary>
             Inserts one record asynchronously.
             </summary>
+            <typeparam name="T">The filter type</typeparam>
             <typeparam name="O">The model type</typeparam>
             <param name="model">The model.</param>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.InsertManyAsync``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Collections.API.Infrastructure.DataCollection.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Inserts many records asynchronously.
             </summary>
+            <typeparam name="T">The filter type</typeparam>
             <typeparam name="O">The model type</typeparam>
             <param name="models">The models.</param>
         </member>
@@ -473,16 +473,16 @@
             <summary>
             Updates one record asynchronously.
             </summary>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <param name="update">The update.</param>
             <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.ReplaceOneAsync``1(MongoDB.Driver.FilterDefinition{``0},``0)">
+        <member name="M:Collections.API.Infrastructure.DataCollection.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
             <summary>
             Replaces one document asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <typeparam name="O">The model type</typeparam>
             <param name="filter">The filter.</param>
             <param name="model">The model.</param>
@@ -492,7 +492,7 @@
             <summary>
             Deletes many records asynchronously.
             </summary>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
         </member>
@@ -500,7 +500,7 @@
             <summary>
             Retrieves the collection.
             </summary>
-            <typeparam name="O">Model of collection</typeparam>
+            <typeparam name="T">Model of collection</typeparam>
             <returns>Mongo DB collection</returns>
         </member>
         <member name="T:Collections.API.Infrastructure.DependencyRegistrar">
@@ -519,35 +519,35 @@
             Interface for the Data Collection wrapper class
             </summary>
         </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindOneAsync``2(MongoDB.Driver.FilterDefinition{``1})">
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Finds one record asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <returns>Retrieved record</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindManyAsync``2(MongoDB.Driver.FilterDefinition{``1})">
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Finds many records asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <returns>Retrived records</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertOneAsync``1(``0)">
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertOneAsync``2(``1)">
             <summary>
             Inserts one record asynchronously.
             </summary>
+            <typeparam name="T">The filter type</typeparam>
             <typeparam name="O">The model type</typeparam>
             <param name="model">The model.</param>
         </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertManyAsync``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Inserts many records asynchronously.
             </summary>
+            <typeparam name="T">The filter type</typeparam>
             <typeparam name="O">The model type</typeparam>
             <param name="models">The models.</param>
         </member>
@@ -555,15 +555,16 @@
             <summary>
             Updates one record asynchronously.
             </summary>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <param name="update">The update.</param>
             <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.ReplaceOneAsync``1(MongoDB.Driver.FilterDefinition{``0},``0)">
+        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
             <summary>
             Replaces one document asynchronously.
             </summary>
+            <typeparam name="T">The filter type</typeparam>
             <typeparam name="O">The model type</typeparam>
             <param name="filter">The filter.</param>
             <param name="model">The model.</param>
@@ -573,7 +574,7 @@
             <summary>
             Deletes many records asynchronously.
             </summary>
-            <typeparam name="O">The filter type</typeparam>
+            <typeparam name="T">The filter type</typeparam>
             <param name="filter">The filter.</param>
             <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
         </member>
@@ -1425,43 +1426,45 @@
             <summary>
             Gets the records asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>All records of requested type</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.GetByIdAsync``2(System.String)">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.GetByIdAsync``1(System.String)">
             <summary>
             Gets the requested record asynchronously.
             </summary>
             <param name="id">The Id of the record to be retrieved</param>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>Retrieved record by it's Id</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostMultipleAsync``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostMultipleAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Posts multiple records asynchronously
             </summary>
             <param name="model">The model to be posted</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PatchAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PatchAsync``2(System.String,``1)">
             <summary>
             Patches specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model tyoe</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PutAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PutAsync``2(System.String,``1)">
             <summary>
             Puts specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model tyoe</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.DeleteMultipleAsync``1(System.Collections.Generic.IEnumerable{System.String})">
@@ -1469,7 +1472,7 @@
             Deletes specified records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Repositories.Interfaces.IRepository">
@@ -1504,43 +1507,45 @@
             <summary>
             Gets the records asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>All records of requested type</returns>
         </member>
-        <member name="M:Collections.API.Repositories.DataRepository.GetByIdAsync``2(System.String)">
+        <member name="M:Collections.API.Repositories.DataRepository.GetByIdAsync``1(System.String)">
             <summary>
             Gets the requested record asynchronously.
             </summary>
             <param name="id">The Id of the record to be retrieved</param>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>Retrieved record by it's Id</returns>
         </member>
-        <member name="M:Collections.API.Repositories.DataRepository.PostMultipleAsync``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Collections.API.Repositories.DataRepository.PostMultipleAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Posts multiple records asynchronously
             </summary>
             <param name="model">The model to be posted</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.DataRepository.PatchAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Repositories.DataRepository.PatchAsync``2(System.String,``1)">
             <summary>
             Patches specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model tyoe</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Repositories.DataRepository.PutAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Repositories.DataRepository.PutAsync``2(System.String,``1)">
             <summary>
             Puts specified record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model tyoe</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="M:Collections.API.Repositories.DataRepository.DeleteMultipleAsync``1(System.Collections.Generic.IEnumerable{System.String})">
@@ -1548,7 +1553,7 @@
             Deletes specified records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.ConfigurationService">
@@ -1601,42 +1606,44 @@
             <summary>
             Gets the records asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.GetByIdAsync``2(System.String)">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.GetByIdAsync``1(System.String)">
             <summary>
             Gets the requested record asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>The requested record</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PostAsync``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Posts the record asynchronously
             </summary>
             <param name="model">The model to be posted</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PatchAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PatchAsync``2(System.String,``1)">
             <summary>
             Patches specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PutAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PutAsync``2(System.String,``1)">
             <summary>
             Puts specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="M:Collections.API.Services.Interfaces.IDataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
@@ -1644,7 +1651,7 @@
             Deletes specified the records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.IService">
@@ -1673,42 +1680,44 @@
             <summary>
             Gets the records asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
         </member>
-        <member name="M:Collections.API.Services.DataService.GetByIdAsync``2(System.String)">
+        <member name="M:Collections.API.Services.DataService.GetByIdAsync``1(System.String)">
             <summary>
             Gets the requested record asynchronously.
             </summary>
-            <typeparam name="T">The interface type</typeparam>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>The requested record</returns>
         </member>
-        <member name="M:Collections.API.Services.DataService.PostAsync``1(System.Collections.Generic.IEnumerable{``0})">
+        <member name="M:Collections.API.Services.DataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Posts the record asynchronously
             </summary>
             <param name="model">The model to be posted</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.DataService.PatchAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Services.DataService.PatchAsync``2(System.String,``1)">
             <summary>
             Patches specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
-        <member name="M:Collections.API.Services.DataService.PutAsync``1(System.String,``0)">
+        <member name="M:Collections.API.Services.DataService.PutAsync``2(System.String,``1)">
             <summary>
             Puts specified the record asynchronously.
             </summary>
             <param name="id">The identifier.</param>
             <param name="model">The model.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="M:Collections.API.Services.DataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
@@ -1716,7 +1725,7 @@
             Deletes specified the records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
-            <typeparam name="O">The collection type</typeparam>
+            <typeparam name="T">The collection type</typeparam>
             <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Startup">

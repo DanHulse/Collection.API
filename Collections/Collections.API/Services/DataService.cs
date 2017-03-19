@@ -28,8 +28,8 @@ namespace Collections.API.Services
         /// <summary>
         /// Gets the records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <typeparam name="O">The collection type</typeparam>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
         /// <returns><see cref="IEnumerable{T}"/>collection of records</returns>
         public async Task<IEnumerable<T>> GetAsync<T, O>() where O : class, T, new()
         {
@@ -41,12 +41,11 @@ namespace Collections.API.Services
         /// <summary>
         /// Gets the requested record asynchronously.
         /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <typeparam name="O">The collection type</typeparam>
+        /// <typeparam name="T">The collection type</typeparam>
         /// <returns>The requested record</returns>
-        public async Task<T> GetByIdAsync<T, O>(string id) where O : class, T, new()
+        public async Task<T> GetByIdAsync<T>(string id)
         {
-            var result = await this.dataRepository.GetByIdAsync<T, O>(id);
+            var result = await this.dataRepository.GetByIdAsync<T>(id);
 
             return result;
         }
@@ -55,11 +54,12 @@ namespace Collections.API.Services
         /// Posts the record asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
-        /// <typeparam name="O">The collection type</typeparam>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PostAsync<O>(IEnumerable<O> model)
+        public async Task<bool> PostAsync<T, O>(IEnumerable<O> model) where O : class, T, new()
         {
-            var result = await this.dataRepository.PostMultipleAsync<O>(model);
+            var result = await this.dataRepository.PostMultipleAsync<T, O>(model);
 
             return result;
         }
@@ -69,11 +69,12 @@ namespace Collections.API.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="O">The collection type</typeparam>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PatchAsync<O>(string id, O model)
+        public async Task<bool> PatchAsync<T, O>(string id, O model) where O : class, T, new()
         {
-            var result = await this.dataRepository.PatchAsync<O>(id, model);
+            var result = await this.dataRepository.PatchAsync<T, O>(id, model);
 
             return result;
         }
@@ -83,11 +84,12 @@ namespace Collections.API.Services
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="O">The collection type</typeparam>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PutAsync<O>(string id, O model)
+        public async Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new()
         {
-            var result = await this.dataRepository.PutAsync<O>(id, model);
+            var result = await this.dataRepository.PutAsync<T, O>(id, model);
 
             return result;
         }
@@ -96,11 +98,11 @@ namespace Collections.API.Services
         /// Deletes specified the records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>
-        /// <typeparam name="O">The collection type</typeparam>
+        /// <typeparam name="T">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteAsync<O>(IEnumerable<string> ids)
+        public async Task<bool> DeleteAsync<T>(IEnumerable<string> ids)
         {
-            var result = await this.dataRepository.DeleteMultipleAsync<O>(ids);
+            var result = await this.dataRepository.DeleteMultipleAsync<T>(ids);
 
             return result;
         }

@@ -12,59 +12,60 @@ namespace Collections.API.Infrastructure.Interfaces
         /// <summary>
         /// Finds one record asynchronously.
         /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <typeparam name="O">The filter type</typeparam>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <returns>Retrieved record</returns>
-        Task<T> FindOneAsync<T, O>(FilterDefinition<O> filter) where O : class, T, new();
+        Task<T> FindOneAsync<T>(FilterDefinition<T> filter);
 
         /// <summary>
         /// Finds many records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The interface type</typeparam>
-        /// <typeparam name="O">The filter type</typeparam>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <returns>Retrived records</returns>
-        Task<IEnumerable<T>> FindManyAsync<T, O>(FilterDefinition<O> filter) where O : class, T, new();
+        Task<IEnumerable<T>> FindManyAsync<T>(FilterDefinition<T> filter);
 
         /// <summary>
         /// Inserts one record asynchronously.
         /// </summary>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <typeparam name="O">The model type</typeparam>
         /// <param name="model">The model.</param>
-        Task InsertOneAsync<O>(O model);
+        Task InsertOneAsync<T, O>(O model) where O : class, T, new();
 
         /// <summary>
         /// Inserts many records asynchronously.
         /// </summary>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <typeparam name="O">The model type</typeparam>
         /// <param name="models">The models.</param>
-        Task InsertManyAsync<O>(IEnumerable<O> models);
+        Task InsertManyAsync<T, O>(IEnumerable<O> models) where O : class, T, new();
 
         /// <summary>
         /// Updates one record asynchronously.
         /// </summary>
-        /// <typeparam name="O">The filter type</typeparam>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <param name="update">The update.</param>
         /// <returns><see cref="UpdateResult"/>result of update operation</returns>
-        Task<UpdateResult> UpdateOneAsync<O>(FilterDefinition<O> filter, UpdateDefinition<O> update);
+        Task<UpdateResult> UpdateOneAsync<T>(FilterDefinition<T> filter, UpdateDefinition<T> update);
 
         /// <summary>
         /// Replaces one document asynchronously.
         /// </summary>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <typeparam name="O">The model type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="ReplaceOneResult"/>result of replace operation</returns>
-        Task<ReplaceOneResult> ReplaceOneAsync<O>(FilterDefinition<O> filter, O model);
+        Task<ReplaceOneResult> ReplaceOneAsync<T, O>(FilterDefinition<T> filter, O model) where O : class, T, new();
 
         /// <summary>
         /// Deletes many records asynchronously.
         /// </summary>
-        /// <typeparam name="O">The filter type</typeparam>
+        /// <typeparam name="T">The filter type</typeparam>
         /// <param name="filter">The filter.</param>
         /// <returns><see cref="DeleteResult"/>result of delete operation</returns>
-        Task<DeleteResult> DeleteManyAsync<O>(FilterDefinition<O> filter);
+        Task<DeleteResult> DeleteManyAsync<T>(FilterDefinition<T> filter);
     }
 }
