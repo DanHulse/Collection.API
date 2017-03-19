@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Collections.API.Models;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Collections.API.Services.Interfaces
@@ -23,6 +24,15 @@ namespace Collections.API.Services.Interfaces
         /// <typeparam name="T">The collection type</typeparam>
         /// <returns>The requested record</returns>
         Task<T> GetByIdAsync<T>(string id);
+
+        /// <summary>
+        /// Searches for the specified model with the advanced search model.
+        /// </summary>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <param name="model">The advanced search model.</param>
+        /// <returns>The results of the search</returns>
+        Task<IEnumerable<T>> PostSearchAsync<T, O>(AdvancedSearchModel<O> model) where O : class, T, new();
 
         /// <summary>
         /// Posts the record asynchronously

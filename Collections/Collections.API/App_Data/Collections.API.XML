@@ -4,6 +4,16 @@
         <name>Collections.API</name>
     </assembly>
     <members>
+        <member name="T:Collections.API.App_Start.DependencyConfig">
+            <summary>
+            Configuration setup for external dependencies
+            </summary>
+        </member>
+        <member name="M:Collections.API.App_Start.DependencyConfig.Configure">
+            <summary>
+            Configures the external dependencies.
+            </summary>
+        </member>
         <member name="T:Collections.API.App_Start.RouteConfig">
             <summary>
             The Route config.
@@ -25,6 +35,26 @@
             Registers the specified configuration.
             </summary>
             <param name="config">The configuration.</param>
+        </member>
+        <member name="T:Collections.API.App_Start.MongoDb.BsonMapConfig">
+            <summary>
+            The mapping config for Mongo DB BSON documents
+            </summary>
+        </member>
+        <member name="M:Collections.API.App_Start.MongoDb.BsonMapConfig.Configure">
+            <summary>
+            Configures this instance.
+            </summary>
+        </member>
+        <member name="T:Collections.API.App_Start.AutoMapConfig">
+            <summary>
+            The Auto mapper profile config
+            </summary>
+        </member>
+        <member name="M:Collections.API.App_Start.AutoMapConfig.Configure">
+            <summary>
+            Configures this instance.
+            </summary>
         </member>
         <member name="T:Collections.API.Controllers.BaseController">
             <summary>
@@ -153,6 +183,13 @@
             Retrieve requested record
             </summary>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested record</returns>
+        </member>
+        <member name="M:Collections.API.Controllers.V1.DataController`3.PostSearchAsync(Collections.API.Models.AdvancedSearchModel{`1})">
+            <summary>
+            Performs an advanced search function on the provided model
+            </summary>
+            <param name="model">The model type to be searched.</param>
+            <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of search results</returns>
         </member>
         <member name="M:Collections.API.Controllers.V1.DataController`3.PostAsync(System.Collections.Generic.IEnumerable{`1})">
             <summary>
@@ -322,45 +359,45 @@
             Base interface for Factories
             </summary>
         </member>
-        <member name="T:Collections.API.Factories.Interfaces.IMongoFactory">
+        <member name="T:Collections.API.Factories.Interfaces.MongoDb.IMongoFactory">
             <summary>
             Interface for the Mongo DB Factory
             </summary>
         </member>
-        <member name="M:Collections.API.Factories.Interfaces.IMongoFactory.ConnectToCollection``1">
+        <member name="M:Collections.API.Factories.Interfaces.MongoDb.IMongoFactory.ConnectToCollection``1">
             <summary>
             Connects to Document DB collection.
             </summary>
             <returns><see cref="T:MongoDB.Driver.IMongoCollection`1"/> of collection from DB</returns>
         </member>
-        <member name="T:Collections.API.Factories.MongoFactory">
+        <member name="T:Collections.API.Factories.MongoDb.MongoFactory">
             <summary>
             Factory for connecting to the Document DB
             </summary>
-            <seealso cref="T:Collections.API.Factories.Interfaces.IMongoFactory"/>
+            <seealso cref="T:Collections.API.Factories.Interfaces.MongoDb.IMongoFactory"/>
         </member>
-        <member name="F:Collections.API.Factories.MongoFactory.configurationService">
+        <member name="F:Collections.API.Factories.MongoDb.MongoFactory.configurationService">
             <summary>
             The configuration service
             </summary>
         </member>
-        <member name="F:Collections.API.Factories.MongoFactory.connectionString">
+        <member name="F:Collections.API.Factories.MongoDb.MongoFactory.connectionString">
             <summary>
             The MongoDB connection string
             </summary>
         </member>
-        <member name="F:Collections.API.Factories.MongoFactory.collection">
+        <member name="F:Collections.API.Factories.MongoDb.MongoFactory.collection">
             <summary>
             The MongoDB collection
             </summary>
         </member>
-        <member name="M:Collections.API.Factories.MongoFactory.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
+        <member name="M:Collections.API.Factories.MongoDb.MongoFactory.#ctor(Collections.API.Services.Interfaces.IConfigurationService)">
             <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoFactory"/> class.
+            Initializes a new instance of the <see cref="T:Collections.API.Factories.MongoDb.MongoFactory"/> class.
             </summary>
             <param name="configurationService">The configuration service.</param>
         </member>
-        <member name="M:Collections.API.Factories.MongoFactory.ConnectToCollection``1">
+        <member name="M:Collections.API.Factories.MongoDb.MongoFactory.ConnectToCollection``1">
             <summary>
             Connects to Document DB collection.
             </summary>
@@ -410,34 +447,24 @@
             </summary>
             <exception cref="T:System.ArgumentNullException">source - Unable to convert object to a dictionary. The source object is null.</exception>
         </member>
-        <member name="T:Collections.API.Infrastructure.BsonMapConfig">
-            <summary>
-            The mapping config for Mongo DB BSON documents
-            </summary>
-        </member>
-        <member name="M:Collections.API.Infrastructure.BsonMapConfig.Configure">
-            <summary>
-            Configures this instance.
-            </summary>
-        </member>
-        <member name="T:Collections.API.Infrastructure.DataCollection">
+        <member name="T:Collections.API.Services.MongoDb.MongoService">
             <summary>
             Wrapper class for the Mongo DB Collection
             </summary>
-            <seealso cref="T:Collections.API.Infrastructure.Interfaces.IDataCollection" />
+            <seealso cref="T:Collections.API.Services.Interfaces.MongoDb.IMongoService" />
         </member>
-        <member name="F:Collections.API.Infrastructure.DataCollection.mongoFactory">
+        <member name="F:Collections.API.Services.MongoDb.MongoService.mongoFactory">
             <summary>
             The mongo DB factory
             </summary>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.#ctor(Collections.API.Factories.Interfaces.IMongoFactory)">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.#ctor(Collections.API.Factories.Interfaces.MongoDb.IMongoFactory)">
             <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Infrastructure.DataCollection"/> class.
+            Initializes a new instance of the <see cref="T:Collections.API.Services.MongoDb.MongoService"/> class.
             </summary>
             <param name="mongoFactory">The mongo DB factory.</param>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Finds one record asynchronously.
             </summary>
@@ -445,7 +472,7 @@
             <param name="filter">The filter.</param>
             <returns>Retrieved record</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Finds many records asynchronously.
             </summary>
@@ -453,7 +480,7 @@
             <param name="filter">The filter.</param>
             <returns>Retrived records</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.InsertOneAsync``2(``1)">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.InsertOneAsync``2(``1)">
             <summary>
             Inserts one record asynchronously.
             </summary>
@@ -461,7 +488,7 @@
             <typeparam name="O">The model type</typeparam>
             <param name="model">The model.</param>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Inserts many records asynchronously.
             </summary>
@@ -469,7 +496,7 @@
             <typeparam name="O">The model type</typeparam>
             <param name="models">The models.</param>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.UpdateOneAsync``1(MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.UpdateDefinition{``0})">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.UpdateOneAsync``1(MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.UpdateDefinition{``0})">
             <summary>
             Updates one record asynchronously.
             </summary>
@@ -478,7 +505,7 @@
             <param name="update">The update.</param>
             <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
             <summary>
             Replaces one document asynchronously.
             </summary>
@@ -488,7 +515,7 @@
             <param name="model">The model.</param>
             <returns><see cref="T:MongoDB.Driver.ReplaceOneResult"/>result of replace operation</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
             <summary>
             Deletes many records asynchronously.
             </summary>
@@ -496,12 +523,312 @@
             <param name="filter">The filter.</param>
             <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
         </member>
-        <member name="M:Collections.API.Infrastructure.DataCollection.RetrieveCollection``1">
+        <member name="M:Collections.API.Services.MongoDb.MongoService.RetrieveCollection``1">
             <summary>
             Retrieves the collection.
             </summary>
             <typeparam name="T">Model of collection</typeparam>
             <returns>Mongo DB collection</returns>
+        </member>
+        <member name="T:Collections.API.Services.MongoDb.QueryService">
+            <summary>
+            Service for building queries for the MongoDb API
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.MongoDb.IQueryService" />
+        </member>
+        <member name="M:Collections.API.Services.MongoDb.QueryService.BuildQuery``2">
+            <summary>
+            Builds the query.
+            </summary>
+            <typeparam name="T">The interface type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Collections.API.Services.MongoDb.QueryService.BuildQuery``2(Collections.API.Models.AdvancedSearchModel{``1})">
+            <summary>
+            Builds the query.
+            </summary>
+            <typeparam name="T">The interface type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="advancedSearchModel">The advanced search model</param>
+            <returns></returns>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.MongoDb.IMongoService">
+            <summary>
+            Interface for the Data Collection wrapper class
+            </summary>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Finds one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns>Retrieved record</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Finds many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns>Retrived records</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.InsertOneAsync``2(``1)">
+            <summary>
+            Inserts one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The model.</param>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Inserts many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="models">The models.</param>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.UpdateOneAsync``1(MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.UpdateDefinition{``0})">
+            <summary>
+            Updates one record asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <param name="update">The update.</param>
+            <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
+            <summary>
+            Replaces one document asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="filter">The filter.</param>
+            <param name="model">The model.</param>
+            <returns><see cref="T:MongoDB.Driver.ReplaceOneResult"/>result of replace operation</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IMongoService.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
+            <summary>
+            Deletes many records asynchronously.
+            </summary>
+            <typeparam name="T">The filter type</typeparam>
+            <param name="filter">The filter.</param>
+            <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.MongoDb.IQueryService">
+            <summary>
+            Interface for the query service
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IService" />
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IQueryService.BuildQuery``2">
+            <summary>
+            Builds the query.
+            </summary>
+            <typeparam name="T">The interface type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns></returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IQueryService.BuildQuery``2(Collections.API.Models.AdvancedSearchModel{``1})">
+            <summary>
+            Builds the query.
+            </summary>
+            <typeparam name="T">The interface type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="advancedSearchModel">The advanced search model</param>
+            <returns></returns>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.IConfigurationService">
+            <summary>
+            Interface for the configuration service
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IService" />
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IConfigurationService.GetAppSetting(System.String)">
+            <summary>
+            Gets the app setting after being passed a key.
+            </summary>
+            <param name="key">The key of the app setting that is being returned.</param>
+            <returns>An app setting.</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IConfigurationService.GetConnectionString(System.String)">
+            <summary>
+            Gets the connection string.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>A connection string</returns>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.IDataService">
+            <summary>
+            Interface for the data service
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IService" />
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.GetAsync``2">
+            <summary>
+            Gets the records asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.GetByIdAsync``1(System.String)">
+            <summary>
+            Gets the requested record asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>The requested record</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+            <summary>
+            Searches for the specified model with the advanced search model.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The advanced search model.</param>
+            <returns>The results of the search</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Posts the record asynchronously
+            </summary>
+            <param name="model">The model to be posted</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PatchAsync``2(System.String,``1)">
+            <summary>
+            Patches specified the record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PutAsync``2(System.String,``1)">
+            <summary>
+            Puts specified the record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.Interfaces.IDataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes specified the records asynchronously.
+            </summary>
+            <param name="ids">The identifiers.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="T:Collections.API.Services.Interfaces.IService">
+            <summary>
+            Base service interface
+            </summary>
+        </member>
+        <member name="T:Collections.API.Services.ConfigurationService">
+            <summary>
+            Service for the retrieval of configuration for the app
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IConfigurationService" />
+        </member>
+        <member name="M:Collections.API.Services.ConfigurationService.GetAppSetting(System.String)">
+            <summary>
+            Gets the app setting after being passed a key.
+            </summary>
+            <param name="key">The key of the app setting that is being returned.</param>
+            <returns>An app setting.</returns>
+        </member>
+        <member name="M:Collections.API.Services.ConfigurationService.GetConnectionString(System.String)">
+            <summary>
+            Gets the connection string.
+            </summary>
+            <param name="key">The key.</param>
+            <returns>A connection string</returns>
+        </member>
+        <member name="T:Collections.API.Services.DataService">
+            <summary>
+            The data service
+            </summary>
+            <seealso cref="T:Collections.API.Services.Interfaces.IDataService" />
+        </member>
+        <member name="F:Collections.API.Services.DataService.dataRepository">
+            <summary>
+            The data repository
+            </summary>
+        </member>
+        <member name="M:Collections.API.Services.DataService.#ctor(Collections.API.Repositories.Interfaces.IDataRepository)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Collections.API.Services.DataService"/> class.
+            </summary>
+            <param name="dataRepository">The data repository.</param>
+        </member>
+        <member name="M:Collections.API.Services.DataService.GetAsync``2">
+            <summary>
+            Gets the records asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.GetByIdAsync``1(System.String)">
+            <summary>
+            Gets the requested record asynchronously.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>The requested record</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+            <summary>
+            Searches for the specified model with the advanced search model.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The advanced search model.</param>
+            <returns>The results of the search</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
+            <summary>
+            Posts the record asynchronously
+            </summary>
+            <param name="model">The model to be posted</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.PatchAsync``2(System.String,``1)">
+            <summary>
+            Patches specified the record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.PutAsync``2(System.String,``1)">
+            <summary>
+            Puts specified the record asynchronously.
+            </summary>
+            <param name="id">The identifier.</param>
+            <param name="model">The model.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <returns>True if successful</returns>
+        </member>
+        <member name="M:Collections.API.Services.DataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Deletes specified the records asynchronously.
+            </summary>
+            <param name="ids">The identifiers.</param>
+            <typeparam name="T">The collection type</typeparam>
+            <returns>True if successful</returns>
         </member>
         <member name="T:Collections.API.Infrastructure.DependencyRegistrar">
             <summary>
@@ -513,70 +840,6 @@
             Registers the specified configuration.
             </summary>
             <param name="config">The configuration.</param>
-        </member>
-        <member name="T:Collections.API.Infrastructure.Interfaces.IDataCollection">
-            <summary>
-            Interface for the Data Collection wrapper class
-            </summary>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindOneAsync``1(MongoDB.Driver.FilterDefinition{``0})">
-            <summary>
-            Finds one record asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <param name="filter">The filter.</param>
-            <returns>Retrieved record</returns>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.FindManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
-            <summary>
-            Finds many records asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <param name="filter">The filter.</param>
-            <returns>Retrived records</returns>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertOneAsync``2(``1)">
-            <summary>
-            Inserts one record asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <param name="model">The model.</param>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.InsertManyAsync``2(System.Collections.Generic.IEnumerable{``1})">
-            <summary>
-            Inserts many records asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <param name="models">The models.</param>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.UpdateOneAsync``1(MongoDB.Driver.FilterDefinition{``0},MongoDB.Driver.UpdateDefinition{``0})">
-            <summary>
-            Updates one record asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <param name="filter">The filter.</param>
-            <param name="update">The update.</param>
-            <returns><see cref="T:MongoDB.Driver.UpdateResult"/>result of update operation</returns>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.ReplaceOneAsync``2(MongoDB.Driver.FilterDefinition{``0},``1)">
-            <summary>
-            Replaces one document asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <param name="filter">The filter.</param>
-            <param name="model">The model.</param>
-            <returns><see cref="T:MongoDB.Driver.ReplaceOneResult"/>result of replace operation</returns>
-        </member>
-        <member name="M:Collections.API.Infrastructure.Interfaces.IDataCollection.DeleteManyAsync``1(MongoDB.Driver.FilterDefinition{``0})">
-            <summary>
-            Deletes many records asynchronously.
-            </summary>
-            <typeparam name="T">The filter type</typeparam>
-            <param name="filter">The filter.</param>
-            <returns><see cref="T:MongoDB.Driver.DeleteResult"/>result of delete operation</returns>
         </member>
         <member name="T:Collections.API.Infrastructure.Interfaces.ILogger">
             <summary>
@@ -700,16 +963,6 @@
             <param name="format">The composite format message to log.</param>
             <param name="args">An object array that contains zero or more objects to format.</param>
         </member>
-        <member name="T:Collections.API.Infrastructure.AutoMapConfig">
-            <summary>
-            The Auto mapper profile config
-            </summary>
-        </member>
-        <member name="M:Collections.API.Infrastructure.AutoMapConfig.Configure">
-            <summary>
-            Configures this instance.
-            </summary>
-        </member>
         <member name="T:Collections.API.Mapper.Interfaces.IMapper">
             <summary>
             Interface for mapper.
@@ -780,6 +1033,23 @@
         <member name="M:Collections.API.Mapper.Profiles.VideoGamesProfile.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.VideoGamesProfile"/> class.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.AdvancedSearchModel`1">
+            <summary>
+            Model for the advanced search capability
+            </summary>
+            <typeparam name="T">The model the search will be performed against</typeparam>
+            <seealso cref="T:Collections.API.Models.Interfaces.IAdvancedSearchModel`1" />
+        </member>
+        <member name="P:Collections.API.Models.AdvancedSearchModel`1.IncludedFields">
+            <summary>
+            Gets or sets the included fields.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.AdvancedSearchModel`1.ExcludedFields">
+            <summary>
+            Gets or sets the excluded fields.
             </summary>
         </member>
         <member name="T:Collections.API.Models.AlbumModel">
@@ -927,6 +1197,22 @@
         <member name="P:Collections.API.Models.BookModel.Rating">
             <summary>
             Gets or sets the rating.
+            </summary>
+        </member>
+        <member name="T:Collections.API.Models.Interfaces.IAdvancedSearchModel`1">
+            <summary>
+            Interface for the advanced search model
+            </summary>
+            <typeparam name="T">The model the search will be performed against</typeparam>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAdvancedSearchModel`1.IncludedFields">
+            <summary>
+            Gets or sets the included fields.
+            </summary>
+        </member>
+        <member name="P:Collections.API.Models.Interfaces.IAdvancedSearchModel`1.ExcludedFields">
+            <summary>
+            Gets or sets the excluded fields.
             </summary>
         </member>
         <member name="T:Collections.API.Models.Interfaces.IAlbumModel">
@@ -1438,6 +1724,15 @@
             <typeparam name="T">The collection type</typeparam>
             <returns>Retrieved record by it's Id</returns>
         </member>
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+            <summary>
+            Searches for the model provided.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The advanced search model.</param>
+            <returns>Results from the search</returns>
+        </member>
         <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostMultipleAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
             Posts multiple records asynchronously
@@ -1482,7 +1777,7 @@
         </member>
         <member name="T:Collections.API.Repositories.DataRepository">
             <summary>
-            Repository for data from Mongp DB
+            Repository for data from Mongo DB
             </summary>
             <seealso cref="T:Collections.API.Repositories.Interfaces.IDataRepository" />
         </member>
@@ -1491,16 +1786,22 @@
             The data collection
             </summary>
         </member>
+        <member name="F:Collections.API.Repositories.DataRepository.queryService">
+            <summary>
+            The query service
+            </summary>
+        </member>
         <member name="F:Collections.API.Repositories.DataRepository.configurationService">
             <summary>
             The configuration service
             </summary>
         </member>
-        <member name="M:Collections.API.Repositories.DataRepository.#ctor(Collections.API.Services.Interfaces.IConfigurationService,Collections.API.Infrastructure.Interfaces.IDataCollection)">
+        <member name="M:Collections.API.Repositories.DataRepository.#ctor(Collections.API.Services.Interfaces.IConfigurationService,Collections.API.Services.Interfaces.MongoDb.IQueryService,Collections.API.Services.Interfaces.MongoDb.IMongoService)">
             <summary>
             Initializes a new instance of the <see cref="T:Collections.API.Repositories.DataRepository"/> class.
             </summary>
             <param name="configurationService">The configuration service</param>
+            <param name="queryService">The query service</param>
             <param name="dataCollection">The data collection</param>
         </member>
         <member name="M:Collections.API.Repositories.DataRepository.GetAsync``2">
@@ -1518,6 +1819,15 @@
             <param name="id">The Id of the record to be retrieved</param>
             <typeparam name="T">The collection type</typeparam>
             <returns>Retrieved record by it's Id</returns>
+        </member>
+        <member name="M:Collections.API.Repositories.DataRepository.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+            <summary>
+            Searches for the model provided.
+            </summary>
+            <typeparam name="T">The collection type</typeparam>
+            <typeparam name="O">The model type</typeparam>
+            <param name="model">The advanced search model.</param>
+            <returns>Results from the search</returns>
         </member>
         <member name="M:Collections.API.Repositories.DataRepository.PostMultipleAsync``2(System.Collections.Generic.IEnumerable{``1})">
             <summary>
@@ -1551,178 +1861,6 @@
         <member name="M:Collections.API.Repositories.DataRepository.DeleteMultipleAsync``1(System.Collections.Generic.IEnumerable{System.String})">
             <summary>
             Deletes specified records asynchronously.
-            </summary>
-            <param name="ids">The identifiers.</param>
-            <typeparam name="T">The collection type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="T:Collections.API.Services.ConfigurationService">
-            <summary>
-            Service for the retrieval of configuration for the app
-            </summary>
-            <seealso cref="T:Collections.API.Services.Interfaces.IConfigurationService" />
-        </member>
-        <member name="M:Collections.API.Services.ConfigurationService.GetAppSetting(System.String)">
-            <summary>
-            Gets the app setting after being passed a key.
-            </summary>
-            <param name="key">The key of the app setting that is being returned.</param>
-            <returns>An app setting.</returns>
-        </member>
-        <member name="M:Collections.API.Services.ConfigurationService.GetConnectionString(System.String)">
-            <summary>
-            Gets the connection string.
-            </summary>
-            <param name="key">The key.</param>
-            <returns>A connection string</returns>
-        </member>
-        <member name="T:Collections.API.Services.Interfaces.IConfigurationService">
-            <summary>
-            Interface for the configuration service
-            </summary>
-            <seealso cref="T:Collections.API.Services.Interfaces.IService" />
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IConfigurationService.GetAppSetting(System.String)">
-            <summary>
-            Gets the app setting after being passed a key.
-            </summary>
-            <param name="key">The key of the app setting that is being returned.</param>
-            <returns>An app setting.</returns>
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IConfigurationService.GetConnectionString(System.String)">
-            <summary>
-            Gets the connection string.
-            </summary>
-            <param name="key">The key.</param>
-            <returns>A connection string</returns>
-        </member>
-        <member name="T:Collections.API.Services.Interfaces.IDataService">
-            <summary>
-            Interface for the data service
-            </summary>
-            <seealso cref="T:Collections.API.Services.Interfaces.IService" />
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.GetAsync``2">
-            <summary>
-            Gets the records asynchronously.
-            </summary>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.GetByIdAsync``1(System.String)">
-            <summary>
-            Gets the requested record asynchronously.
-            </summary>
-            <typeparam name="T">The collection type</typeparam>
-            <returns>The requested record</returns>
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
-            <summary>
-            Posts the record asynchronously
-            </summary>
-            <param name="model">The model to be posted</param>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PatchAsync``2(System.String,``1)">
-            <summary>
-            Patches specified the record asynchronously.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PutAsync``2(System.String,``1)">
-            <summary>
-            Puts specified the record asynchronously.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Deletes specified the records asynchronously.
-            </summary>
-            <param name="ids">The identifiers.</param>
-            <typeparam name="T">The collection type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="T:Collections.API.Services.Interfaces.IService">
-            <summary>
-            Base service interface
-            </summary>
-        </member>
-        <member name="T:Collections.API.Services.DataService">
-            <summary>
-            The data service
-            </summary>
-            <seealso cref="T:Collections.API.Services.Interfaces.IDataService" />
-        </member>
-        <member name="F:Collections.API.Services.DataService.dataRepository">
-            <summary>
-            The data repository
-            </summary>
-        </member>
-        <member name="M:Collections.API.Services.DataService.#ctor(Collections.API.Repositories.Interfaces.IDataRepository)">
-            <summary>
-            Initializes a new instance of the <see cref="T:Collections.API.Services.DataService"/> class.
-            </summary>
-            <param name="dataRepository">The data repository.</param>
-        </member>
-        <member name="M:Collections.API.Services.DataService.GetAsync``2">
-            <summary>
-            Gets the records asynchronously.
-            </summary>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns><see cref="T:System.Collections.Generic.IEnumerable`1"/>collection of records</returns>
-        </member>
-        <member name="M:Collections.API.Services.DataService.GetByIdAsync``1(System.String)">
-            <summary>
-            Gets the requested record asynchronously.
-            </summary>
-            <typeparam name="T">The collection type</typeparam>
-            <returns>The requested record</returns>
-        </member>
-        <member name="M:Collections.API.Services.DataService.PostAsync``2(System.Collections.Generic.IEnumerable{``1})">
-            <summary>
-            Posts the record asynchronously
-            </summary>
-            <param name="model">The model to be posted</param>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="M:Collections.API.Services.DataService.PatchAsync``2(System.String,``1)">
-            <summary>
-            Patches specified the record asynchronously.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="M:Collections.API.Services.DataService.PutAsync``2(System.String,``1)">
-            <summary>
-            Puts specified the record asynchronously.
-            </summary>
-            <param name="id">The identifier.</param>
-            <param name="model">The model.</param>
-            <typeparam name="T">The collection type</typeparam>
-            <typeparam name="O">The model type</typeparam>
-            <returns>True if successful</returns>
-        </member>
-        <member name="M:Collections.API.Services.DataService.DeleteAsync``1(System.Collections.Generic.IEnumerable{System.String})">
-            <summary>
-            Deletes specified the records asynchronously.
             </summary>
             <param name="ids">The identifiers.</param>
             <typeparam name="T">The collection type</typeparam>

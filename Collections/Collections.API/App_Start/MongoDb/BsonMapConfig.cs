@@ -1,7 +1,7 @@
 ﻿using Collections.API.Models;
 using MongoDB.Bson.Serialization;
 
-namespace Collections.API.Infrastructure
+namespace Collections.API.App_Start.MongoDb
 {
     /// <summary>
     /// The mapping config for Mongo DB BSON documents

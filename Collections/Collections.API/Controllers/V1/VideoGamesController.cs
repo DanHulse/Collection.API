@@ -16,7 +16,7 @@ namespace Collections.API.Controllers.V1
     /// </summary>
     /// <seealso cref="Collections.API.Controllers.V1.DataController{T, O, S}" />
     [RoutePrefix("api/v1/VideoGames")]
-    public class VideoGamesController : DataController<IVideoGameModel, VideoGameModel, VideoGameViewModel>
+    public class VideoGamesController : DataController<IVideoGameModel, VideoGameModel, VideoGameDetailViewModel>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="VideoGamesController"/> class.

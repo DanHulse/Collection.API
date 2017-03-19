@@ -1,6 +1,6 @@
 ﻿using Collections.API.Mapper.Profiles;
 
-namespace Collections.API.Infrastructure
+namespace Collections.API.App_Start
 {
     /// <summary>
     /// The Auto mapper profile config

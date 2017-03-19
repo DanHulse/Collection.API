@@ -30,7 +30,7 @@ namespace Collections.API
             app.UseWebApi(config);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             AutoMapConfig.Configure();
-            BsonMapConfig.Configure();
+            DependencyConfig.Configure();
         }
     }
 }

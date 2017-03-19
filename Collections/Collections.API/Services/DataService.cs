@@ -1,5 +1,7 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
+using Collections.API.Models;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
 
@@ -48,6 +50,20 @@ namespace Collections.API.Services
             var result = await this.dataRepository.GetByIdAsync<T>(id);
 
             return result;
+        }
+
+        /// <summary>
+        /// Searches for the specified model with the advanced search model.
+        /// </summary>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <param name="model">The advanced search model.</param>
+        /// <returns>The results of the search</returns>
+        public async Task<IEnumerable<T>> PostSearchAsync<T, O>(AdvancedSearchModel<O> model) where O : class, T, new()
+        {
+            var results = await this.dataRepository.PostSearchAsync<T, O>(model);
+
+            return results;
         }
 
         /// <summary>

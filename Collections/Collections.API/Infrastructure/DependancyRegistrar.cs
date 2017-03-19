@@ -52,11 +52,6 @@ namespace Collections.API.Infrastructure
                 .AsImplementedInterfaces()
                 .SingleInstance();
 
-            builder.RegisterAssemblyTypes(assembly)
-                .Where(t => typeof(IDataCollection).IsAssignableFrom(t))
-                .AsImplementedInterfaces()
-                .SingleInstance();
-
             var container = builder.Build();
 
             config.DependencyResolver = new AutofacWebApiDependencyResolver(container);

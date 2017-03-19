@@ -1,14 +1,14 @@
 ﻿using System.Security.Authentication;
-using Collections.API.Factories.Interfaces;
 using Collections.API.Services.Interfaces;
 using MongoDB.Driver;
+using Collections.API.Factories.Interfaces.MongoDb;
 
-namespace Collections.API.Factories
+namespace Collections.API.Factories.MongoDb
 {
     /// <summary>
     /// Factory for connecting to the Document DB
     /// </summary>
-    /// <seealso cref="Collections.API.Factories.Interfaces.IMongoFactory"/>
+    /// <seealso cref="Collections.API.Factories.Interfaces.MongoDb.IMongoFactory"/>
     public class MongoFactory : IMongoFactory
     {
         /// <summary>

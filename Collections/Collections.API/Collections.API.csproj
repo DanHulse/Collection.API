@@ -260,6 +260,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="App_Start\DependencyConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\SwaggerConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
@@ -272,24 +273,26 @@
     <Compile Include="Enumerations\DataType.cs" />
     <Compile Include="Enumerations\LogLevel.cs" />
     <Compile Include="Factories\Interfaces\IFactory.cs" />
-    <Compile Include="Factories\Interfaces\IMongoFactory.cs" />
+    <Compile Include="Factories\Interfaces\MongoDb\IMongoFactory.cs" />
     <Compile Include="Helpers\ObjectToDictionaryHelper.cs" />
-    <Compile Include="Infrastructure\BsonMapConfig.cs" />
-    <Compile Include="Infrastructure\DataCollection.cs" />
+    <Compile Include="App_Start\MongoDb\BsonMapConfig.cs" />
+    <Compile Include="Services\MongoDb\MongoService.cs" />
     <Compile Include="Infrastructure\DependancyRegistrar.cs" />
-    <Compile Include="Infrastructure\Interfaces\IDataCollection.cs" />
+    <Compile Include="Services\Interfaces\MongoDb\IMongoService.cs" />
     <Compile Include="Infrastructure\Interfaces\ILogger.cs" />
     <Compile Include="Infrastructure\Logger.cs" />
-    <Compile Include="Infrastructure\AutoMapConfig.cs" />
-    <Compile Include="Factories\MongoFactory.cs" />
+    <Compile Include="App_Start\AutoMapConfig.cs" />
+    <Compile Include="Factories\MongoDb\MongoFactory.cs" />
     <Compile Include="Mapper\Interfaces\IMapper.cs" />
     <Compile Include="Mapper\Mapper.cs" />
     <Compile Include="Mapper\Profiles\AlbumsProfile.cs" />
     <Compile Include="Mapper\Profiles\BooksProfile.cs" />
     <Compile Include="Mapper\Profiles\MoviesProfile.cs" />
     <Compile Include="Mapper\Profiles\VideoGamesProfile.cs" />
+    <Compile Include="Models\AdvancedSearchModel.cs" />
     <Compile Include="Models\AlbumModel.cs" />
     <Compile Include="Models\BookModel.cs" />
+    <Compile Include="Models\Interfaces\IAdvancedSearchModel.cs" />
     <Compile Include="Models\Interfaces\IAlbumModel.cs" />
     <Compile Include="Models\Interfaces\IBookModel.cs" />
     <Compile Include="Models\Interfaces\IMovieModel.cs" />
@@ -303,8 +306,10 @@
     <Compile Include="Services\ConfigurationService.cs" />
     <Compile Include="Services\Interfaces\IConfigurationService.cs" />
     <Compile Include="Services\Interfaces\IDataService.cs" />
+    <Compile Include="Services\Interfaces\MongoDb\IQueryService.cs" />
     <Compile Include="Services\Interfaces\IService.cs" />
     <Compile Include="Services\DataService.cs" />
+    <Compile Include="Services\MongoDb\QueryService.cs" />
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\AlbumDetailViewModel.cs" />
     <Compile Include="ViewModels\AlbumViewModel.cs" />

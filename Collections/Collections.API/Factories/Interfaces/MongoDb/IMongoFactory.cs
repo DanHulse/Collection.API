@@ -1,6 +1,6 @@
 ﻿using MongoDB.Driver;
 
-namespace Collections.API.Factories.Interfaces
+namespace Collections.API.Factories.Interfaces.MongoDb
 {
     /// <summary>
     /// Interface for the Mongo DB Factory

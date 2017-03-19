@@ -7,6 +7,7 @@ using Collections.API.Enumerations;
 using Collections.API.Infrastructure.Interfaces;
 using Collections.API.Services.Interfaces;
 using Collections.API.Mapper.Interfaces;
+using Collections.API.Models;
 
 namespace Collections.API.Controllers.V1
 {
@@ -91,6 +92,34 @@ namespace Collections.API.Controllers.V1
             catch (Exception ex)
             {
                 this.Logger.Log(LogLevel.Error, ex, $"Failed to retrive record with Id: {id}");
+
+                return this.InternalServerError(ex);
+            }
+        }
+
+        /// <summary>
+        /// Performs an advanced search function on the provided model
+        /// </summary>
+        /// <param name="model">The model type to be searched.</param>
+        /// <returns><see cref="IHttpActionResult"/>of search results</returns>
+        public virtual async Task<IHttpActionResult> PostSearchAsync([FromBody]AdvancedSearchModel<O> model)
+        {
+            try
+            {
+                var result = await this.dataService.PostSearchAsync<T, O>(model);
+
+                if (result.Any())
+                {
+                    var mappedResult = this.mapper.Map<S>(result);
+
+                    return this.Ok(mappedResult);
+                }
+
+                return this.NotFound();
+            }
+            catch (Exception ex)
+            {
+                this.Logger.Log(LogLevel.Error, ex, $"Failed to perform search");
 
                 return this.InternalServerError(ex);
             }

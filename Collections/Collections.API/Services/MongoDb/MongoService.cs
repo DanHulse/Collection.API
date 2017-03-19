@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using Collections.API.Factories.Interfaces;
-using Collections.API.Infrastructure.Interfaces;
+using Collections.API.Factories.Interfaces.MongoDb;
+using Collections.API.Services.Interfaces.MongoDb;
 using MongoDB.Driver;
 
-namespace Collections.API.Infrastructure
+namespace Collections.API.Services.MongoDb
 {
     /// <summary>
     /// Wrapper class for the Mongo DB Collection
     /// </summary>
-    /// <seealso cref="Collections.API.Infrastructure.Interfaces.IDataCollection" />
-    public class DataCollection : IDataCollection
+    /// <seealso cref="Collections.API.Services.Interfaces.MongoDb.IMongoService" />
+    public class MongoService : IMongoService
     {
         /// <summary>
         /// The mongo DB factory
@@ -18,10 +18,10 @@ namespace Collections.API.Infrastructure
         private readonly IMongoFactory mongoFactory;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="DataCollection"/> class.
+        /// Initializes a new instance of the <see cref="MongoService"/> class.
         /// </summary>
         /// <param name="mongoFactory">The mongo DB factory.</param>
-        public DataCollection(IMongoFactory mongoFactory)
+        public MongoService(IMongoFactory mongoFactory)
         {
             this.mongoFactory = mongoFactory;
         }

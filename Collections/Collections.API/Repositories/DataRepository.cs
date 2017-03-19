@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using Collections.API.Infrastructure.Interfaces;
+using Collections.API.Services.Interfaces.MongoDb;
 using Collections.API.Helpers;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
 using MongoDB.Bson;
 using MongoDB.Driver;
+using Collections.API.Models;
 
 namespace Collections.API.Repositories
 {
     /// <summary>
-    /// Repository for data from Mongp DB
+    /// Repository for data from Mongo DB
     /// </summary>
     /// <seealso cref="Collections.API.Repositories.Interfaces.IDataRepository" />
     public class DataRepository : IDataRepository
@@ -20,7 +21,12 @@ namespace Collections.API.Repositories
         /// <summary>
         /// The data collection
         /// </summary>
-        private readonly IDataCollection dataCollection;
+        private readonly IMongoService dataCollection;
+
+        /// <summary>
+        /// The query service
+        /// </summary>
+        private readonly IQueryService queryService;
 
         /// <summary>
         /// The configuration service
@@ -31,10 +37,12 @@ namespace Collections.API.Repositories
         /// Initializes a new instance of the <see cref="DataRepository"/> class.
         /// </summary>
         /// <param name="configurationService">The configuration service</param>
+        /// <param name="queryService">The query service</param>
         /// <param name="dataCollection">The data collection</param>
-        public DataRepository(IConfigurationService configurationService, IDataCollection dataCollection)
+        public DataRepository(IConfigurationService configurationService, IQueryService queryService, IMongoService dataCollection)
         {
             this.configurationService = configurationService;
+            this.queryService = queryService;
             this.dataCollection = dataCollection;
         }
 
@@ -66,6 +74,20 @@ namespace Collections.API.Repositories
             var result = await this.dataCollection.FindOneAsync<T>(filter);
 
             return result;
+        }
+
+        /// <summary>
+        /// Searches for the model provided.
+        /// </summary>
+        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The model type</typeparam>
+        /// <param name="model">The advanced search model.</param>
+        /// <returns>Results from the search</returns>
+        public Task<IEnumerable<T>> PostSearchAsync<T, O>(AdvancedSearchModel<O> model) where O : class, T, new()
+        {
+            var filter = this.queryService.BuildQuery<T, O>(model);
+
+            return null;
         }
 
         /// <summary>

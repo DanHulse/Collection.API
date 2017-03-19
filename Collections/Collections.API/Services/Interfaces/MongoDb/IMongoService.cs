@@ -2,12 +2,12 @@
 using System.Threading.Tasks;
 using MongoDB.Driver;
 
-namespace Collections.API.Infrastructure.Interfaces
+namespace Collections.API.Services.Interfaces.MongoDb
 {
     /// <summary>
     /// Interface for the Data Collection wrapper class
     /// </summary>
-    public interface IDataCollection
+    public interface IMongoService : IService
     {
         /// <summary>
         /// Finds one record asynchronously.
