@@ -41,11 +41,14 @@ namespace Collections.API.Repositories
         /// <summary>
         /// Gets the records asynchronously.
         /// </summary>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="T">The interface type</typeparam>
+        /// <typeparam name="O">The collection type</typeparam>
         /// <returns>All records of requested type</returns>
-        public async Task<IEnumerable<T>> GetAsync<T>()
+        public async Task<IEnumerable<T>> GetAsync<T, O>() where O : class, T, new()
         {
-            var result = await this.dataCollection.FindManyAsync<T>(new BsonDocument());
+            var filter = Builders<O>.Filter.Eq("_t", (typeof(O).Name));
+
+            var result = await this.dataCollection.FindManyAsync<T, O>(filter);
 
             return result;
         }
@@ -54,13 +57,14 @@ namespace Collections.API.Repositories
         /// Gets the requested record asynchronously.
         /// </summary>
         /// <param name="id">The Id of the record to be retrieved</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="T">The interface type</typeparam>
+        /// <typeparam name="O">The collection type</typeparam>
         /// <returns>Retrieved record by it's Id</returns>
-        public async Task<T> GetByIdAsync<T>(string id)
+        public async Task<T> GetByIdAsync<T, O>(string id) where O : class, T, new()
         {
-            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(id));
+            var filter = Builders<O>.Filter.Eq("_id", ObjectId.Parse(id));
 
-            var result = await this.dataCollection.FindOneAsync(filter);
+            var result = await this.dataCollection.FindOneAsync<T, O>(filter);
 
             return result;
         }
@@ -69,14 +73,13 @@ namespace Collections.API.Repositories
         /// Posts multiple records asynchronously
         /// </summary>
         /// <param name="model">The model to be posted</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="O">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PostMultipleAsync<T, O>(IEnumerable<O> model) where O : class, T, new()
+        public async Task<bool> PostMultipleAsync<O>(IEnumerable<O> model)
         {
             try
             {
-                await this.dataCollection.InsertManyAsync<T, O>(model);
+                await this.dataCollection.InsertManyAsync<O>(model);
 
                 return true;
             }
@@ -91,14 +94,13 @@ namespace Collections.API.Repositories
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="O">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PatchAsync<T, O>(string id, O model) where O : class, T, new()
+        public async Task<bool> PatchAsync<O>(string id, O model)
         {
             var dictionary = model.ToDictionary();
-        
-            var result = await this.dataCollection.UpdateOneAsync<T>(new BsonDocument("_id", ObjectId.Parse(id)), new BsonDocument("$set", new BsonDocument(dictionary)));
+
+            var result = await this.dataCollection.UpdateOneAsync<O>(new BsonDocument("_id", ObjectId.Parse(id)), new BsonDocument("$set", new BsonDocument(dictionary)));
 
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {
@@ -117,14 +119,13 @@ namespace Collections.API.Repositories
         /// </summary>
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="T">The collection type</typeparam>
-        /// <typeparam name="O">The model type</typeparam>
+        /// <typeparam name="O">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> PutAsync<T, O>(string id, O model) where O : class, T, new()
+        public async Task<bool> PutAsync<O>(string id, O model)
         {
-            var filter = Builders<T>.Filter.Eq("_id", ObjectId.Parse(id));
+            var filter = Builders<O>.Filter.Eq("_id", ObjectId.Parse(id));
 
-            var result = await this.dataCollection.ReplaceOneAsync<T, O>(filter, model);
+            var result = await this.dataCollection.ReplaceOneAsync<O>(filter, model);
 
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {
@@ -142,15 +143,15 @@ namespace Collections.API.Repositories
         /// Deletes specified records asynchronously.
         /// </summary>
         /// <param name="ids">The identifiers.</param>
-        /// <typeparam name="T">The collection type</typeparam>
+        /// <typeparam name="O">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteMultipleAsync<T>(IEnumerable<string> ids)
+        public async Task<bool> DeleteMultipleAsync<O>(IEnumerable<string> ids)
         {
             var parsedIds = ids.Select(s => ObjectId.Parse(s));
 
-            var filter = Builders<T>.Filter.In("_id", parsedIds);
+            var filter = Builders<O>.Filter.In("_id", parsedIds);
 
-            var result = await this.dataCollection.DeleteManyAsync<T>(filter);
+            var result = await this.dataCollection.DeleteManyAsync<O>(filter);
 
             if (result.IsAcknowledged && result.DeletedCount >= 1)
             {

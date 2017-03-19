@@ -50,7 +50,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.GetAsync<T>();
+                var result = await this.dataService.GetAsync<T, O>();
 
                 if (result.Any())
                 {
@@ -77,7 +77,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.GetByIdAsync<T>(id);
+                var result = await this.dataService.GetByIdAsync<T, O>(id);
 
                 if (result != null)
                 {
@@ -105,7 +105,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.PostAsync<T, O>(model);
+                var result = await this.dataService.PostAsync<O>(model);
 
                 if (result)
                 {
@@ -132,7 +132,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.PatchAsync<T, O>(id, model);
+                var result = await this.dataService.PatchAsync<O>(id, model);
 
                 if (result)
                 {
@@ -159,7 +159,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.PutAsync<T, O>(id, model);
+                var result = await this.dataService.PutAsync<O>(id, model);
 
                 if (result)
                 {
@@ -185,7 +185,7 @@ namespace Collections.API.Controllers.V1
         {
             try
             {
-                var result = await this.dataService.DeleteAsync<T>(ids);
+                var result = await this.dataService.DeleteAsync<O>(ids);
 
                 if (result)
                 {

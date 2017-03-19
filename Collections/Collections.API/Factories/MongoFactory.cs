@@ -41,7 +41,7 @@ namespace Collections.API.Factories
         /// Connects to Document DB collection.
         /// </summary>
         /// <returns><see cref="IMongoCollection{TDocument}"/> of collection from DB</returns>
-        public IMongoCollection<T> ConnectToCollection<T>()
+        public IMongoCollection<O> ConnectToCollection<O>()
         {
             MongoClientSettings settings = MongoClientSettings.FromUrl(new MongoUrl(this.connectionString));
 
@@ -51,7 +51,7 @@ namespace Collections.API.Factories
 
             var db = mongoClient.GetDatabase(this.collection);
 
-            return db.GetCollection<T>(this.collection);
+            return db.GetCollection<O>(this.collection);
         }
     }
 }
