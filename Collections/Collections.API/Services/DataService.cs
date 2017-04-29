@@ -59,7 +59,7 @@ namespace Collections.API.Services
         /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The advanced search model.</param>
         /// <returns>The results TModelf the search</returns>
-        public async Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(AdvancedSearchModel<TModel> model) where TModel : class, TInterface, new()
+        public async Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(TModel model) where TModel : class, TInterface, new()
         {
             var results = await this.dataRepository.PostSearchAsync<TInterface, TModel>(model);
 

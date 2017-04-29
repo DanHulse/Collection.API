@@ -103,7 +103,7 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         /// <param name="model">The model type to be searched.</param>
         /// <returns><see cref="IHttpActionResult"/>of search results</returns>
-        public virtual async Task<IHttpActionResult> PostSearchAsync([FromBody]AdvancedSearchModel<TModel> model)
+        public virtual async Task<IHttpActionResult> PostSearchAsync([FromBody]TModel model)
         {
             try
             {

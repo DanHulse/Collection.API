@@ -32,7 +32,7 @@ namespace Collections.API.Services.Interfaces
         /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The advanced search model.</param>
         /// <returns>The results of the search</returns>
-        Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(AdvancedSearchModel<TModel> model) where TModel : class, TInterface, new();
+        Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
         /// Posts the record asynchronously

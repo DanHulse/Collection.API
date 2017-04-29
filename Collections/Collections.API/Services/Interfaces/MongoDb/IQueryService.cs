@@ -27,8 +27,8 @@ namespace Collections.API.Services.Interfaces.MongoDb
         /// </summary>
         /// <typeparam name="TInterface">The interface type</typeparam>
         /// <typeparam name="TModel">The model type</typeparam>
-        /// <param name="advancedSearchModel">The advanced search model</param>
+        /// <param name="searchModel">The search model</param>
         /// <returns></returns>
-        FilterDefinition<TInterface> BuildQuery<TInterface, TModel>(AdvancedSearchModel<TModel> advancedSearchModel) where TModel : class, TInterface, new();
+        FilterDefinition<TInterface> BuildQuery<TInterface, TModel>(TModel searchModel) where TModel : class, TInterface, new();
     }
 }

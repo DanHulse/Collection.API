@@ -53,7 +53,7 @@ namespace Collections.API.Controllers.V1
         [HttpPost]
         [Route("search")]
         [ResponseType(typeof(IEnumerable<MovieViewModel>))]
-        public override Task<IHttpActionResult> PostSearchAsync([FromBody]AdvancedSearchModel<MovieModel> model)
+        public override Task<IHttpActionResult> PostSearchAsync([FromBody]MovieModel model)
         { return base.PostSearchAsync(model); }
 
         /// <summary>

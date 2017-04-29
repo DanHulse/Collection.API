@@ -53,7 +53,7 @@ namespace Collections.API.Controllers.V1
         [HttpPost]
         [Route("search")]
         [ResponseType(typeof(IEnumerable<BookViewModel>))]
-        public override Task<IHttpActionResult> PostSearchAsync([FromBody]AdvancedSearchModel<BookModel> model)
+        public override Task<IHttpActionResult> PostSearchAsync([FromBody]BookModel model)
         { return base.PostSearchAsync(model); }
 
         /// <summary>

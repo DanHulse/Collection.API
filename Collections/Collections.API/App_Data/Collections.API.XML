@@ -91,7 +91,7 @@
             Retrieve requested record
             </summary>
         </member>
-        <member name="M:Collections.API.Controllers.V1.AlbumsController.PostSearchAsync(Collections.API.Models.AdvancedSearchModel{Collections.API.Models.AlbumModel})">
+        <member name="M:Collections.API.Controllers.V1.AlbumsController.PostSearchAsync(Collections.API.Models.AlbumModel)">
             <summary>
             Performs an advanced search function on the provided model
             </summary>
@@ -135,7 +135,7 @@
             Retrieve requested record
             </summary>
         </member>
-        <member name="M:Collections.API.Controllers.V1.VideoGamesController.PostSearchAsync(Collections.API.Models.AdvancedSearchModel{Collections.API.Models.VideoGameModel})">
+        <member name="M:Collections.API.Controllers.V1.VideoGamesController.PostSearchAsync(Collections.API.Models.VideoGameModel)">
             <summary>
             Performs an advanced search function on the provided model
             </summary>
@@ -195,7 +195,7 @@
             </summary>
             <returns><see cref="T:System.Web.Http.IHttpActionResult"/>of requested record</returns>
         </member>
-        <member name="M:Collections.API.Controllers.V1.DataController`4.PostSearchAsync(Collections.API.Models.AdvancedSearchModel{`1})">
+        <member name="M:Collections.API.Controllers.V1.DataController`4.PostSearchAsync(`1)">
             <summary>
             Performs an advanced search function on the provided model
             </summary>
@@ -256,7 +256,7 @@
             Retrieve requested record
             </summary>
         </member>
-        <member name="M:Collections.API.Controllers.V1.BooksController.PostSearchAsync(Collections.API.Models.AdvancedSearchModel{Collections.API.Models.BookModel})">
+        <member name="M:Collections.API.Controllers.V1.BooksController.PostSearchAsync(Collections.API.Models.BookModel)">
             <summary>
             Performs an advanced search function on the provided model
             </summary>
@@ -300,7 +300,7 @@
             Retrieve requested record
             </summary>
         </member>
-        <member name="M:Collections.API.Controllers.V1.MoviesController.PostSearchAsync(Collections.API.Models.AdvancedSearchModel{Collections.API.Models.MovieModel})">
+        <member name="M:Collections.API.Controllers.V1.MoviesController.PostSearchAsync(Collections.API.Models.MovieModel)">
             <summary>
             Performs an advanced search function on the provided model
             </summary>
@@ -548,13 +548,13 @@
             <typeparam name="TModel">The model type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Collections.API.Services.MongoDb.QueryService.BuildQuery``2(Collections.API.Models.AdvancedSearchModel{``1})">
+        <member name="M:Collections.API.Services.MongoDb.QueryService.BuildQuery``2(``1)">
             <summary>
             Builds the query.
             </summary>
             <typeparam name="TInterface">The interface type</typeparam>
             <typeparam name="TModel">The model type</typeparam>
-            <param name="advancedSearchModel">The advanced search model</param>
+            <param name="searchModel">The search model</param>
             <returns></returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.MongoDb.IDataCollection">
@@ -635,13 +635,13 @@
             <typeparam name="TModel">The model type</typeparam>
             <returns></returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.MongoDb.IQueryService.BuildQuery``2(Collections.API.Models.AdvancedSearchModel{``1})">
+        <member name="M:Collections.API.Services.Interfaces.MongoDb.IQueryService.BuildQuery``2(``1)">
             <summary>
             Builds the query.
             </summary>
             <typeparam name="TInterface">The interface type</typeparam>
             <typeparam name="TModel">The model type</typeparam>
-            <param name="advancedSearchModel">The advanced search model</param>
+            <param name="searchModel">The search model</param>
             <returns></returns>
         </member>
         <member name="T:Collections.API.Services.Interfaces.IConfigurationService">
@@ -685,7 +685,7 @@
             <typeparam name="T">The collection type</typeparam>
             <returns>The requested record</returns>
         </member>
-        <member name="M:Collections.API.Services.Interfaces.IDataService.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+        <member name="M:Collections.API.Services.Interfaces.IDataService.PostSearchAsync``2(``1)">
             <summary>
             Searches for the specified model with the advanced search model.
             </summary>
@@ -788,7 +788,7 @@
             <typeparam name="TInterface">The collection type</typeparam>
             <returns>The requested record</returns>
         </member>
-        <member name="M:Collections.API.Services.DataService.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+        <member name="M:Collections.API.Services.DataService.PostSearchAsync``2(``1)">
             <summary>
             Searches for the specified model with the advanced search model.
             </summary>
@@ -1039,23 +1039,6 @@
             Initializes a new instance of the <see cref="T:Collections.API.Mapper.Profiles.VideoGamesProfile"/> class.
             </summary>
         </member>
-        <member name="T:Collections.API.Models.AdvancedSearchModel`1">
-            <summary>
-            Model for the advanced search capability
-            </summary>
-            <typeparam name="T">The model the search will be performed against</typeparam>
-            <seealso cref="T:Collections.API.Models.Interfaces.IAdvancedSearchModel`1" />
-        </member>
-        <member name="P:Collections.API.Models.AdvancedSearchModel`1.IncludedFields">
-            <summary>
-            Gets or sets the included fields.
-            </summary>
-        </member>
-        <member name="P:Collections.API.Models.AdvancedSearchModel`1.ExcludedFields">
-            <summary>
-            Gets or sets the excluded fields.
-            </summary>
-        </member>
         <member name="T:Collections.API.Models.AlbumModel">
             <summary>
             Model for Album data
@@ -1201,22 +1184,6 @@
         <member name="P:Collections.API.Models.BookModel.Rating">
             <summary>
             Gets or sets the rating.
-            </summary>
-        </member>
-        <member name="T:Collections.API.Models.Interfaces.IAdvancedSearchModel`1">
-            <summary>
-            Interface for the advanced search model
-            </summary>
-            <typeparam name="T">The model the search will be performed against</typeparam>
-        </member>
-        <member name="P:Collections.API.Models.Interfaces.IAdvancedSearchModel`1.IncludedFields">
-            <summary>
-            Gets or sets the included fields.
-            </summary>
-        </member>
-        <member name="P:Collections.API.Models.Interfaces.IAdvancedSearchModel`1.ExcludedFields">
-            <summary>
-            Gets or sets the excluded fields.
             </summary>
         </member>
         <member name="T:Collections.API.Models.Interfaces.IAlbumModel">
@@ -1728,7 +1695,7 @@
             <typeparam name="TInterface">The collection type</typeparam>
             <returns>Retrieved record by it's Id</returns>
         </member>
-        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+        <member name="M:Collections.API.Repositories.Interfaces.IDataRepository.PostSearchAsync``2(``1)">
             <summary>
             Searches for the model provided.
             </summary>
@@ -1818,7 +1785,7 @@
             <typeparam name="TInterface">The collection type</typeparam>
             <returns>Retrieved record by it's Id</returns>
         </member>
-        <member name="M:Collections.API.Repositories.DataRepository.PostSearchAsync``2(Collections.API.Models.AdvancedSearchModel{``1})">
+        <member name="M:Collections.API.Repositories.DataRepository.PostSearchAsync``2(``1)">
             <summary>
             Searches for the model provided.
             </summary>

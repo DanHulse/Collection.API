@@ -75,7 +75,7 @@ namespace Collections.API.Repositories
         /// <typeparam name="TModel">The model type</typeparam>
         /// <param name="model">The advanced search model.</param>
         /// <returns>Results from the search</returns>
-        public async Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(AdvancedSearchModel<TModel> model) where TModel : class, TInterface, new()
+        public async Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(TModel model) where TModel : class, TInterface, new()
         {
             var filter = this.queryService.BuildQuery<TInterface, TModel>(model);
 

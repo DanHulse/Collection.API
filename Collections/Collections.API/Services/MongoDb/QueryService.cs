@@ -35,17 +35,15 @@ namespace Collections.API.Services.MongoDb
         /// </summary>
         /// <typeparam name="TInterface">The interface type</typeparam>
         /// <typeparam name="TModel">The model type</typeparam>
-        /// <param name="advancedSearchModel">The advanced search model</param>
+        /// <param name="searchModel">The search model</param>
         /// <returns></returns>
-        public FilterDefinition<TInterface> BuildQuery<TInterface, TModel>(AdvancedSearchModel<TModel> advancedSearchModel) where TModel : class, TInterface, new()
+        public FilterDefinition<TInterface> BuildQuery<TInterface, TModel>(TModel searchModel) where TModel : class, TInterface, new()
         {
-            var includedFields = advancedSearchModel.IncludedFields.ToValueDictionary();
-            var excludedFields = advancedSearchModel.ExcludedFields.ToValueDictionary();
+            var includedFields = searchModel.ToValueDictionary();
 
             var builder = Builders<TInterface>.Filter;
 
             var incFilter = builder.Empty;
-            var excFilter = builder.Empty;
 
             foreach (var incField in includedFields.ToList())
             {
@@ -56,6 +54,8 @@ namespace Collections.API.Services.MongoDb
                     var startDate = new DateTime(((DateTime)incField.Value).Year, 1, 1);
                     var endDate = new DateTime(startDate.AddYears(1).Year, 1, 1);
 
+                    var test = builder.Gte(incField.Key, startDate);
+
                     incFilter |= builder.Gte(incField.Key, startDate) & builder.Lt(incField.Key, endDate);
                 }
 
@@ -63,35 +63,16 @@ namespace Collections.API.Services.MongoDb
                 {
                     var newKey = incField.Key.Remove(incField.Key.Length - 3);
 
-                    excFilter |= builder.AnyNe(newKey, incField.Value);
+                    incFilter |= builder.All(newKey, new[] { incField.Value });
                 }
 
-                incFilter |= builder.Eq(incField.Key, incField.Value);
+                else
+                {
+                    incFilter |= builder.Eq(incField.Key, incField.Value);
+                }
             }
 
-            foreach (var excField in excludedFields.ToList())
-            {
-                Type valueType = excField.Value.GetType();
-
-                if (valueType == typeof(DateTime))
-                {
-                    var startDate = new DateTime(((DateTime)excField.Value).Year, 1, 1);
-                    var endDate = new DateTime(startDate.AddYears(1).Year, 1, 1);
-
-                    incFilter |= builder.Gte(excField.Key, startDate) & builder.Lt(excField.Key, endDate);
-                }
-
-                if (excField.Key.Contains("["))
-                {
-                    var newKey = excField.Key.Remove(excField.Key.Length - 3);
-
-                    excFilter |= builder.AnyNe(newKey, excField.Value);
-                }
-
-                excFilter &= builder.Ne(excField.Key, excField.Value);
-            }
-
-            return incFilter & excFilter;
+            return incFilter;
         }
     }
 }

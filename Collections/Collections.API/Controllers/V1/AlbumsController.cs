@@ -53,7 +53,7 @@ namespace Collections.API.Controllers.V1
         [HttpPost]
         [Route("search")]
         [ResponseType(typeof(IEnumerable<AlbumViewModel>))]
-        public override Task<IHttpActionResult> PostSearchAsync([FromBody] AdvancedSearchModel<AlbumModel> model)
+        public override Task<IHttpActionResult> PostSearchAsync([FromBody] AlbumModel model)
         { return base.PostSearchAsync(model); }
 
         /// <summary>
