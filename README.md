@@ -17,7 +17,7 @@ Go to the root folder of the Repo and create a file called "AppSettingsSecrets.c
 ```
 This will ensure that the API will connect to your Azure DB without storing the connection details in the Web.config file.
 
-When publishing this API to Azure, you can then add these AppSettings into the live app by following this: [AppSettings and Connection Strings in Azure] (https://azure.microsoft.com/en-gb/blog/windows-azure-web-sites-how-application-strings-and-connection-strings-work/)
+When publishing this API to Azure, you can then add these AppSettings into the live app by following this: [AppSettings and Connection Strings in Azure](https://azure.microsoft.com/en-gb/blog/windows-azure-web-sites-how-application-strings-and-connection-strings-work/)
 
 ## Current Status
 The API currently supports Movie, Book, Album, and Video Game collections that run through generic DataService and DataRepository classes, this allows the API to be easily expanded to support more data models if needs be, there is also a generic controller that handles all the logic, each controller for the collections is a simple shell that handles only the routing.
