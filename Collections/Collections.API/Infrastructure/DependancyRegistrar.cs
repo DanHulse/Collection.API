@@ -8,7 +8,6 @@ using Collections.API.Mapper.Interfaces;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
 using Collections.API.Factories.Interfaces;
-using MongoDB.Driver;
 
 namespace Collections.API.Infrastructure
 {
