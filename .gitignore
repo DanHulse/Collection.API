@@ -246,3 +246,4 @@ ModelManifest.xml
 *.jfm
 /Collections/Collections.API/AppSettingsSecrets.config
 /AppSettingsSecrets.config
+/Collections.API/Properties/PublishProfiles/collections-api - Web Deploy.pubxml
