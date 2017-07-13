@@ -1,17 +1,40 @@
-﻿using System.Web.Http;
-using Collections.API.Infrastructure.Interfaces;
+﻿using System;
+using System.Net;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
 
 namespace Collections.API.Controllers
 {
     /// <summary>
-    /// The Base controller
+    /// Base Controller for API
     /// </summary>
-    /// <seealso cref="System.Web.Http.ApiController" />
-    public class BaseController : ApiController
+    /// <seealso cref="Microsoft.AspNetCore.Mvc.Controller" />
+    public class BaseController : Controller
     {
         /// <summary>
-        /// Gets or sets the logger.
+        /// Gets the logger.
         /// </summary>
-        public virtual ILogger Logger { get; set; }
+        protected ILogger Logger { get; private set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BaseController"/> class.
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        protected BaseController(ILogger logger)
+        {
+            this.Logger = logger;
+        }
+
+        /// <summary>
+        /// Handles Internal Server Errors from the controllers.
+        /// </summary>
+        /// <param name="ex">The exception.</param>
+        /// <returns><see cref="ObjectResult"/>New result with exception message</returns>
+        protected virtual IActionResult InternalServerError(Exception ex)
+        {
+            this.Logger.LogCritical(ex.Message, ex);
+
+            return this.StatusCode((int)HttpStatusCode.InternalServerError, ex.Message);
+        }
     }
 }

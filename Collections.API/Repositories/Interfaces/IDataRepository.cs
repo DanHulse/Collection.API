@@ -1,75 +1,71 @@
-﻿using Collections.API.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using MongoDB.Driver;
 
 namespace Collections.API.Repositories.Interfaces
 {
     /// <summary>
-    /// Interface for the movies repository
+    /// Interface for the data repository
     /// </summary>
-    /// <seealso cref="Collections.API.Repositories.Interfaces.IRepository" />
-    public interface IDataRepository : IRepository
+    public interface IDataRepository
     {
         /// <summary>
-        /// Gets the records asynchronously.
+        /// Finds one record asynchronously.
         /// </summary>
-        /// <typeparam name="TInterface">The collection type</typeparam>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <param name="filter">The filter.</param>
+        /// <returns>Retrieved record</returns>
+        Task<TInterface> FindOneAsync<TInterface>(FilterDefinition<TInterface> filter);
+
+        /// <summary>
+        /// Finds many records asynchronously.
+        /// </summary>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <param name="filter">The filter.</param>
+        /// <returns>Retrived records</returns>
+        Task<IEnumerable<TInterface>> FindManyAsync<TInterface>(FilterDefinition<TInterface> filter);
+
+        /// <summary>
+        /// Inserts one record asynchronously.
+        /// </summary>
+        /// <typeparam name="TInterface">The filter type</typeparam>
         /// <typeparam name="TModel">The model type</typeparam>
-        /// <returns>All records of requested type</returns>
-        Task<IEnumerable<TInterface>> GetAsync<TInterface, TModel>() where TModel : class, TInterface, new();
-
-        /// <summary>
-        /// Gets the requested record asynchronously.
-        /// </summary>
-        /// <param name="id">The Id of the record to be retrieved</param>
-        /// <typeparam name="TInterface">The collection type</typeparam>
-        /// <returns>Retrieved record by it's Id</returns>
-        Task<TInterface> GetByIdAsync<TInterface>(string id);
-
-        /// <summary>
-        /// Searches for the model provided.
-        /// </summary>
-        /// <typeparam name="TInterface">The collection type</typeparam>
-        /// <typeparam name="TModel">The model type</typeparam>
-        /// <param name="model">The advanced search model.</param>
-        /// <returns>Results from the search</returns>
-        Task<IEnumerable<TInterface>> PostSearchAsync<TInterface, TModel>(TModel model) where TModel : class, TInterface, new();
-
-        /// <summary>
-        /// Posts multiple records asynchronously
-        /// </summary>
-        /// <param name="model">The model to be posted</param>
-        /// <typeparam name="TInterface">The collection type</typeparam>
-        /// <typeparam name="TModel">The model type</typeparam>
-        /// <returns>True if successful</returns>
-        Task<bool> PostMultipleAsync<TInterface, TModel>(IEnumerable<TModel> model) where TModel : class, TInterface, new();
-
-        /// <summary>
-        /// Patches specified record asynchronously.
-        /// </summary>
-        /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="TInterface">The collection type</typeparam>
-        /// <typeparam name="TModel">The model tyoe</typeparam>
-        /// <returns>True if successful</returns>
-        Task<bool> PatchAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new();
+        Task InsertOneAsync<TInterface, TModel>(TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
-        /// Puts specified record asynchronously.
+        /// Inserts many records asynchronously.
         /// </summary>
-        /// <param name="id">The identifier.</param>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
+        /// <param name="models">The models.</param>
+        Task InsertManyAsync<TInterface, TModel>(IEnumerable<TModel> models) where TModel : class, TInterface, new();
+
+        /// <summary>
+        /// Updates one record asynchronously.
+        /// </summary>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <param name="filter">The filter.</param>
+        /// <param name="update">The update.</param>
+        /// <returns><see cref="UpdateResult"/>result of update operation</returns>
+        Task<UpdateResult> UpdateOneAsync<TInterface>(FilterDefinition<TInterface> filter, UpdateDefinition<TInterface> update);
+
+        /// <summary>
+        /// Replaces one document asynchronously.
+        /// </summary>
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <typeparam name="TModel">The model type</typeparam>
+        /// <param name="filter">The filter.</param>
         /// <param name="model">The model.</param>
-        /// <typeparam name="TInterface">The collection type</typeparam>
-        /// <typeparam name="TModel">The model tyoe</typeparam>
-        /// <returns>True if successful</returns>
-        Task<bool> PutAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new();
+        /// <returns><see cref="ReplaceOneResult"/>result of replace operation</returns>
+        Task<ReplaceOneResult> ReplaceOneAsync<TInterface, TModel>(FilterDefinition<TInterface> filter, TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
-        /// Deletes specified records asynchronously.
+        /// Deletes many records asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers.</param>
-        /// <typeparam name="TInterface">The collection type</typeparam>
-        /// <returns>True if successful</returns>
-        Task<bool> DeleteMultipleAsync<TInterface>(IEnumerable<string> ids);
+        /// <typeparam name="TInterface">The filter type</typeparam>
+        /// <param name="filter">The filter.</param>
+        /// <returns><see cref="DeleteResult"/>result of delete operation</returns>
+        Task<DeleteResult> DeleteManyAsync<TInterface>(FilterDefinition<TInterface> filter);
     }
 }
