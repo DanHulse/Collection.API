@@ -90,7 +90,7 @@ namespace Collections.API
 
                 options.IncludeXmlComments($"{basePath}\\Collections.API.xml");
                 options.DescribeAllEnumsAsStrings();
-                options.GroupActionsBy(c => c.HttpMethod);
+                options.GroupActionsBy(c => c.GroupName);
             });
 
             services.AddSingleton(x => this.AutoMapperConfig.CreateMapper());

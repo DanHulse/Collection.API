@@ -3,10 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Collections.API.Models;
-using Collections.API.Models.Interfaces;
 using Collections.API.Services.Interfaces;
-using Collections.API.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
@@ -17,7 +14,7 @@ namespace Collections.API.Controllers.V1
     /// </summary>
     /// <seealso cref="Collections.API.Controllers.BaseController" />
     [Route("api/v1/[controller]")]
-    public class CollectionsController : BaseController
+    public class CollectionsController<TModel, TInterface, TView, TDetailView> : BaseController where TModel : class, TInterface, new()
     {
         /// <summary>
         /// The collection service
@@ -30,7 +27,7 @@ namespace Collections.API.Controllers.V1
         private readonly IMapper mapper;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="CollectionsController"/> class.
+        /// Initializes a new instance of the <see cref="CollectionsController{TModel, TInterface, TView, TDetailView}"/> class.
         /// </summary>
         /// <param name="collectionService">The collection service.</param>
         /// <param name="mapper">The mapper.</param>
@@ -46,18 +43,15 @@ namespace Collections.API.Controllers.V1
         /// Retrieve all data records of the data type specified
         /// </summary>
         /// <returns><see cref="IActionResult"/>of all records</returns>
-        [HttpGet]
-        [Route("")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> GetAsync()
+        public virtual async Task<IActionResult> GetAsync()
         {
             try
             {
-                var result = await this.collectionService.GetAsync<IAlbumModel, AlbumModel>();
+                var result = await this.collectionService.GetAsync<TInterface, TModel>();
 
                 if (result.Any())
                 {
-                    var mappedResults = this.mapper.Map<IEnumerable<AlbumViewModel>>(result);
+                    var mappedResults = this.mapper.Map<IEnumerable<TView>>(result);
 
                     return this.Ok(mappedResults);
                 }
@@ -74,18 +68,15 @@ namespace Collections.API.Controllers.V1
         /// Retrieve requested record
         /// </summary>
         /// <returns><see cref="IActionResult"/>of requested record</returns>
-        [HttpGet]
-        [Route("{id}")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> GetByIdAsync([FromRoute]string id)
+        public virtual async Task<IActionResult> GetByIdAsync([FromRoute]string id)
         {
             try
             {
-                var result = await this.collectionService.GetByIdAsync<IAlbumModel>(id);
+                var result = await this.collectionService.GetByIdAsync<TInterface>(id);
 
                 if (result != null)
                 {
-                    var mappedResult = this.mapper.Map<AlbumDetailViewModel>(result);
+                    var mappedResult = this.mapper.Map<TDetailView>(result);
 
                     return this.Ok(mappedResult);
                 }
@@ -103,18 +94,15 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         /// <param name="model">The model type to be searched.</param>
         /// <returns><see cref="IActionResult"/>of search results</returns>
-        [HttpPost]
-        [Route("search")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> PostSearchAsync([FromBody]AlbumModel model)
+        public virtual async Task<IActionResult> PostSearchAsync([FromBody]TModel model)
         {
             try
             {
-                var result = await this.collectionService.PostSearchAsync<IAlbumModel, AlbumModel>(model);
+                var result = await this.collectionService.PostSearchAsync<TInterface, TModel>(model);
 
                 if (result.Any())
                 {
-                    var mappedResult = this.mapper.Map<IEnumerable<AlbumViewModel>>(result);
+                    var mappedResult = this.mapper.Map<IEnumerable<TView>>(result);
 
                     return this.Ok(mappedResult);
                 }
@@ -132,14 +120,11 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         /// <param name="model">The record to be posted</param>
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
-        [HttpPost]
-        [Route("")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> PostAsync([FromBody]IEnumerable<AlbumModel> model)
+        public virtual async Task<IActionResult> PostAsync([FromBody]IEnumerable<TModel> model)
         {
             try
             {
-                var result = await this.collectionService.PostAsync<IAlbumModel, AlbumModel>(model);
+                var result = await this.collectionService.PostAsync<TInterface, TModel>(model);
 
                 if (result)
                 {
@@ -160,14 +145,11 @@ namespace Collections.API.Controllers.V1
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
-        [HttpPatch]
-        [Route("{id}")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> PatchAsync([FromRoute]string id, [FromBody]AlbumModel model)
+        public virtual async Task<IActionResult> PatchAsync([FromRoute]string id, [FromBody]TModel model)
         {
             try
             {
-                var result = await this.collectionService.PatchAsync<IAlbumModel, AlbumModel>(id, model);
+                var result = await this.collectionService.PatchAsync<TInterface, TModel>(id, model);
 
                 if (result)
                 {
@@ -188,14 +170,11 @@ namespace Collections.API.Controllers.V1
         /// <param name="id">The identifier.</param>
         /// <param name="model">The model.</param>
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
-        [HttpPut]
-        [Route("{id}")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> PutAsync([FromRoute]string id, [FromBody]AlbumModel model)
+        public virtual async Task<IActionResult> PutAsync([FromRoute]string id, [FromBody]TModel model)
         {
             try
             {
-                var result = await this.collectionService.PutAsync<IAlbumModel, AlbumModel>(id, model);
+                var result = await this.collectionService.PutAsync<TInterface, TModel>(id, model);
 
                 if (result)
                 {
@@ -215,14 +194,11 @@ namespace Collections.API.Controllers.V1
         /// </summary>
         /// <param name="ids">The identifiers of the records to delete.</param>
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
-        [HttpDelete]
-        [Route("")]
-        [Produces(typeof(IActionResult))]
-        public async Task<IActionResult> DeleteAsync([FromBody]IEnumerable<string> ids)
+        public virtual async Task<IActionResult> DeleteAsync([FromBody]IEnumerable<string> ids)
         {
             try
             {
-                var result = await this.collectionService.DeleteAsync<IAlbumModel>(ids);
+                var result = await this.collectionService.DeleteAsync<TInterface>(ids);
 
                 if (result)
                 {
