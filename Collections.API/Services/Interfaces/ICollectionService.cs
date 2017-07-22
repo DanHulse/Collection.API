@@ -62,11 +62,11 @@ namespace Collections.API.Services.Interfaces
         Task<bool> PutAsync<TInterface, TModel>(string id, TModel model) where TModel : class, TInterface, new();
 
         /// <summary>
-        /// Deletes specified the records asynchronously.
+        /// Deletes specified the record asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers.</param>
+        /// <param name="id">The identifiers.</param>
         /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        Task<bool> DeleteAsync<TInterface>(IEnumerable<string> ids);
+        Task<bool> DeleteAsync<TInterface>(string id);
     }
 }

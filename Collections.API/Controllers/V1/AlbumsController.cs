@@ -22,7 +22,7 @@ namespace Collections.API.Controllers.V1
         /// <param name="collectionService">The collection service.</param>
         /// <param name="mapper">The mapper.</param>
         /// <param name="logger">The logger.</param>
-        public AlbumsController(ICollectionService collectionService, IMapper mapper, ILogger logger)
+        public AlbumsController(ICollectionService collectionService, IMapper mapper, ILogger<AlbumsController> logger)
             : base(collectionService, mapper, logger) {}
 
         /// <summary>
@@ -86,13 +86,13 @@ namespace Collections.API.Controllers.V1
         public override async Task<IActionResult> PutAsync([FromRoute]string id, [FromBody]AlbumModel model) { return await base.PutAsync(id, model); }
 
         /// <summary>
-        /// Deletes the records of the specified type asynchronously.
+        /// Deletes the record of the specified type asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers of the records to delete.</param>
+        /// <param name="id">The identifier of the record to delete.</param>
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
         [HttpDelete]
         [Route("")]
         [Produces(typeof(IActionResult))]
-        public override async Task<IActionResult> DeleteAsync([FromBody]IEnumerable<string> ids) { return await base.DeleteAsync(ids); }
+        public override async Task<IActionResult> DeleteAsync([FromRoute]string id) { return await base.DeleteAsync(id); }
     }
 }

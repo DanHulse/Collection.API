@@ -2,6 +2,7 @@
 using Collections.API.Factories;
 using Collections.API.Factories.Interfaces;
 using Collections.API.Mappings.Profiles;
+using Collections.API.MIddleware;
 using Collections.API.Repositories;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services;
@@ -101,6 +102,7 @@ namespace Collections.API
             services.Configure<AppSettings>(this.Configuration.GetSection("AppSettings"));
             services.AddScoped(x => x.GetService<IOptionsSnapshot<AppSettings>>().Value);
 
+            services.AddTransient<IQueryService, QueryService>();
             services.AddTransient<ICollectionService, CollectionService>();
             services.AddTransient<ICollectionRepository, CollectionRepository>();
             services.AddTransient<IDataRepository, MongoDbDataRepository>();
@@ -125,6 +127,8 @@ namespace Collections.API
 
             loggerFactory.AddNLog();
             loggerFactory.ConfigureNLog($"{basePath}\\nlog.config");
+
+            app.UseMiddleware(typeof(ErrorHandlerMiddleware));
 
             app.UseMvc();
 

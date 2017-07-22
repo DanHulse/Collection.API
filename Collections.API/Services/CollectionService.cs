@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Collections.API.Repositories.Interfaces;
 using Collections.API.Services.Interfaces;
@@ -112,14 +109,14 @@ namespace Collections.API.Services
         }
 
         /// <summary>
-        /// Deletes specified the records asynchronously.
+        /// Deletes specified the record asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers.</param>
+        /// <param name="ids">The identifier.</param>
         /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteAsync<TInterface>(IEnumerable<string> ids)
+        public async Task<bool> DeleteAsync<TInterface>(string id)
         {
-            var result = await this.collectionRepository.DeleteMultipleAsync<TInterface>(ids);
+            var result = await this.collectionRepository.DeleteAsync<TInterface>(id);
 
             return result;
         }

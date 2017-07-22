@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using Collections.API.Helpers;
 using Collections.API.Repositories.Interfaces;
@@ -92,16 +90,9 @@ namespace Collections.API.Repositories
         /// <returns>True if successful</returns>
         public async Task<bool> PostMultipleAsync<TInterface, TModel>(IEnumerable<TModel> model) where TModel : class, TInterface, new()
         {
-            try
-            {
-                await this.dataRepository.InsertManyAsync<TInterface, TModel>(model);
+            await this.dataRepository.InsertManyAsync<TInterface, TModel>(model);
 
-                return true;
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+            return true;
         }
 
         /// <summary>
@@ -121,10 +112,6 @@ namespace Collections.API.Repositories
             if (result.IsAcknowledged && (result.MatchedCount == 1 && result.ModifiedCount == 1))
             {
                 return true;
-            }
-            else if (result.IsAcknowledged && result.MatchedCount == 1)
-            {
-                throw new Exception("Document found but failed to be replaced");
             }
 
             return false;
@@ -148,10 +135,6 @@ namespace Collections.API.Repositories
             {
                 return true;
             }
-            else if (result.IsAcknowledged && result.MatchedCount == 1)
-            {
-                throw new Exception("Document found but failed to be replaced");
-            }
 
             return false;
         }
@@ -159,24 +142,18 @@ namespace Collections.API.Repositories
         /// <summary>
         /// Deletes specified records asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers.</param>
+        /// <param name="id">The identifier.</param>
         /// <typeparam name="TInterface">The collection type</typeparam>
         /// <returns>True if successful</returns>
-        public async Task<bool> DeleteMultipleAsync<TInterface>(IEnumerable<string> ids)
+        public async Task<bool> DeleteAsync<TInterface>(string id)
         {
-            var parsedIds = ids.Select(s => ObjectId.Parse(s));
-
-            var filter = Builders<TInterface>.Filter.In("_id", parsedIds);
+            var filter = Builders<TInterface>.Filter.Eq("_id", ObjectId.Parse(id));
 
             var result = await this.dataRepository.DeleteManyAsync<TInterface>(filter);
 
             if (result.IsAcknowledged && result.DeletedCount >= 1)
             {
                 return true;
-            }
-            else if (result.IsAcknowledged && result.DeletedCount == 0)
-            {
-                throw new Exception("Request acknowledged but document failed to be deleted");
             }
 
             return false;

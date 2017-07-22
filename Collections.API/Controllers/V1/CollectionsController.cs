@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
@@ -45,23 +44,16 @@ namespace Collections.API.Controllers.V1
         /// <returns><see cref="IActionResult"/>of all records</returns>
         public virtual async Task<IActionResult> GetAsync()
         {
-            try
+            var result = await this.collectionService.GetAsync<TInterface, TModel>();
+
+            if (result.Any())
             {
-                var result = await this.collectionService.GetAsync<TInterface, TModel>();
+                var mappedResults = this.mapper.Map<IEnumerable<TView>>(result);
 
-                if (result.Any())
-                {
-                    var mappedResults = this.mapper.Map<IEnumerable<TView>>(result);
-
-                    return this.Ok(mappedResults);
-                }
-
-                return this.NotFound();
+                return this.Ok(mappedResults);
             }
-            catch (Exception ex)
-            {
-                return this.InternalServerError(ex);
-            }
+
+            return this.NotFound();
         }
 
         /// <summary>
@@ -70,23 +62,16 @@ namespace Collections.API.Controllers.V1
         /// <returns><see cref="IActionResult"/>of requested record</returns>
         public virtual async Task<IActionResult> GetByIdAsync([FromRoute]string id)
         {
-            try
+            var result = await this.collectionService.GetByIdAsync<TInterface>(id);
+
+            if (result != null)
             {
-                var result = await this.collectionService.GetByIdAsync<TInterface>(id);
+                var mappedResult = this.mapper.Map<TDetailView>(result);
 
-                if (result != null)
-                {
-                    var mappedResult = this.mapper.Map<TDetailView>(result);
-
-                    return this.Ok(mappedResult);
-                }
-
-                return this.NotFound();
+                return this.Ok(mappedResult);
             }
-            catch (Exception ex)
-            {
-                return this.InternalServerError(ex);
-            }
+
+            return this.NotFound();
         }
 
         /// <summary>
@@ -96,23 +81,16 @@ namespace Collections.API.Controllers.V1
         /// <returns><see cref="IActionResult"/>of search results</returns>
         public virtual async Task<IActionResult> PostSearchAsync([FromBody]TModel model)
         {
-            try
+            var result = await this.collectionService.PostSearchAsync<TInterface, TModel>(model);
+
+            if (result.Any())
             {
-                var result = await this.collectionService.PostSearchAsync<TInterface, TModel>(model);
+                var mappedResult = this.mapper.Map<IEnumerable<TView>>(result);
 
-                if (result.Any())
-                {
-                    var mappedResult = this.mapper.Map<IEnumerable<TView>>(result);
-
-                    return this.Ok(mappedResult);
-                }
-
-                return this.NotFound();
+                return this.Ok(mappedResult);
             }
-            catch (Exception ex)
-            {
-                return this.InternalServerError(ex);
-            }
+
+            return this.NotFound();
         }
 
         /// <summary>
@@ -122,21 +100,14 @@ namespace Collections.API.Controllers.V1
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
         public virtual async Task<IActionResult> PostAsync([FromBody]IEnumerable<TModel> model)
         {
-            try
-            {
-                var result = await this.collectionService.PostAsync<TInterface, TModel>(model);
+            var result = await this.collectionService.PostAsync<TInterface, TModel>(model);
 
-                if (result)
-                {
-                    return this.Ok();
-                }
-
-                return this.BadRequest();
-            }
-            catch (Exception ex)
+            if (result)
             {
-                return this.InternalServerError(ex);
+                return this.Ok();
             }
+
+            return this.BadRequest();
         }
 
         /// <summary>
@@ -147,21 +118,14 @@ namespace Collections.API.Controllers.V1
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
         public virtual async Task<IActionResult> PatchAsync([FromRoute]string id, [FromBody]TModel model)
         {
-            try
-            {
-                var result = await this.collectionService.PatchAsync<TInterface, TModel>(id, model);
+            var result = await this.collectionService.PatchAsync<TInterface, TModel>(id, model);
 
-                if (result)
-                {
-                    return this.Ok();
-                }
-
-                return this.BadRequest();
-            }
-            catch (Exception ex)
+            if (result)
             {
-                return this.InternalServerError(ex);
+                return this.Ok();
             }
+
+            return this.BadRequest();
         }
 
         /// <summary>
@@ -172,45 +136,31 @@ namespace Collections.API.Controllers.V1
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
         public virtual async Task<IActionResult> PutAsync([FromRoute]string id, [FromBody]TModel model)
         {
-            try
-            {
-                var result = await this.collectionService.PutAsync<TInterface, TModel>(id, model);
+            var result = await this.collectionService.PutAsync<TInterface, TModel>(id, model);
 
-                if (result)
-                {
-                    return this.Ok();
-                }
-
-                return this.BadRequest();
-            }
-            catch (Exception ex)
+            if (result)
             {
-                return this.InternalServerError(ex);
+                return this.Ok();
             }
+
+            return this.BadRequest();
         }
 
         /// <summary>
-        /// Deletes the records of the specified type asynchronously.
+        /// Deletes the record of the specified type asynchronously.
         /// </summary>
-        /// <param name="ids">The identifiers of the records to delete.</param>
+        /// <param name="id">The identifier of the record to delete.</param>
         /// <returns><see cref="IActionResult"/>OK if successful</returns>
-        public virtual async Task<IActionResult> DeleteAsync([FromBody]IEnumerable<string> ids)
+        public virtual async Task<IActionResult> DeleteAsync([FromRoute]string id)
         {
-            try
-            {
-                var result = await this.collectionService.DeleteAsync<TInterface>(ids);
+            var result = await this.collectionService.DeleteAsync<TInterface>(id);
 
-                if (result)
-                {
-                    return this.Ok();
-                }
-
-                return this.BadRequest();
-            }
-            catch (Exception ex)
+            if (result)
             {
-                return this.InternalServerError(ex);
+                return this.Ok();
             }
+
+            return this.BadRequest();
         }
     }
 }
